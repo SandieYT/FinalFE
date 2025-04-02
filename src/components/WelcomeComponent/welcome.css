@@ -1,12 +1,11 @@
-/* ===== Base Styles ===== */
+/* ===== Main Container Styles ===== */
 .welcome-container {
-    color: #fff;
     margin: 12px 24px;
     background-color: #000;
     border-radius: 24px;
 }
 
-/* ===== Layout Structure ===== */
+/* ===== Content Layout Styles ===== */
 .welcome-content {
     display: flex;
     gap: 32px;
@@ -15,10 +14,7 @@
     padding: 50px 48px;
 }
 
-.welcome-left {
-    flex: 1;
-}
-
+.welcome-left,
 .welcome-right {
     flex: 1;
 }
@@ -85,6 +81,18 @@
     height: 60px;
     object-fit: contain;
     animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* ===== CTA & Socials Styles ===== */
@@ -177,9 +185,8 @@
 }
 
 /* ===== Video Styles ===== */
-.video-content {
+.video-spotlight {
     width: 100%;
-    max-width: 600px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(255, 107, 0, 0.2);
@@ -188,7 +195,7 @@
     position: relative;
 }
 
-.video-content:hover {
+.video-spotlight:hover {
     transform: perspective(1000px) rotateY(0deg) scale(1.02);
     box-shadow: 0 15px 40px rgba(255, 107, 0, 0.3);
 }
@@ -202,7 +209,7 @@
     transition: transform 0.5s ease;
 }
 
-.video-content::before {
+.video-spotlight::before {
     content: '';
     position: absolute;
     top: 0;
@@ -213,17 +220,4 @@
     z-index: 1;
     border-radius: 20px;
     pointer-events: none;
-}
-
-/* ===== Animations ===== */
-@keyframes bounce {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
 }

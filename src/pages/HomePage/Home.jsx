@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Welcome, Footer } from "../../components";
+import { Welcome, Footer, GuidedDownload } from "../../components";
 import "./home.css";
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
             <li>
               <Link to="#">
                 <span>
-                  [Trading Challenge] Spin and Rise Stronger With Bybit: Win
+                  [Trading Challenge] Spin and Rise Stronger With Wiki: Win
                   Guaranteed Prizes Up to 35,000 USDT!
                 </span>
               </Link>
@@ -37,7 +37,9 @@ export default function Home() {
           </ul>
         </div>
       </section>
-
+      <section>
+        <GuidedDownload />
+      </section>
       <section>
         <Footer />
       </section>

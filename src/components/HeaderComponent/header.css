@@ -1,4 +1,4 @@
-/* ===== Base Header Styles ===== */
+/* ===== Header Container Styles ===== */
 #main-header {
     background-color: #000;
 }
@@ -18,7 +18,7 @@
     gap: 40px;
 }
 
-/* Logo Styles */
+/* ===== Logo Section Styles ===== */
 .header-logo {
     font-size: 24px;
     font-weight: bold;
@@ -46,7 +46,19 @@
     animation-delay: 0.6s;
 }
 
-/* Navigation Menu */
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ===== Navigation Menu Styles ===== */
 .header-menu ul {
     display: flex;
     gap: 24px;
@@ -93,7 +105,7 @@
     gap: 20px;
 }
 
-/* Search Bar */
+/* ===== Search Bar Styles ===== */
 .header-search {
     display: flex;
     align-items: center;
@@ -148,7 +160,7 @@
     transform: scale(1.05);
 }
 
-/* Auth Buttons */
+/* ===== Auth Buttons Styles ===== */
 .header-auth {
     display: flex;
     gap: 12px;
@@ -183,17 +195,4 @@
 .btn-register button:hover {
     background: #d9a30a;
     color: #333;
-}
-
-/* ===== Animation Keyframes ===== */
-@keyframes wave {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-5px);
-    }
 }

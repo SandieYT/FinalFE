@@ -60,7 +60,7 @@ export default function Welcome() {
           </div>
         </div>
         <div className="welcome-right">
-          <div className="video-content">
+          <div className="video-spotlight">
             <Link to="#">
               <video autoPlay loop muted playsInline className="feature-video">
                 <source src="/videos/7a6c20610af011f0b58c5efff9f511af.mp4" />

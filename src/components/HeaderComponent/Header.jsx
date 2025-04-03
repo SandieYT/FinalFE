@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <>
       <header id="main-header">
-        <div className="header-container">
+        <div className="header-container unselectable">
           <div className="header-left">
             <div className="header-logo wave-container">
               <Link to="/" className="wave-text">

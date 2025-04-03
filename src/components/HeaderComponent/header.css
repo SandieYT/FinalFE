@@ -160,6 +160,10 @@
     transform: scale(1.05);
 }
 
+.header-search input::-webkit-search-cancel-button {
+    display: none;
+}
+
 /* ===== Auth Buttons Styles ===== */
 .header-auth {
     display: flex;

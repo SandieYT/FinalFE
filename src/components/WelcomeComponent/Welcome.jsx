@@ -8,20 +8,20 @@ export default function Welcome() {
       <div className="welcome-content">
         <div className="welcome-left">
           <div className="slogan-spotlight">
-            <h1 className="slogan-title">Wiki Indices Unleashed!</h1>
+            <h1 className="slogan-title unselectable">Wiki Indices Unleashed!</h1>
             <div className="slogan-description">
               <p className="paragraph-main-1">[/ˈwikē], noun</p>
-              <p className="paragraph-main-2">Trade indices with zero fees!</p>
+              <p className="paragraph-main-2 unselectable">Trade indices with zero fees!</p>
             </div>
           </div>
-          <div className="register-btn">
+          <div className="register-btn unselectable">
             <Link to="#">Sign Up for Rewards</Link>
             <img
               src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"
               alt="Welcome Image"
             />
           </div>
-          <div className="cta-socials">
+          <div className="cta-socials unselectable">
             <div className="cta-main">
               <p>Join the waiting list</p>
             </div>

@@ -5,6 +5,7 @@ import RootLayout from "./RootLayout";
 const LoadingSpinner = () => <div>Loading...</div>;
 
 const Home = lazy(() => import("../pages/HomePage/Home"));
+const Markets = lazy(() => import("../pages/MarketsPage/Markets"));
 
 const Router = createBrowserRouter([
   {
@@ -16,6 +17,14 @@ const Router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "markets",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Markets />
           </Suspense>
         ),
       },

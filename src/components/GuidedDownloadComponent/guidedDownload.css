@@ -24,7 +24,7 @@
 /* ===== Wallet Mode Section ===== */
 .wallet-mode {
     background-color: #000000;
-    border-radius: 24px;
+    border-radius: 38px;
     padding: 24px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     overflow: hidden;
@@ -123,7 +123,7 @@
 
 /* ===== Video Section ===== */
 .video-waller-mode {
-    border-radius: 12px;
+    border-radius: 24px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }

@@ -1,4 +1,4 @@
-/* ===== Main Container Styles ===== */
+/* ===== Main Container ===== */
 .faq-container {
     margin: 16px 0;
     background: linear-gradient(135deg, #1e1e1e, #292929);
@@ -7,13 +7,13 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== Content Layout Styles ===== */
+/* ===== Content Layout ===== */
 .faq-content {
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* ===== Title Styles ===== */
+/* ===== Title Section ===== */
 .faq-content h2 {
     font-size: 32px;
     color: #ff6b00;
@@ -23,7 +23,7 @@
     font-weight: bold;
 }
 
-/* ===== FAQ Item Styles ===== */
+/* ===== FAQ Items ===== */
 .faq-collapse-item {
     margin-bottom: 16px;
     border-radius: 12px;
@@ -34,13 +34,13 @@
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== Hover Effects ===== */
+/* Hover Effects */
 .faq-collapse-item:hover {
     border-color: rgba(255, 107, 0, 0.5);
     transform: translateY(-2px);
 }
 
-/* ===== Header Styles ===== */
+/* ===== Header ===== */
 .faq-collapse-header {
     display: flex;
     justify-content: space-between;
@@ -54,54 +54,48 @@
     background: rgba(255, 107, 0, 0.15);
 }
 
-/* ===== Header Text Styles ===== */
+/* Header Text */
 .faq-collapse-header-text {
     font-size: 18px;
     font-weight: bold;
     color: #fff;
 }
 
-/* ===== Arrow Icon Styles ===== */
+/* Arrow Icon */
 .faq-collapse-header svg {
     color: #ff6b00;
     transition: transform 0.3s ease;
 }
 
-/* ===== Active State Arrow Rotation ===== */
+/* Active State */
 .faq-collapse-item.active .faq-collapse-header svg {
     transform: rotate(180deg);
 }
 
-/* ===== Collapse Content Styles ===== */
+/* ===== Content ===== */
 .faq-collapse-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out;
     padding: 0 24px;
     background: #1e1e1e;
-    white-space: normal;
-    word-wrap: break-word;
 }
 
-/* ===== Active State Content Expansion ===== */
 .faq-collapse-item.active .faq-collapse-content {
     max-height: 500px;
     padding: 16px 24px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ===== Content Text Styles ===== */
+/* Content Text */
 .faq-collapse-content span {
-    display: inline;
     color: #d1d1d1;
     font-size: 16px;
     line-height: 1.6;
 }
 
-/* ===== Highlight Text Styles ===== */
+/* Highlight Text */
 .highlight {
     color: #ffa502 !important;
     font-weight: normal;
-    display: inline;
-    white-space: nowrap;
 }

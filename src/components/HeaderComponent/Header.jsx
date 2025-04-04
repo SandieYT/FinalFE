@@ -59,10 +59,18 @@ export default function Header() {
             </div>
             <div className="header-auth">
               <div className="btn btn-login">
-                <button>Login</button>
+                <button>
+                  <Link to="/login">
+                    <span>Login</span>
+                  </Link>
+                </button>
               </div>
               <div className="btn btn-register">
-                <button>Register</button>
+                <button>
+                  <Link to="#">
+                    <span>Register</span>
+                  </Link>
+                </button>
               </div>
             </div>
           </div>

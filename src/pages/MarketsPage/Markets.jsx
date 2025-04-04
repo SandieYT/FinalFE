@@ -6,18 +6,28 @@ import "./markets.css";
 
 export default function Markets() {
   const [cryptoData, setCryptoData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  
   const formatter = Intl.NumberFormat('en-US', {
     notation: 'compact',
     maximumFractionDigits: 3,
   });
   
   useEffect(() => {
+
     const fetchData = async () => {
       try {
+        
+        const response2 = await axios.get('https://api.coingecko.com/api/v3/simple/supported_vs_currencies')
+        
+        setTotal(Math.ceil(response2.data.length/20))
         const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
           params: {
             vs_currency: 'usd',
-            ids: 'bitcoin,ethereum,ripple',
+            order: 'market_cap_desc',
+            per_page: 20,
+            page: page,
           },
         });
         setCryptoData(response.data);
@@ -27,21 +37,91 @@ export default function Markets() {
     };
 
     fetchData();
-  }, []);
+  }, [page]);
 
   return (
     <div id="main-markets">
-      <section>
-              <ul>
-        {cryptoData.map(coin => (
-          <li key={coin.id}>
-            <h2>{coin.name} ({coin.symbol.toUpperCase()})</h2>
-            <p>Price: ${coin.current_price}</p>
-            <p>Market Cap: ${formatter.format(coin.market_cap)}</p>
-            <p>24h Change: {coin.price_change_percentage_24h}%</p>
-          </li>
-        ))}
-      </ul>
+      <section className='market-section'>
+      <h1 className='market-header unselectable'>Crypto Hub</h1>
+              <ul  className='market-currencies'>
+                <li className='market-currency-header unselectable'>
+                <p className='currency-icon'/>
+                    <h2 className='currency-name-header'>Coin Name</h2>
+                    <h2 className='currency-price'>Price</h2>
+                    <h2 className='currency-cap'>Market Cap</h2>
+                    <h2 className='currency-percentage'>24h Change</h2>
+                    </li>
+                {cryptoData.map(coin => (
+                  <li key={coin.id} className='market-currency'>
+                    <img className='currency-icon unselectable' src={coin.image}/>
+                    <p className='currency-name'>{coin.name} ({coin.symbol.toUpperCase()})</p>
+                    <p className='currency-price'>${coin.current_price}</p>
+                    <p className='currency-cap'>${formatter.format(coin.market_cap)}</p>
+                    <p className={(coin.price_change_percentage_24h>0?'percentage-increase':(coin.price_change_percentage_24h<0?'percentage-decrease':'percentage-neutral'))+' currency-percentage'}>{coin.price_change_percentage_24h}%</p>
+                  </li>
+                ))}
+                            <div className="pagination-buttons unselectable">
+                <button 
+                    className="pagination-button prev" 
+                    disabled={page === 1} 
+                    onClick={() => setPage(page - 1)}>
+                    {"<"}
+                </button>
+                {page > 3 && (
+                    <button 
+                    className="pagination-button" 
+                    onClick={() => setPage(page - 3)}>
+                    {page - 3}
+                    </button>
+                )}
+                {page > 2 && (
+                    <button 
+                    className="pagination-button" 
+                    onClick={() => setPage(page - 2)}>
+                    {page - 2}
+                    </button>
+                )}
+                {page > 1 && (
+                    <button 
+                    className="pagination-button" 
+                    onClick={() => setPage(page - 1)}>
+                    {page - 1}
+                    </button>
+                )}
+                <button 
+                    className="pagination-button current" 
+                    disabled>
+                    {page}
+                </button>
+                {page < total && (
+                    <button 
+                    className="pagination-button" 
+                    onClick={() => setPage(page + 1)}>
+                    {page + 1}
+                    </button>
+                )}
+                {page < total - 1 && (
+                    <button 
+                    className="pagination-button" 
+                    onClick={() => setPage(page + 2)}>
+                    {page + 2}
+                    </button>
+                )}
+                {page < total - 2 && (
+                    <button 
+                    className="pagination-button" 
+                    onClick={() => setPage(page + 3)}>
+                    {page + 3}
+                    </button>
+                )}
+                <button 
+                    className="pagination-button next" 
+                    disabled={page === total} 
+                    onClick={() => setPage(page + 1)}>
+                    {">"}
+                </button>
+            </div>
+              </ul>
       </section>
 
       <section>

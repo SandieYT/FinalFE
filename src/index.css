@@ -5,6 +5,11 @@
     font-family: "Gidole";
 }
 
+::selection {
+    background-color: #ffc20c;
+    color: #000;
+}
+
 ul li {
     list-style: none;
 }
@@ -20,6 +25,3 @@ a {
     user-select: none;         /* Standard syntax */
 }
 
-.root-div {
-    padding-top: 64px;
-}

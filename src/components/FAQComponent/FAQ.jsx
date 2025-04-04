@@ -52,7 +52,7 @@ export default function FAQ() {
   return (
     <div className="faq-container">
       <div className="faq-content">
-        <h2>Câu Hỏi Thường Gặp</h2>
+        <h2>FAQs</h2>
         <div className="faq-questions">
           <div className="faq-collapse">
             {faqItems.map((item, index) => (

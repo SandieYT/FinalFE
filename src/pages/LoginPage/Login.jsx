@@ -1,11 +1,15 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaApple, FaTelegram } from "react-icons/fa";
+import userService from "../../services/userService";
+import toast from "react-hot-toast";
 import "./login.css";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -19,10 +23,30 @@ export default function Login() {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        const response = await toast.promise(userService.loginUser(values), {
+          loading: "Logging in...",
+          success: "Login successful!",
+          error: (err) => getErrorMessage(err),
+        });
+
+        if (response.success) {
+          localStorage.setItem("accessToken", response.data.accessToken);
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+      }
     },
   });
+
+  const getErrorMessage = (error) => {
+    return (
+      error.response?.data?.error?.details?.message ||
+      "Login failed. Please check your credentials and try again."
+    );
+  };
 
   return (
     <div id="main-login">
@@ -31,13 +55,13 @@ export default function Login() {
           <h2 className="login-title">Login</h2>
 
           <div className="social-login">
-            <button className="social-btn google">
+            <button type="button" className="social-btn google">
               <FaGoogle className="social-icon" /> Google
             </button>
-            <button className="social-btn apple">
+            <button type="button" className="social-btn apple">
               <FaApple className="social-icon" /> Apple
             </button>
-            <button className="social-btn telegram">
+            <button type="button" className="social-btn telegram">
               <FaTelegram className="social-icon" /> Telegram
             </button>
           </div>
@@ -97,8 +121,12 @@ export default function Login() {
               </Link>
             </div>
 
-            <button type="submit" className="login-btn">
-              Login
+            <button
+              type="submit"
+              className="login-btn"
+              disabled={formik.isSubmitting}
+            >
+              {formik.isSubmitting ? "Logging in..." : "Login"}
             </button>
           </form>
 

@@ -1,4 +1,4 @@
-/* ===== MAIN CONTAINER ===== */
+/* ===== MAIN STRUCTURE ===== */
 #main-login {
     display: flex;
     justify-content: center;
@@ -13,7 +13,6 @@
     padding: 20px;
 }
 
-/* ===== LOGIN BOX ===== */
 .login-box {
     background-color: white;
     border-radius: 8px;
@@ -22,7 +21,7 @@
     border-top: 4px solid #FFD700;
 }
 
-/* ===== HEADER SECTION ===== */
+/* ===== HEADER ===== */
 .login-title {
     font-size: 28px;
     margin-bottom: 10px;
@@ -31,14 +30,13 @@
     font-weight: 600;
 }
 
-/* ===== SOCIAL LOGIN SECTION ===== */
+/* ===== SOCIAL BUTTONS ===== */
 .social-login {
     display: flex;
     gap: 10px;
     margin-bottom: 25px;
 }
 
-/* ===== SOCIAL BUTTONS ===== */
 .social-btn {
     flex: 1;
     padding: 12px;
@@ -60,10 +58,8 @@
 
 .social-icon {
     font-size: 1.1rem;
-    vertical-align: middle;
 }
 
-/* Button Variants */
 .social-btn.google {
     background-color: #f4b400;
     color: white;
@@ -79,7 +75,7 @@
     color: white;
 }
 
-/* ===== DIVIDER SECTION ===== */
+/* ===== DIVIDER ===== */
 .divider {
     display: flex;
     align-items: center;
@@ -98,7 +94,7 @@
     font-size: 14px;
 }
 
-/* ===== FORM SECTION ===== */
+/* ===== FORM ELEMENTS ===== */
 .login-form {
     margin-top: 20px;
 }
@@ -125,7 +121,6 @@
     background-color: #fafafa;
 }
 
-/* Input States */
 .input-group input:focus {
     outline: none;
     border-color: #FFD700;
@@ -159,7 +154,7 @@
     color: #d4af37;
 }
 
-/* ===== BUTTON STYLES ===== */
+/* ===== SUBMIT BUTTON ===== */
 .login-btn {
     width: 100%;
     padding: 14px;
@@ -180,7 +175,15 @@
     box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
 }
 
-/* ===== FOOTER SECTION ===== */
+.login-btn:disabled {
+    background-color: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== FOOTER LINK ===== */
 .register-prompt {
     margin-top: 25px;
     text-align: center;

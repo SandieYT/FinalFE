@@ -67,7 +67,7 @@ export default function Header() {
               </div>
               <div className="btn btn-register">
                 <button>
-                  <Link to="#">
+                  <Link to="/register">
                     <span>Register</span>
                   </Link>
                 </button>

@@ -116,7 +116,7 @@ export default function Login() {
             </div>
 
             <div className="form-options">
-              <Link to="/forgot-password" className="forgot-password">
+              <Link to="#" className="forgot-password">
                 Forgot password?
               </Link>
             </div>
@@ -124,7 +124,7 @@ export default function Login() {
             <button
               type="submit"
               className="login-btn"
-              disabled={formik.isSubmitting}
+              disabled={!formik.isValid || formik.isSubmitting}
             >
               {formik.isSubmitting ? "Logging in..." : "Login"}
             </button>

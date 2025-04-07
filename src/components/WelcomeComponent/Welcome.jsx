@@ -15,7 +15,7 @@ export default function Welcome() {
             </div>
           </div>
           <div className="welcome-register-btn">
-            <Link to="#">Sign Up for Rewards</Link>
+            <Link to="/register">Sign Up for Rewards</Link>
             <img
               src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"
               alt="Welcome Image"

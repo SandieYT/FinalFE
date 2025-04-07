@@ -5,6 +5,8 @@ import RootLayout from "./RootLayout";
 const LoadingSpinner = () => <div>Loading...</div>;
 
 const Home = lazy(() => import("../pages/HomePage/Home"));
+const Login = lazy(() => import("../pages/LoginPage/Login"));
+const Register = lazy(() => import("../pages/RegisterPage/Register"));
 const Markets = lazy(() => import("../pages/MarketsPage/Markets"));
 const Coin = lazy(() => import("../pages/CoinPage/Coin"));
 
@@ -18,6 +20,22 @@ const Router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "login",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Register />
           </Suspense>
         ),
       },

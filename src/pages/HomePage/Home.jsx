@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Welcome, Footer, GuidedDownload } from "../../components";
+import { Welcome, Footer, GuidedDownload, FAQ } from "../../components";
 import "./home.css";
 
 export default function Home() {
@@ -39,6 +39,9 @@ export default function Home() {
       </section>
       <section>
         <GuidedDownload />
+      </section>
+      <section>
+        <FAQ />
       </section>
       <section>
         <Footer />

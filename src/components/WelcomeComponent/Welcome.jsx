@@ -1,26 +1,53 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./welcome.css";
 
 export default function Welcome() {
+  const { isAuthenticated, username } = useSelector((state) => state.auth);
+
   return (
     <div className="welcome-container">
       <div className="welcome-content">
         <div className="welcome-left">
           <div className="slogan-spotlight">
-            <h1 className="slogan-title">Wiki Indices Unleashed!</h1>
+            <h1 className="slogan-title">
+              {isAuthenticated
+                ? `Welcome back ${username}!`
+                : "Wiki Indices Unleashed!"}
+            </h1>
             <div className="slogan-description">
-              <p className="paragraph-main-1">[/ˈwikē], noun</p>
-              <p className="paragraph-main-2">Trade indices with zero fees!</p>
+              <p className="paragraph-main-1">
+                {isAuthenticated ? "Ready to trade today?" : "[/ˈwikē], noun"}
+              </p>
+              <p className="paragraph-main-2">
+                {isAuthenticated
+                  ? "Your exclusive rewards are waiting!"
+                  : "Trade indices with zero fees!"}
+              </p>
             </div>
           </div>
-          <div className="welcome-register-btn">
-            <Link to="/register">Sign Up for Rewards</Link>
-            <img
-              src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"
-              alt="Welcome Image"
-            />
-          </div>
+
+          {!isAuthenticated && (
+            <div className="welcome-register-btn">
+              <Link to="/register">Sign Up for Rewards</Link>
+              <img
+                src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"
+                alt="Welcome Image"
+              />
+            </div>
+          )}
+
+          {isAuthenticated && (
+            <div className="welcome-register-btn">
+              <Link to="#">Claim Your Rewards</Link>
+              <img
+                src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"
+                alt="Welcome Image\"
+              />
+            </div>
+          )}
+
           <div className="cta-socials">
             <div className="cta-main">
               <p>Join the waiting list</p>

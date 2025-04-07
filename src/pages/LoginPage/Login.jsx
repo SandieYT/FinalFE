@@ -6,10 +6,14 @@ import { FaGoogle, FaApple, FaTelegram } from "react-icons/fa";
 import userService from "../../services/userService";
 import { useTodoMutation } from "../../hooks/useTodoMutation";
 import toast from "react-hot-toast";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../features/authSlice";
 import "./login.css";
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const loginMutation = useTodoMutation((data) => userService.loginUser(data));
 
@@ -45,7 +49,15 @@ export default function Login() {
         );
 
         if (response?.success) {
-          console.log(response)
+          const decoded = jwtDecode(response?.data.accessToken);
+          dispatch(
+            loginSuccess({
+              username: decoded.data.username,
+              email: decoded.data.email,
+              accessToken: response.data.accessToken,
+              userId: decoded.data.userId,
+            })
+          );
           navigate("/");
         }
       } catch (error) {

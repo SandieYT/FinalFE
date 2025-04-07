@@ -1,4 +1,4 @@
-/* ===== MAIN STRUCTURE ===== */
+/* ===== Main Structure Styles ===== */
 #main-login {
     display: flex;
     justify-content: center;
@@ -21,7 +21,7 @@
     border-top: 4px solid #FFD700;
 }
 
-/* ===== HEADER ===== */
+/* ===== Header Section Styles ===== */
 .login-title {
     font-size: 28px;
     margin-bottom: 10px;
@@ -30,7 +30,7 @@
     font-weight: 600;
 }
 
-/* ===== SOCIAL BUTTONS ===== */
+/* ===== Social Login Section Styles ===== */
 .social-login {
     display: flex;
     gap: 10px;
@@ -60,6 +60,7 @@
     font-size: 1.1rem;
 }
 
+/* ===== Social Button Variants ===== */
 .social-btn.google {
     background-color: #f4b400;
     color: white;
@@ -75,7 +76,7 @@
     color: white;
 }
 
-/* ===== DIVIDER ===== */
+/* ===== Divider Section Styles ===== */
 .divider {
     display: flex;
     align-items: center;
@@ -94,7 +95,7 @@
     font-size: 14px;
 }
 
-/* ===== FORM ELEMENTS ===== */
+/* ===== Form Section Styles ===== */
 .login-form {
     margin-top: 20px;
 }
@@ -137,7 +138,7 @@
     margin-top: 6px;
 }
 
-/* ===== FORM OPTIONS ===== */
+/* ===== Form Options Section Styles ===== */
 .form-options {
     display: flex;
     justify-content: flex-end;
@@ -154,7 +155,7 @@
     color: #d4af37;
 }
 
-/* ===== SUBMIT BUTTON ===== */
+/* ===== Submit Button Styles ===== */
 .login-btn {
     width: 100%;
     padding: 14px;
@@ -183,7 +184,7 @@
     box-shadow: none;
 }
 
-/* ===== FOOTER LINK ===== */
+/* ===== Footer Link Styles ===== */
 .register-prompt {
     margin-top: 25px;
     text-align: center;

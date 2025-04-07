@@ -1,4 +1,4 @@
-/* ===== MAIN STRUCTURE ===== */
+/* ===== Main Structure Styles ===== */
 #main-register {
     display: flex;
     justify-content: center;
@@ -21,7 +21,7 @@
     border-top: 4px solid #FFD700;
 }
 
-/* ===== HEADER ===== */
+/* ===== Header Section Styles ===== */
 .register-title {
     font-size: 28px;
     margin-bottom: 10px;
@@ -30,7 +30,7 @@
     font-weight: 600;
 }
 
-/* ===== FORM ELEMENTS ===== */
+/* ===== Form Section Styles ===== */
 .register-form {
     margin-top: 20px;
 }
@@ -73,14 +73,14 @@
     margin-top: 6px;
 }
 
-/* ===== PASSWORD STRENGTH ===== */
+/* ===== Password Strength Indicator ===== */
 .password-strength {
     font-size: 13px;
     color: #777;
     margin-top: 6px;
 }
 
-/* ===== SUBMIT BUTTON ===== */
+/* ===== Submit Button Styles ===== */
 .register-btn {
     width: 100%;
     padding: 14px;
@@ -109,7 +109,7 @@
     box-shadow: none;
 }
 
-/* ===== FOOTER LINK ===== */
+/* ===== Footer Link Styles ===== */
 .login-prompt {
     margin-top: 25px;
     text-align: center;

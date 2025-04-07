@@ -14,12 +14,19 @@
     padding: 50px 48px;
 }
 
-.welcome-left,
+.welcome-left {
+    flex: 1;
+}
+
 .welcome-right {
     flex: 1;
 }
 
-/* ===== Typography Styles ===== */
+/* ===== Slogan Section Styles ===== */
+.slogan-spotlight {
+    margin-bottom: 32px;
+}
+
 .slogan-title {
     font-size: 40px;
     font-weight: 700;
@@ -30,7 +37,11 @@
     margin-bottom: 16px;
 }
 
+.slogan-description p {
+    margin: 8px 0;
+}
 
+/* ===== Paragraph Text Styles ===== */
 .paragraph-main-1 {
     color: #a1a1c2;
     font-style: italic;
@@ -43,16 +54,7 @@
     color: #fff;
 }
 
-/* ===== Component Styles ===== */
-.slogan-spotlight {
-    margin-bottom: 32px;
-}
-
-.slogan-description p {
-    margin: 8px 0;
-}
-
-/* ===== Button Styles ===== */
+/* ===== Button Section Styles ===== */
 .welcome-register-btn {
     display: flex;
     align-items: center;
@@ -96,7 +98,7 @@
     }
 }
 
-/* ===== CTA & Socials Styles ===== */
+/* ===== CTA & Socials Section Styles ===== */
 .cta-socials {
     display: flex;
     flex-direction: column;
@@ -185,7 +187,7 @@
     filter: brightness(1);
 }
 
-/* ===== Video Styles ===== */
+/* ===== Video Section Styles ===== */
 .video-spotlight {
     width: 100%;
     border-radius: 20px;

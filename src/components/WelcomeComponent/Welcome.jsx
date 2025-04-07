@@ -14,7 +14,7 @@ export default function Welcome() {
               <p className="paragraph-main-2">Trade indices with zero fees!</p>
             </div>
           </div>
-          <div className="register-btn">
+          <div className="welcome-register-btn">
             <Link to="#">Sign Up for Rewards</Link>
             <img
               src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"

@@ -6,6 +6,7 @@ const LoadingSpinner = () => <div>Loading...</div>;
 
 const Home = lazy(() => import("../pages/HomePage/Home"));
 const Markets = lazy(() => import("../pages/MarketsPage/Markets"));
+const Coin = lazy(() => import("../pages/CoinPage/Coin"));
 
 const Router = createBrowserRouter([
   {
@@ -25,6 +26,14 @@ const Router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <Markets />
+          </Suspense>
+        ),
+      },
+      {
+        path: "coin/:id",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Coin />
           </Suspense>
         ),
       },

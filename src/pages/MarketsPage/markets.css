@@ -26,6 +26,7 @@
 }
 
 .market-currency {
+    color: #141414;
     border-top: 1px solid #cacaca;
     display: flex;
     align-items: center;

@@ -39,6 +39,8 @@ export default function Markets() {
     fetchData();
   }, [page]);
 
+  console.log(cryptoData)
+
   return (
     <div id="main-markets">
       <section className='market-section'>
@@ -52,6 +54,7 @@ export default function Markets() {
                     <h2 className='currency-percentage'>24h Change</h2>
                     </li>
                 {cryptoData.map(coin => (
+                  <Link to={"/coin/"+coin.id}>
                   <li key={coin.id} className='market-currency'>
                     <img className='currency-icon unselectable' src={coin.image}/>
                     <p className='currency-name'>{coin.name} ({coin.symbol.toUpperCase()})</p>
@@ -59,6 +62,7 @@ export default function Markets() {
                     <p className='currency-cap'>${formatter.format(coin.market_cap)}</p>
                     <p className={(coin.price_change_percentage_24h>0?'percentage-increase':(coin.price_change_percentage_24h<0?'percentage-decrease':'percentage-neutral'))+' currency-percentage'}>{coin.price_change_percentage_24h}%</p>
                   </li>
+                  </Link>
                 ))}
                             <div className="pagination-buttons unselectable">
                 <button 

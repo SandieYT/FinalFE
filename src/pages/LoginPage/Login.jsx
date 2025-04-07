@@ -4,11 +4,21 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaApple, FaTelegram } from "react-icons/fa";
 import userService from "../../services/userService";
+import { useTodoMutation } from "../../hooks/useTodoMutation";
 import toast from "react-hot-toast";
 import "./login.css";
 
 export default function Login() {
   const navigate = useNavigate();
+
+  const loginMutation = useTodoMutation((data) => userService.loginUser(data));
+
+  const getErrorMessage = (error) => {
+    return (
+      error?.response?.data?.error?.details?.message ||
+      "Login failed. Please check your credentials and try again."
+    );
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -25,28 +35,24 @@ export default function Login() {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await toast.promise(userService.loginUser(values), {
-          loading: "Logging in...",
-          success: "Login successful!",
-          error: (err) => getErrorMessage(err),
-        });
+        const response = await toast.promise(
+          loginMutation.mutateAsync(values),
+          {
+            loading: "Logging in...",
+            success: "Login successful!",
+            error: (err) => getErrorMessage(err),
+          }
+        );
 
-        if (response.success) {
-          localStorage.setItem("accessToken", response.data.accessToken);
+        if (response?.success) {
+          console.log(response)
           navigate("/");
         }
       } catch (error) {
-        console.error("Login error:", error);
+        console.log("Login error:", error);
       }
     },
   });
-
-  const getErrorMessage = (error) => {
-    return (
-      error.response?.data?.error?.details?.message ||
-      "Login failed. Please check your credentials and try again."
-    );
-  };
 
   return (
     <div id="main-login">
@@ -67,9 +73,9 @@ export default function Login() {
           </div>
 
           <div className="divider">
-            <span className="divider-line"></span>
+            <span className="divider-line" />
             <span className="divider-text">or</span>
-            <span className="divider-line"></span>
+            <span className="divider-line" />
           </div>
 
           <form onSubmit={formik.handleSubmit} className="login-form">
@@ -79,6 +85,7 @@ export default function Login() {
                 id="email"
                 name="email"
                 type="text"
+                autoComplete="email"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
@@ -100,6 +107,7 @@ export default function Login() {
                 id="password"
                 name="password"
                 type="password"
+                autoComplete="current-password"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
@@ -131,7 +139,7 @@ export default function Login() {
           </form>
 
           <div className="register-prompt">
-            Don't have an account? <Link to="/register">Register</Link>
+            Don&apos;t have an account? <Link to="/register">Register</Link>
           </div>
         </div>
       </div>

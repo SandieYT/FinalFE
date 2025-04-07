@@ -2,12 +2,41 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
+import { useTodoMutation } from "../../hooks/useTodoMutation";
 import userService from "../../services/userService";
 import toast from "react-hot-toast";
 import "./register.css";
 
 export default function Register() {
   const navigate = useNavigate();
+
+  const registerMutation = useTodoMutation(userService.registerUser);
+
+  const getErrorMessage = (error) => {
+    return (
+      error.response?.data?.error?.details?.message ||
+      "Registration failed. Please try again."
+    );
+  };
+
+  const getPasswordStrength = (password) => {
+    if (!password) return { level: "", color: "" };
+    if (password.length < 6) return { level: "Weak", color: "#ff4d4f" };
+
+    const strengthChecks = [
+      /[A-Z]/.test(password),
+      /[a-z]/.test(password),
+      /\d/.test(password),
+      /[!@#$%^&*(),.?":{}|<>]/.test(password),
+    ];
+
+    const passedChecks = strengthChecks.filter(Boolean).length;
+
+    if (passedChecks <= 1) return { level: "Weak", color: "#ff4d4f" };
+    if (passedChecks === 2 || passedChecks === 3)
+      return { level: "Medium", color: "#faad14" };
+    return { level: "Strong", color: "#52c41a" };
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -25,51 +54,31 @@ export default function Register() {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .oneOf([Yup.ref("password")], "Passwords must match")
         .required("Please confirm your password"),
     }),
     onSubmit: async (values) => {
+      const { confirmPassword, ...userData } = values;
       try {
-        const { confirmPassword, ...userData } = values;
-        await toast.promise(userService.registerUser(userData), {
-          loading: "Creating account...",
-          success: "Registration successful!",
-          error: (err) => getErrorMessage(err),
-        });
-        navigate("/login");
-      } catch (error) {
-        console.error("Registration error:", error);
+        const response = await toast.promise(
+          registerMutation.mutateAsync(userData),
+          {
+            loading: "Creating account...",
+            success: "Registration successful!",
+            error: (err) => getErrorMessage(err),
+          }
+        );
+
+        if (response?.success) {
+          navigate("/login");
+        }
+      } catch (err) {
+        console.log("Registration error:", err);
       }
     },
   });
 
-  const getErrorMessage = (error) => {
-    return (
-      error.response?.data?.error?.details?.message ||
-      "Registration failed. Please try again."
-    );
-  };
-
-  const getPasswordStrength = (password) => {
-    if (!password) return "";
-    if (password.length < 6) return "Weak";
-
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    const strength = [
-      hasUpperCase,
-      hasLowerCase,
-      hasNumbers,
-      hasSpecialChars,
-    ].filter(Boolean).length;
-
-    if (strength < 2) return "Weak";
-    if (strength < 4) return "Medium";
-    return "Strong";
-  };
+  const passwordStrength = getPasswordStrength(formik.values.password);
 
   return (
     <div id="main-register">
@@ -84,6 +93,8 @@ export default function Register() {
                 id="username"
                 name="username"
                 type="text"
+                autoComplete="username"
+                placeholder="Enter your username"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.username}
@@ -92,7 +103,6 @@ export default function Register() {
                     ? "input-error"
                     : ""
                 }
-                placeholder="Enter your username"
               />
               {formik.touched.username && formik.errors.username && (
                 <div className="error-message">{formik.errors.username}</div>
@@ -105,6 +115,8 @@ export default function Register() {
                 id="email"
                 name="email"
                 type="email"
+                autoComplete="email"
+                placeholder="Enter your email"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
@@ -113,7 +125,6 @@ export default function Register() {
                     ? "input-error"
                     : ""
                 }
-                placeholder="Enter your email"
               />
               {formik.touched.email && formik.errors.email && (
                 <div className="error-message">{formik.errors.email}</div>
@@ -126,6 +137,8 @@ export default function Register() {
                 id="password"
                 name="password"
                 type="password"
+                autoComplete="new-password"
+                placeholder="Enter your password"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
@@ -134,14 +147,16 @@ export default function Register() {
                     ? "input-error"
                     : ""
                 }
-                placeholder="Enter your password"
               />
               {formik.touched.password && formik.errors.password && (
                 <div className="error-message">{formik.errors.password}</div>
               )}
               {formik.values.password && (
-                <div className="password-strength">
-                  Strength: {getPasswordStrength(formik.values.password)}
+                <div
+                  className="password-strength"
+                  style={{ color: passwordStrength.color }}
+                >
+                  Strength: {passwordStrength.level}
                 </div>
               )}
             </div>
@@ -152,6 +167,8 @@ export default function Register() {
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
+                autoComplete="new-password"
+                placeholder="Confirm your password"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.confirmPassword}
@@ -161,7 +178,6 @@ export default function Register() {
                     ? "input-error"
                     : ""
                 }
-                placeholder="Confirm your password"
               />
               {formik.touched.confirmPassword &&
                 formik.errors.confirmPassword && (
@@ -174,9 +190,9 @@ export default function Register() {
             <button
               type="submit"
               className="register-btn"
-              disabled={!formik.isValid || formik.isSubmitting}
+              disabled={!formik.isValid || registerMutation.isPending}
             >
-              {formik.isSubmitting ? "Registering..." : "Register"}
+              {registerMutation.isPending ? "Registering..." : "Register"}
             </button>
           </form>
 

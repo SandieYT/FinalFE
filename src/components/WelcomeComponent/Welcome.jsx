@@ -40,7 +40,7 @@ export default function Welcome() {
 
           {isAuthenticated && (
             <div className="welcome-register-btn">
-              <Link to="#">Claim Your Rewards</Link>
+              <Link to="#">Connect your wallet</Link>
               <img
                 src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"
                 alt="Welcome Image\"

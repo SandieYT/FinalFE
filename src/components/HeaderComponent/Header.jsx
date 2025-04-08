@@ -37,7 +37,7 @@ export default function Header() {
           <div className="header-menu">
             <ul>
               <li>
-                <Link to="#">
+                <Link to="/transaction">
                   <span>Buy Crypto</span>
                 </Link>
               </li>

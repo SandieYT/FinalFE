@@ -1,5 +1,6 @@
 import React from "react";
-import "./transaction.css"
+
+import "./transaction.css";
 
 export default function Transaction() {
   return (

@@ -1,12 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Welcome, Footer, GuidedDownload, FAQ } from "../../components";
+import useScrollAnimation from "../../hooks/useScrollAnimation";
+
 import "./home.css";
 
 export default function Home() {
+  const [refWelcome, showWelcome] = useScrollAnimation();
+  const [refDownload, showDownload] = useScrollAnimation();
+  const [refFAQ, showFAQ] = useScrollAnimation();
+  const [refFooter, showFooter] = useScrollAnimation();
+
   return (
     <div id="main-home">
-      <section>
+      <section
+        ref={refWelcome}
+        className={`fade-in-up ${showWelcome ? "show" : ""}`}
+      >
+        {" "}
         <Welcome />
         <div className="newIndex-marquee">
           <ul>
@@ -37,13 +48,19 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      <section>
+      <section
+        ref={refDownload}
+        className={`fade-in-up ${showDownload ? "show" : ""}`}
+      >
         <GuidedDownload />
       </section>
-      <section>
+      <section ref={refFAQ} className={`fade-in-up ${showFAQ ? "show" : ""}`}>
         <FAQ />
       </section>
-      <section>
+      <section
+        ref={refFooter}
+        className={`fade-in-up ${showFooter ? "show" : ""}`}
+      >
         <Footer />
       </section>
     </div>

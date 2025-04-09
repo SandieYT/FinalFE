@@ -5,7 +5,7 @@ import { TransactionContext } from "../../context/TransactionContext";
 import "./welcome.css";
 
 export default function Welcome() {
-  const { connectWallet } = useContext(TransactionContext);
+  const { connectWallet, currentAccount } = useContext(TransactionContext);
   const { isAuthenticated, username } = useSelector((state) => state.auth);
 
   return (
@@ -40,7 +40,7 @@ export default function Welcome() {
             </div>
           )}
 
-          {isAuthenticated && (
+          {isAuthenticated && !currentAccount && (
             <div className="welcome-register-btn">
               <Link to="#" onClick={connectWallet}>
                 Connect your wallet

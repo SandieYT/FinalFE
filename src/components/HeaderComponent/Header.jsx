@@ -38,7 +38,7 @@ export default function Header() {
             <ul>
               <li>
                 <Link to="/transaction">
-                  <span>Buy Crypto</span>
+                  <span>Exchange</span>
                 </Link>
               </li>
               <li>

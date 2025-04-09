@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { TransactionContext } from "../../context/TransactionContext";
 import "./welcome.css";
 
 export default function Welcome() {
+  const { connectWallet } = useContext(TransactionContext);
   const { isAuthenticated, username } = useSelector((state) => state.auth);
 
   return (
@@ -40,7 +42,9 @@ export default function Welcome() {
 
           {isAuthenticated && (
             <div className="welcome-register-btn">
-              <Link to="#">Connect your wallet</Link>
+              <Link to="#" onClick={connectWallet}>
+                Connect your wallet
+              </Link>
               <img
                 src="/images/piggy-68ee34a44ef142d586e121df51cbc026.avif"
                 alt="Welcome Image\"

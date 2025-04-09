@@ -1,4 +1,4 @@
-/* ===== Main Container ===== */
+/* ===== Main Container Styles ===== */
 .faq-container {
     margin: 16px 0;
     background: linear-gradient(135deg, #1e1e1e, #292929);
@@ -7,13 +7,13 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== Content Layout ===== */
+/* ===== Content Layout Styles ===== */
 .faq-content {
     max-width: 800px;
     margin: 0 auto;
 }
 
-/* ===== Title Section ===== */
+/* ===== Title Section Styles ===== */
 .faq-content h2 {
     font-size: 32px;
     color: #ff6b00;
@@ -23,7 +23,17 @@
     font-weight: bold;
 }
 
-/* ===== FAQ Items ===== */
+/* ===== FAQ Items Section Styles ===== */
+.faq-questions {
+    margin-top: 24px;
+}
+
+.faq-collapse {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .faq-collapse-item {
     margin-bottom: 16px;
     border-radius: 12px;
@@ -34,13 +44,13 @@
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover Effects */
+/* ===== Item Hover Effects ===== */
 .faq-collapse-item:hover {
     border-color: rgba(255, 107, 0, 0.5);
     transform: translateY(-2px);
 }
 
-/* ===== Header ===== */
+/* ===== Header Section Styles ===== */
 .faq-collapse-header {
     display: flex;
     justify-content: space-between;
@@ -54,25 +64,23 @@
     background: rgba(255, 107, 0, 0.15);
 }
 
-/* Header Text */
 .faq-collapse-header-text {
     font-size: 18px;
     font-weight: bold;
     color: #fff;
 }
 
-/* Arrow Icon */
 .faq-collapse-header svg {
     color: #ff6b00;
     transition: transform 0.3s ease;
 }
 
-/* Active State */
+/* ===== Active State Styles ===== */
 .faq-collapse-item.active .faq-collapse-header svg {
     transform: rotate(180deg);
 }
 
-/* ===== Content ===== */
+/* ===== Content Section Styles ===== */
 .faq-collapse-content {
     max-height: 0;
     overflow: hidden;
@@ -87,14 +95,13 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Content Text */
 .faq-collapse-content span {
     color: #d1d1d1;
     font-size: 16px;
     line-height: 1.6;
 }
 
-/* Highlight Text */
+/* ===== Highlight Text Styles ===== */
 .highlight {
     color: #ffa502 !important;
     font-weight: normal;

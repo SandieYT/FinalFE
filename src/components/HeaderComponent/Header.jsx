@@ -1,15 +1,26 @@
-import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutSuccess } from "../../features/authSlice";
+
 import "./header.css";
 
 export default function Header() {
-  const [searchActive, setSearchActive] = useState(false);
-  const searchRef = useRef(null);
+  const [searchActive, setSearchActive] = React.useState(false);
+  const searchRef = React.useRef(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated, username } = useSelector((state) => state.auth);
 
   const handleSearchIconClick = () => {
     setSearchActive(true);
     searchRef.current.focus();
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess());
+    navigate("/");
   };
   return (
     <header id="main-header">
@@ -26,8 +37,8 @@ export default function Header() {
           <div className="header-menu">
             <ul>
               <li>
-                <Link to="#">
-                  <span>Buy Crypto</span>
+                <Link to="/transaction">
+                  <span>Exchange</span>
                 </Link>
               </li>
               <li>
@@ -54,20 +65,31 @@ export default function Header() {
             <CiSearch className="search-icon" onClick={handleSearchIconClick} />
           </div>
           <div className="header-auth">
-            <div className="btn header-login-btn">
-              <button>
-                <Link to="/login">
-                  <span>Login</span>
-                </Link>
-              </button>
-            </div>
-            <div className="btn header-register-btn">
-              <button>
-                <Link to="/register">
-                  <span>Register</span>
-                </Link>
-              </button>
-            </div>
+            {isAuthenticated ? (
+              <div className="user-info">
+                <span className="username">Hello {username}</span>
+                <button onClick={handleLogout} className="header-logout-btn">
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="btn header-login-btn">
+                  <button>
+                    <Link to="/login">
+                      <span>Login</span>
+                    </Link>
+                  </button>
+                </div>
+                <div className="btn header-register-btn">
+                  <button>
+                    <Link to="/register">
+                      <span>Register</span>
+                    </Link>
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

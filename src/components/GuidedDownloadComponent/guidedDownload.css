@@ -65,22 +65,30 @@
 }
 
 @keyframes firstTabHighlight {
-    0%, 40% {
+
+    0%,
+    40% {
         font-weight: 700;
         opacity: 1;
     }
-    60%, 100% {
+
+    60%,
+    100% {
         font-weight: 400;
         opacity: 0.6;
     }
 }
 
 @keyframes secondTabHighlight {
-    0%, 40% {
+
+    0%,
+    40% {
         font-weight: 400;
         opacity: 0.6;
     }
-    60%, 100% {
+
+    60%,
+    100% {
         font-weight: 700;
         opacity: 1;
     }

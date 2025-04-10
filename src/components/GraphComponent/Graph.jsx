@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Chart } from 'react-google-charts';
+import React, { useState, useEffect } from "react";
+import { Chart } from "react-google-charts";
+import "./graph.css";
 
-const CryptoGraph = ({ historicalData }) => {
+export default function Graph({ historicalData }) {
   const [chartData, setChartData] = useState([
-    ['Date', 'Low', 'Open', 'Close', 'High', { type: 'string', role: 'tooltip', p: { html: true } }],
+    [
+      "Date",
+      "Low",
+      "Open",
+      "Close",
+      "High",
+      { type: "string", role: "tooltip", p: { html: true } },
+    ],
   ]);
 
   useEffect(() => {
@@ -14,70 +22,63 @@ const CryptoGraph = ({ historicalData }) => {
         item[1], // Open
         item[4], // Close
         item[2], // High
-        `<div style="padding:10px;">
-          <strong>Date:</strong> ${new Date(item[0]).toLocaleDateString()}<br/>
-          <strong>Open:</strong> ${item[1]}<br/>
-          <strong>High:</strong> ${item[2]}<br/>
-          <strong>Low:</strong> ${item[3]}<br/>
-          <strong>Close:</strong> ${item[4]}
-        </div>`,
+        `
+          <div class="custom-tooltip">
+            <strong>Date:</strong> ${new Date(
+              item[0]
+            ).toLocaleDateString()}<br/>
+            <strong>Open:</strong> ${item[1]}<br/>
+            <strong>High:</strong> ${item[2]}<br/>
+            <strong>Low:</strong> ${item[3]}<br/>
+            <strong>Close:</strong> ${item[4]}
+          </div>
+        `,
       ]);
-      setChartData((prevData) => [...prevData, ...formattedData]);
+      setChartData((prev) => [...prev, ...formattedData]);
     }
   }, [historicalData]);
 
   const options = {
-    legend: 'none',
+    legend: "none",
     tooltip: { isHtml: true },
     candlestick: {
-      risingColor: { stroke: '#59ff88', fill: '#59ff88' },
-      fallingColor: { stroke: '#ff1c46', fill: '#ff1c46' },
+      risingColor: { stroke: "#59ff88", fill: "#59ff88" },
+      fallingColor: { stroke: "#ff1c46", fill: "#ff1c46" },
     },
-    chartArea: { width: '90%', height: '70%' },
-    bar: { groupWidth: '80%' },
-    backgroundColor: '#000',
+    chartArea: { width: "90%", height: "70%" },
+    bar: { groupWidth: "80%" },
+    backgroundColor: "#000",
     hAxis: {
-      textStyle: {
-        color: '#fff',
-        fontSize: 12,
-      },
+      textStyle: { color: "#fff", fontSize: 12 },
     },
     vAxis: {
-      textStyle: {
-        color: '#fff',
-        fontSize: 12,
-      },
-      gridlines: {
-        color: '#171717',
-        count: 10,
-      },
-      minorGridlines: {
-        color: '#0f0f0f',
-      },
+      textStyle: { color: "#fff", fontSize: 12 },
+      gridlines: { color: "#171717", count: 10 },
+      minorGridlines: { color: "#0f0f0f" },
     },
+  };
+
+  const handleMouseOver = ({ event }) => {
+    const tooltip = document.querySelector(".google-visualization-tooltip");
+    if (tooltip) {
+      tooltip.style.top = `${event.clientY - 120}px`;
+      tooltip.style.left = `${event.clientX - 10}px`;
+    }
   };
 
   return (
     <Chart
       chartType="CandlestickChart"
       width="100%"
-      height="320px"
+      height="400px"
       data={chartData}
       options={options}
       chartEvents={[
         {
-          eventName: 'onmouseover',
-          callback: ({ chartWrapper, event }) => {
-            const tooltip = document.querySelector('.google-visualization-tooltip');
-            if (tooltip) {
-              tooltip.style.top = `${event.clientY - 120}px`;
-              tooltip.style.left = `${event.clientX - 10}px`;
-            }
-          },
+          eventName: "onmouseover",
+          callback: handleMouseOver,
         },
       ]}
     />
   );
-};
-
-export default CryptoGraph;
+}

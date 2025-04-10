@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Welcome, Footer, GuidedDownload, FAQ } from "../../components";
 import useScrollAnimation from "../../hooks/useScrollAnimation";
-
 import "./home.css";
 
 export default function Home() {

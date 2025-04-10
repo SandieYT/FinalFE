@@ -35,11 +35,11 @@
     margin-top: 20px;
 }
 
-.input-group {
+.register-input-group {
     margin-bottom: 25px;
 }
 
-.input-group label {
+.register-input-group label {
     display: block;
     margin-bottom: 8px;
     color: #555;
@@ -47,7 +47,7 @@
     font-weight: 500;
 }
 
-.input-group input {
+.register-input-group input {
     width: 100%;
     padding: 14px 16px;
     border: 1px solid #ddd;
@@ -57,13 +57,13 @@
     background-color: #fafafa;
 }
 
-.input-group input:focus {
+.register-input-group input:focus {
     outline: none;
     border-color: #FFD700;
     box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
 }
 
-.input-group input.input-error {
+.register-input-group input.input-error {
     border-color: #ff5a5f;
 }
 

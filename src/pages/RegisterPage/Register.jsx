@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTodoMutation } from "../../hooks/useTodoMutation";
 import userService from "../../services/userService";
 import toast from "react-hot-toast";
-
 import "./register.css";
 
 export default function Register() {
@@ -88,7 +87,7 @@ export default function Register() {
           <h2 className="register-title">Create Account</h2>
 
           <form onSubmit={formik.handleSubmit} className="register-form">
-            <div className="input-group">
+            <div className="register-input-group">
               <label htmlFor="username">Username</label>
               <input
                 id="username"
@@ -110,7 +109,7 @@ export default function Register() {
               )}
             </div>
 
-            <div className="input-group">
+            <div className="register-input-group">
               <label htmlFor="email">Email</label>
               <input
                 id="email"
@@ -132,7 +131,7 @@ export default function Register() {
               )}
             </div>
 
-            <div className="input-group">
+            <div className="register-input-group">
               <label htmlFor="password">Password</label>
               <input
                 id="password"
@@ -162,7 +161,7 @@ export default function Register() {
               )}
             </div>
 
-            <div className="input-group">
+            <div className="register-input-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
               <input
                 id="confirmPassword"

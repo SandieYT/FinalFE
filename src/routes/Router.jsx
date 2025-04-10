@@ -7,9 +7,9 @@ const LoadingSpinner = () => <div>Loading...</div>;
 const Home = lazy(() => import("../pages/HomePage/Home"));
 const Login = lazy(() => import("../pages/LoginPage/Login"));
 const Register = lazy(() => import("../pages/RegisterPage/Register"));
+const Transaction = lazy(() => import("../pages/TransactionPage/Transaction"));
 const Markets = lazy(() => import("../pages/MarketsPage/Markets"));
 const Coin = lazy(() => import("../pages/CoinPage/Coin"));
-const Transaction = lazy(() => import("../pages/TransactionPage/Transaction"))
 
 const Router = createBrowserRouter([
   {
@@ -41,6 +41,14 @@ const Router = createBrowserRouter([
         ),
       },
       {
+        path: "transaction",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Transaction />
+          </Suspense>
+        ),
+      },
+      {
         path: "markets",
         element: (
           <Suspense fallback={<LoadingSpinner />}>
@@ -53,14 +61,6 @@ const Router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <Coin />
-          </Suspense>
-        ),
-      },
-      {
-        path: "transaction",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <Transaction />
           </Suspense>
         ),
       },

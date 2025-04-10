@@ -1,7 +1,7 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import "./transaction.css"
+import "./transaction.css";
 
 const validationSchema = Yup.object({
   addressTo: Yup.string()
@@ -16,81 +16,109 @@ const validationSchema = Yup.object({
 });
 
 export default function Transaction() {
+  const formik = useFormik({
+    initialValues: {
+      addressTo: '',
+      amount: '',
+      keyword: '',
+      message: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values, { setSubmitting, resetForm }) => {
+      
+
+
+
+
+
+    },
+  });
+
   return (
     <div id="main-transaction">
       <div className="transaction-container">
-        <div className="transaction-decoration">
+        <div className="transaction-left">
           <h1>some text here</h1>
         </div>
-        <div className="transaction-form">
+        <div className="transaction-right">
           <div className='transaction-card'>
             <h1>text</h1>
           </div>
           <div className='transaction-form-container'>
-          <Formik
-        initialValues={{
-          addressTo: '',
-          amount: '',
-          keyword: '',
-          message: '',
-        }}
-        validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
-          
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form className="">
-            <div>
-              <Field
-                name="addressTo"
-                type="text"
-                className="transaction-form-field"
-                placeholder="Address To"
-              />
-              <ErrorMessage name="addressTo" component="div" className="" />
-            </div>
-            <div>
-              <Field
-                name="amount"
-                type="number"
-                className="transaction-form-field"
-                placeholder="Amount (ETH)"
-              />
-              <ErrorMessage name="amount" component="div" className="" />
-            </div>
+            <form onSubmit={formik.handleSubmit} className="transaction-form-content">
+              <div className='transaction-form-flex1'>
+                <input
+                  id="addressTo"
+                  name="addressTo"
+                  type="text"
+                  className="transaction-form-field"
+                  placeholder="Address To"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.addressTo}
+                />
+                {formik.touched.addressTo && formik.errors.addressTo ? (
+                  <div className="transaction-field-error">{formik.errors.addressTo}</div>
+                ) : null}
+              </div>
 
-            <div>
-              <Field
-                name="keyword"
-                type="text"
-                className="transaction-form-field"
-                placeholder="Keyword (Gif)"
-              />
-              <ErrorMessage name="keyword" component="div" className="" />
-            </div>
+              <div className='transaction-form-flex1'>
+                <input
+                  id="amount"
+                  name="amount"
+                  type="number"
+                  className="transaction-form-field"
+                  placeholder="Amount (ETH)"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.amount}
+                  step="any"
+                />
+                {formik.touched.amount && formik.errors.amount ? (
+                  <div className="transaction-field-error">{formik.errors.amount}</div>
+                ) : null}
+              </div>
 
-            <div>
-              <Field
-                name="message"
-                as="textarea"
-                rows="5"
-                className="transaction-form-field"
-                placeholder="Message"
-              />
-              <ErrorMessage name="message" component="div" className="" />
-            </div>
+              <div className='transaction-form-flex1'>
+                <input
+                  id="keyword"
+                  name="keyword"
+                  type="text"
+                  className="transaction-form-field"
+                  placeholder="Keyword (Gif)"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.keyword}
+                />
+                {formik.touched.keyword && formik.errors.keyword ? (
+                  <div className="transaction-field-error">{formik.errors.keyword}</div>
+                ) : null}
+              </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-            >
-              {isSubmitting ? 'Sending...' : 'Send'}
-            </button>
-          </Form>
-        )}
-      </Formik>
+              <div className='transaction-form-flex3'>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  className="transaction-form-field"
+                  placeholder="Message"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.message}
+                />
+                {formik.touched.message && formik.errors.message ? (
+                  <div className="transaction-field-error">{formik.errors.message}</div>
+                ) : null}
+              </div>
+
+              <button
+                type="submit"
+                disabled={formik.isSubmitting}
+                className="transaction-form-submit"
+              >
+                {formik.isSubmitting ? 'Sending...' : 'Send'}
+              </button>
+            </form>
           </div>
         </div>
       </div>

@@ -1,0 +1,43 @@
+.transaction-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: calc(95vh - 35px);
+    gap: 32px;
+    padding: 64px;
+}
+
+.transaction-form {
+    gap: 16px;
+    flex: 1;
+}
+
+.transaction-form-container {
+    border-radius: 16px;
+    background-color: #000;
+    padding: 16px;
+    color:#fff;
+    height: 100%;
+    aspect-ratio: 1.4;
+}
+
+.transaction-decoration {
+    flex: 1;
+}
+
+.transaction-form-label {
+    font-weight: bold;
+    text-align: start;
+}
+
+.transaction-form-field {
+    border-radius: 16px;
+    padding: 4px;
+    margin: 4px;
+    width: 100%;
+    resize: none;
+    overflow-y: auto;
+    background-clip: padding-box
+}

@@ -49,7 +49,7 @@ export default function Coin() {
         <div className='coin-info'>
           <div className='coin-info-content'>
             <div className='coin-title'>
-              <img className='coin-icon unselectable' src={coinDetails?coinDetails.image.large:""}/>
+              <img className='coin-icon unselectable' src={coinDetails?coinDetails.image.large:null}/>
               <h1 className='coin-header'>{coinDetails?coinDetails.name:""}</h1>
               {coinDetails?<p className='coin-header-symbol'>({coinDetails.symbol.toUpperCase()})</p>:<></>}
             </div>

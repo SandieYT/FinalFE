@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
+import { TransactionContext } from "../../context/TransactionContext";
 import "./transaction.css";
 
 export default function Transaction() {
+  const { sendTransaction } = useContext(TransactionContext);
+
   const formik = useFormik({
     initialValues: {
       addressTo: "",
@@ -13,13 +16,22 @@ export default function Transaction() {
       message: "",
     },
     validationSchema: Yup.object({
-      addressTo: Yup.string()
-        .required("Address is required")
-        .matches(/^0x[a-fA-F0-9]{40}$/, "Invalid Ethereum address"),
-      amount: Yup.number()
+      addressTo: Yup.string().required("Address is required"),
+      amount: Yup.string()
         .required("Amount is required")
-        .positive("Amount must be positive")
-        .max(100, "Amount cannot exceed 100 ETH"),
+        .test("is-valid-amount", "Invalid amount format", (value) =>
+          /^\d*\.?\d+$/.test(value)
+        )
+        .test(
+          "is-positive",
+          "Amount must be positive",
+          (value) => parseFloat(value) > 0
+        )
+        .test(
+          "max-amount",
+          "Amount cannot exceed 100 ETH",
+          (value) => parseFloat(value) <= 100
+        ),
       keyword: Yup.string()
         .required("Keyword is required")
         .matches(
@@ -30,15 +42,17 @@ export default function Transaction() {
         .required("Message is required")
         .max(200, "Message cannot exceed 200 characters"),
     }),
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values) => {
       try {
-        const response = await toast.promise();
+        const { addressTo, amount, keyword, message } = values;
 
-        if (response.success) {
-          resetForm();
-        }
+        if (!addressTo || !amount || !keyword || !message) return;
+
+        await sendTransaction(addressTo, amount, keyword, message);
+        toast.success("Transaction sent successfully!");
       } catch (error) {
         console.error("Transaction error:", error);
+        toast.error("Transaction failed: " + error.message);
       }
     },
   });
@@ -78,10 +92,12 @@ export default function Transaction() {
               <input
                 id="amount"
                 name="amount"
-                type="number"
+                type="text"
                 placeholder="Amount (ETH)"
-                step="any"
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  const value = e.target.value.replace(/[^0-9.]/g, "");
+                  formik.setFieldValue("amount", value);
+                }}
                 onBlur={formik.handleBlur}
                 value={formik.values.amount}
                 className={

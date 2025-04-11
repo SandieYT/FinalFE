@@ -1,15 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { TransactionContext } from "../../context/TransactionContext";
 import { shortenAddress } from "../../utils/shortenAddress";
+import useFetchGif from "../../hooks/useFetchGif";
 import "./transaction.css";
 
 export default function Transaction() {
-  const { currentAccount, sendTransaction, transactions } = useContext(TransactionContext);
+  const { currentAccount, sendTransaction, transactions } =
+    useContext(TransactionContext);
 
-  console.log("Transactions:", transactions);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -51,14 +53,19 @@ export default function Transaction() {
 
         if (!addressTo || !amount || !keyword || !message) return;
 
+        setIsConfirmed(false);
+
         await sendTransaction(addressTo, amount, keyword, message);
         toast.success("Transaction sent successfully!");
+        setIsConfirmed(true);
       } catch (error) {
         console.error("Transaction error:", error);
         toast.error("Transaction failed: " + error.message);
       }
     },
   });
+
+  const gifUrl = useFetchGif({ keyword: formik.values.keyword });
 
   return (
     <div id="main-transaction">
@@ -69,6 +76,7 @@ export default function Transaction() {
         <div className="transaction-right">
           <div className="transaction-header">
             <h1>Send Crypto</h1>
+            {isConfirmed && gifUrl && <img src={gifUrl} alt="gif" />}
           </div>
           <form onSubmit={formik.handleSubmit} className="transaction-form">
             <div className="transaction-form-group">

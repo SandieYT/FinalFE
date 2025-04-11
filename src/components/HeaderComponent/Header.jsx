@@ -42,7 +42,7 @@ export default function Header() {
                 </Link>
               </li>
               <li>
-                <Link to="/market">
+                <Link to="/markets">
                   <span>Markets</span>
                 </Link>
               </li>

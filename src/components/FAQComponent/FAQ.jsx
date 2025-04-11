@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
+
 import "./faq.css";
 
 export default function FAQ() {
@@ -40,7 +41,7 @@ export default function FAQ() {
       ),
     },
     {
-      question: "What are the trading fees on Bybit?",
+      question: "What are the trading fees on Wiki?",
       answer: <span className="highlight">Free</span>,
     },
   ];

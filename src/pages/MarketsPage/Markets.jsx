@@ -78,9 +78,9 @@ export default function Markets() {
               </li>
             </Link>
           ))}
-          <div className="pagination-buttons">
+          <div className="market-pagination-buttons">
             <button
-              className="pagination-button prev"
+              className="market-pagination-button prev"
               disabled={page === 1}
               onClick={() => setPage(page - 1)}
             >
@@ -88,7 +88,7 @@ export default function Markets() {
             </button>
             {page > 3 && (
               <button
-                className="pagination-button"
+                className="market-pagination-button"
                 onClick={() => setPage(page - 3)}
               >
                 {page - 3}
@@ -96,7 +96,7 @@ export default function Markets() {
             )}
             {page > 2 && (
               <button
-                className="pagination-button"
+                className="market-pagination-button"
                 onClick={() => setPage(page - 2)}
               >
                 {page - 2}
@@ -104,18 +104,18 @@ export default function Markets() {
             )}
             {page > 1 && (
               <button
-                className="pagination-button"
+                className="market-pagination-button"
                 onClick={() => setPage(page - 1)}
               >
                 {page - 1}
               </button>
             )}
-            <button className="pagination-button current" disabled>
+            <button className="market-pagination-button current" disabled>
               {page}
             </button>
             {page < total && (
               <button
-                className="pagination-button"
+                className="market-pagination-button"
                 onClick={() => setPage(page + 1)}
               >
                 {page + 1}
@@ -123,7 +123,7 @@ export default function Markets() {
             )}
             {page < total - 1 && (
               <button
-                className="pagination-button"
+                className="market-pagination-button"
                 onClick={() => setPage(page + 2)}
               >
                 {page + 2}
@@ -131,14 +131,14 @@ export default function Markets() {
             )}
             {page < total - 2 && (
               <button
-                className="pagination-button"
+                className="market-pagination-button"
                 onClick={() => setPage(page + 3)}
               >
                 {page + 3}
               </button>
             )}
             <button
-              className="pagination-button next"
+              className="market-pagination-button next"
               disabled={page === total}
               onClick={() => setPage(page + 1)}
             >

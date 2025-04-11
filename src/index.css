@@ -5,6 +5,16 @@
     font-family: "Gidole";
 }
 
+.inner-root-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.root-body {
+    flex: 1;
+}
+  
+
 ul li {
     list-style: none;
 }

@@ -4,9 +4,11 @@ import { Outlet } from "react-router";
 
 export default function RootLayout() {
   return (
-    <div>
+    <div className="inner-root-layout">
       <Header />
+      <div className="root-body">
       <Outlet />
+      </div>
     </div>
   );
 }

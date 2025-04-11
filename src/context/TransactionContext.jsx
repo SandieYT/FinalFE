@@ -20,10 +20,35 @@ const createEthereumContract = async () => {
 
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [transactionCount, setTransactionCount] = useState(
     localStorage.getItem("transactionCount") || 0
   );
+  const [transactions, setTransactions] = useState([]);
+
+  const getAllTransactions = async () => {
+    try {
+      const transactionContract = await createEthereumContract();
+      const availableTransactions =
+        await transactionContract.getAllTransactions();
+
+      const structuredTransactions = availableTransactions.map(
+        (transaction) => ({
+          addressTo: transaction.receiver,
+          addressFrom: transaction.sender,
+          timestamp: new Date(
+            Number(transaction.timestamp) * 1000
+          ).toLocaleString(),
+          message: transaction.message,
+          keyword: transaction.keyword,
+          amount: Number(transaction.amount) / 10 ** 18,
+        })
+      );
+
+      setTransactions(structuredTransactions);
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+    }
+  };
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -32,12 +57,23 @@ export const TransactionProvider = ({ children }) => {
 
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
-        console.log("Wallet connected:", accounts[0]);
+        await getAllTransactions();
       } else {
         console.log("No wallet connected.");
       }
     } catch (error) {
       console.error("Error checking wallet connection:", error);
+    }
+  };
+
+  const checkIfTransactionsExist = async () => {
+    try {
+      const transactionContract = await createEthereumContract();
+      const currentTransactionCount =
+        await transactionContract.getTransactionCount();
+      localStorage.setItem("transactionCount", currentTransactionCount);
+    } catch (error) {
+      console.error("Error checking transactions:", error);
     }
   };
 
@@ -54,9 +90,10 @@ export const TransactionProvider = ({ children }) => {
 
   const sendTransaction = async (addressTo, amount, keyword, message) => {
     try {
+      if (!currentAccount) throw new Error("No wallet connected.");
+
       const provider = getEthereumProvider();
       const transactionContract = await createEthereumContract();
-
       const parsedAmount = parseEther(amount.toString());
 
       await provider.send("eth_sendTransaction", [
@@ -68,22 +105,20 @@ export const TransactionProvider = ({ children }) => {
         },
       ]);
 
-      const transactionHash = await transactionContract.addToBlockChain(
+      const transactionHash = await transactionContract.addToBlockchain(
         addressTo,
         parsedAmount,
         message,
         keyword
       );
-
-      setIsLoading(true);
       console.log("Transaction in progress:", transactionHash.hash);
 
       await transactionHash.wait();
-      setIsLoading(false);
       console.log("Transaction successful:", transactionHash.hash);
 
-      const updatedTransactionCount = await transactionContract.getTransactionCount();
-      setTransactionCount(updatedTransactionCount.toNumber());
+      const updatedTransactionCount =
+        await transactionContract.getTransactionCount();
+      setTransactionCount(Number(updatedTransactionCount));
     } catch (error) {
       console.error("Error sending transaction:", error);
     }
@@ -91,6 +126,7 @@ export const TransactionProvider = ({ children }) => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
+    checkIfTransactionsExist();
   }, []);
 
   return (
@@ -99,8 +135,8 @@ export const TransactionProvider = ({ children }) => {
         connectWallet,
         currentAccount,
         sendTransaction,
-        isLoading,
         transactionCount,
+        transactions,
       }}
     >
       {children}

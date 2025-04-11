@@ -5,11 +5,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { TransactionContext } from "../../context/TransactionContext";
+import { shortenAddress } from "../../utils/shortenAddress";
 import "./transaction.css";
 
 export default function Transaction() {
-  const { connectWallet, sendTransaction, currentAccount } = useContext(TransactionContext);
-  console.log(sendTransaction)
+  const { currentAccount, sendTransaction, transactions } = useContext(TransactionContext);
+
+  console.log("Transactions:", transactions);
 
   const formik = useFormik({
     initialValues: {
@@ -80,7 +82,7 @@ export default function Transaction() {
             <div className="transaction-form-header-icon"/> 
           </div>
           <div className="transaction-form-header-bottom">
-          <p>Address</p>
+          <p>{shortenAddress(currentAccount)}</p>
           <h2>Ethereum</h2>
           </div>
           </div>

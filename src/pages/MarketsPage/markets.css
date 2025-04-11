@@ -1,150 +1,210 @@
+/* ===== Main Container Styles ===== */
 #main-markets {
     width: 100%;
+    margin: 32px 0;
 }
 
+.market-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== Header Section Styles ===== */
 .market-header {
-    margin-top: 32px;
+    margin: 32px 0 48px 0;
     font-size: 64px;
+    font-weight: 700;
     background: linear-gradient(90deg, #ff6b00, #ffa502);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-align: center;
+    letter-spacing: -1.5px;
+    position: relative;
 }
 
+.market-header::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b00, #ffa502);
+    margin: 16px auto 0;
+    border-radius: 2px;
+}
+
+/* ===== Currencies Table Styles ===== */
 .market-currencies {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin-top: 64px;
-    padding: 24px;
-    border-radius: 24px;
-    background-color: #F8F8F8;
-    border-radius: 24px;
+    width: 90%;
+    background-color: #ffffff;
+    border-radius: 16px;
     padding: 24px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-.market-currency {
-    color: #141414;
-    border-top: 1px solid #cacaca;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 12px;
-    gap: 24px;
-    font-size: 16px;
+.market-currencies:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
-.market-currency p {
-    font-weight: bold;
-}
-
+/* ===== Table Header Styles ===== */
 .market-currency-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 12px;
+    padding: 16px 24px;
     gap: 24px;
     font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    margin-bottom: 8px;
 }
 
-.market-section {
-    width: 100%;
+/* ===== Currency Item Styles ===== */
+.market-currency {
+    color: #141414;
+    border-top: 1px solid #eaeaea;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    gap: 24px;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
+.market-currency:hover {
+    background-color: #f9f9f9;
+    transform: translateX(5px);
+}
+
+.market-currency p {
+    font-weight: 500;
+}
+
+/* ===== Currency Cell Styles ===== */
 .currency-icon {
-    height: 24px;
-    aspect-ratio: 1;
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.market-currency:hover .currency-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .currency-name {
     flex: 5;
     font-size: 18px;
+    font-weight: 500;
+    color: #222;
 }
 
 .currency-name-header {
     flex: 5;
+    text-align: left;
 }
 
 .currency-price {
     flex: 2;
+    text-align: right;
+    font-weight: 600;
 }
 
 .currency-cap {
     flex: 2;
+    text-align: right;
 }
 
 .currency-percentage {
     flex: 2;
+    text-align: right;
+    font-weight: 600;
 }
 
-.pagination-buttons {
-    display: flex;
-    width: 20%;
-    flex-direction: row;
-    margin: 24px 0;
-    gap: 4px;
-    align-items: center;
-}
-
-.pagination-button {
-    width: 24px;
-    aspect-ratio: 0.8;
-    text-align: center;
-    background-color: transparent;
-    border: 1.5px solid #000;
-    font-size: 14px;
-    border-radius: 8px;
-    transition-duration: 0.1s;
-}
-
-.pagination-button:hover {
-    width: 24px;
-    aspect-ratio: 0.8;
-    text-align: center;
-    background-color: #0000007c;
-    font-weight: bold;
-}
-
-.current {
-    background-color: #000;
-    color: #fff;
-    font-weight: bold;
-}
-
-.next {
-    height: 24px;
-    width: 24px;
-    background-color: #000;
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-}
-
-.prev {
-    height: 24px;
-    width: 24px;
-    background-color: #000;
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-}
-
+/* ===== Percentage Change Styles ===== */
 .percentage-increase {
-    color: rgb(0, 173, 78);
-    paint-order: stroke fill;
+    color: #00aa5b;
+    background-color: rgba(0, 170, 91, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
 }
 
 .percentage-decrease {
-    color: rgb(196, 0, 59);
-    paint-order: stroke fill;
+    color: #ff3a3a;
+    background-color: rgba(255, 58, 58, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
 }
- 
+
 .percentage-neutral {
-    color: rgb(90, 90, 90);
-    paint-order: stroke fill;
+    color: #666;
+    background-color: rgba(102, 102, 102, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
 }
+
+/* ===== Pagination Styles ===== */
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 32px 0 16px;
+    gap: 8px;
+}
+
+.pagination-button {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-button:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+.pagination-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.current {
+    background-color: #ffa502;
+    color: white;
+    border-color: #ffa502;
+    font-weight: 600;
+}
+
+.next, .prev {
+    background-color: #333;
+    color: white;
+    font-weight: 600;
+    border: none;
+}
+
+.next:hover, .prev:hover {
+    background-color: #555;
+}
+

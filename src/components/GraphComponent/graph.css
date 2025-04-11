@@ -1,0 +1,8 @@
+/* ===== Tooltip custom styling ===== */
+.custom-tooltip {
+    padding: 10px;
+}
+
+.google-visualization-tooltip {
+    z-index: 999 !important;
+}

@@ -11,8 +11,8 @@ export default function GuidedDownload() {
           <div className="wallet-mode">
             <div className="wallet-mode-title">
               <div className="headline-tab-anim">
-                <h2 className="tab-headline first-tab unselectable">Non Custodial</h2>
-                <h2 className="tab-headline second-tab unselectable">Deposit</h2>
+                <h2 className="tab-headline first-tab">Non Custodial</h2>
+                <h2 className="tab-headline second-tab">Deposit</h2>
               </div>
             </div>
             <div className="video-waller-mode">
@@ -23,39 +23,39 @@ export default function GuidedDownload() {
           </div>
         </div>
         <div className="guidedDownload-right">
-          <h3 className="unselectable">Trust Should Be an Option</h3>
+          <h3>Trust Should Be an Option</h3>
           <div className="download-options">
-            <Link to="#" className="download-btn app-store unselectable">
+            <Link to="#" className="download-btn app-store">
               <img
                 src="/images/appstore-47ff262997f8d723706ca638f8bd9d67.svg"
                 alt="Apple"
-                className="download-icon unselectable"
+                className="download-icon"
               />
               App Store
             </Link>
-            <Link to="#" className="download-btn android-apk unselectable">
-            Android APK
+            <Link to="#" className="download-btn android-apk">
               <img
                 src="/images/android-bd8aee1484ce1680a0a815eac2a3e211.svg"
                 alt="Android"
-                className="download-icon unselectable"
+                className="download-icon"
               />
+              Android APK
             </Link>
-            <Link to="#" className="download-btn google-play unselectable">
+            <Link to="#" className="download-btn google-play">
               <img
                 src="\images\googleplay-1e427977e42df2cfc0b148c2865179c2.png"
                 alt="Google Play"
-                className="download-icon unselectable"
+                className="download-icon"
               />
               Google Play
             </Link>
-            <Link to="#" className="download-btn api unselectable">
-            API
+            <Link to="#" className="download-btn api">
               <img
                 src="/images/api-03d915f9273477c6390cdc44006eb22f.svg"
                 alt="API"
-                className="download-icon unselectable"
+                className="download-icon"
               />
+              API
             </Link>
           </div>
         </div>

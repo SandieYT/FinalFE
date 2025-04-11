@@ -65,37 +65,32 @@
 }
 
 @keyframes firstTabHighlight {
-    0%, 40% {
+
+    0%,
+    40% {
         font-weight: 700;
         opacity: 1;
     }
 
-    50%,
-    90% {
-        font-weight: 400;
-        opacity: 0.5;
-    }
+    60%,
     100% {
-        font-weight: 700;
-        opacity: 1;
+        font-weight: 400;
+        opacity: 0.6;
     }
 }
 
 @keyframes secondTabHighlight {
-    0%, 40% {
+
+    0%,
+    40% {
         font-weight: 400;
-        opacity: 0.5;
+        opacity: 0.6;
     }
 
-    50%,
-    90% {
+    60%,
+    100% {
         font-weight: 700;
         opacity: 1;
-    }
-
-    100% {
-        font-weight: 400;
-        opacity: 0.5;
     }
 }
 
@@ -131,7 +126,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    gap: 5px;
     margin-bottom: 24px;
 }
 
@@ -140,7 +134,6 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 24px 24px;
     padding: 24px 24px;
     font-weight: 600;
     color: white;

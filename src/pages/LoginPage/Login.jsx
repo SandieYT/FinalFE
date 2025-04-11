@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../features/authSlice";
-
 import "./login.css";
 
 export default function Login() {
@@ -92,7 +91,7 @@ export default function Login() {
           </div>
 
           <form onSubmit={formik.handleSubmit} className="login-form">
-            <div className="input-group">
+            <div className="login-input-group">
               <label htmlFor="email">Email</label>
               <input
                 id="email"
@@ -114,7 +113,7 @@ export default function Login() {
               )}
             </div>
 
-            <div className="input-group">
+            <div className="login-input-group">
               <label htmlFor="password">Password</label>
               <input
                 id="password"

@@ -47,14 +47,13 @@ export default function Graph({ historicalData }) {
     },
     chartArea: { width: "90%", height: "70%" },
     bar: { groupWidth: "80%" },
-    backgroundColor: "#000",
     hAxis: {
-      textStyle: { color: "#fff", fontSize: 12 },
+      textStyle: { fontSize: 12 },
     },
     vAxis: {
-      textStyle: { color: "#fff", fontSize: 12 },
-      gridlines: { color: "#171717", count: 10 },
-      minorGridlines: { color: "#0f0f0f" },
+      textStyle: { fontSize: 12 },
+      gridlines: { color: "#eee", count: 10 },
+      minorGridlines: { color: "#f0f0f0" },
     },
   };
 

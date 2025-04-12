@@ -9,7 +9,7 @@ import { shortenAddress } from "../../utils/shortenAddress";
 import "./transaction.css";
 
 export default function Transaction() {
-  const { currentAccount, sendTransaction, transactions } = useContext(TransactionContext);
+  const { currentAccount, connectWallet, sendTransaction, transactions } = useContext(TransactionContext);
 
   console.log("Transactions:", transactions);
 
@@ -65,17 +65,7 @@ export default function Transaction() {
   return (
     <div id="main-transaction">
       <section className="transaction-container">
-        <div className="transaction-left">
-          <h1>Send Crypto Easily with Wiki</h1>
-          {currentAccount?
-              // <Link to="/transaction" className="transaction-wallet-button" onClick={disconnectWallet}>
-              //   Disconnect your wallet
-              // </Link>
-              <></>
-              :<Link to="/transaction" className="transaction-wallet-button" onClick={connectWallet}>
-                Connect your wallet
-              </Link>}
-        </div>
+
         <div className="transaction-right">
           <div className="transaction-form-header">
           <div className="transaction-form-header-top">
@@ -168,8 +158,29 @@ export default function Transaction() {
             </div>
           </form>
         </div>
+        <div className="transaction-left">
+          <h1>Send Crypto Easily with Wiki</h1>
+          {currentAccount?
+              // <Link to="/transaction" className="transaction-wallet-button" onClick={disconnectWallet}>
+              //   Disconnect your wallet
+              // </Link>
+              <></>
+              :<Link to="/transaction" className="transaction-wallet-button" onClick={connectWallet}>
+                Connect your wallet
+              </Link>}
+        </div>
       </section>
-      
+      <section className="transaction-history">
+              {transactions.map((i)=>(
+                <div className="transaction-history-card">
+                  <h1 className="transaction-history-card-amount">{i.amount} ETH</h1>
+                <p><strong>From: </strong>{shortenAddress(i.addressFrom)}</p>
+                <p><strong>To: </strong>{shortenAddress(i.addressTo)}</p>
+                <img className="transaction-history-card-gif" src={i.keyword||null}/>
+                <p className="transaction-history-card-message">{i.message}</p>
+                </div>
+              ))}
+      </section>
     </div>
   );
 }

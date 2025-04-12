@@ -1,3 +1,8 @@
+#main-transaction {
+    background: linear-gradient(150deg, #ffffff 30%, #ffaf37 100%);
+
+}
+
 .transaction-container {
     display: flex;
     align-items: center;
@@ -7,7 +12,6 @@
     height: 100%;
     gap: 32px;
     padding: 64px;
-    background: linear-gradient(150deg, #ffffff 30%, #ffaf37 100%);
 }
 
 .transaction-right {
@@ -143,4 +147,48 @@
 
 .transaction-form-flex3 {
     flex: 3;
+}
+
+.transaction-history {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 5%;
+    gap: 4vmin;
+}
+
+.transaction-history-card {
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 0.7;
+    width: 30%;
+    background-color: #fff;
+    border-radius: 4vmin;
+    box-shadow: 1vmin 1vmin 1vmin 1vmin #00000028;
+    border: 2px outset #d4d4d4;
+    padding: 3vmin;
+    font-size: 3vmin;
+    gap: 1vmin;
+}
+
+.transaction-history-card-amount {
+    background: linear-gradient(90deg, #ff6b00, #ffa502);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 6vmin;
+    text-align: center;
+    margin: 2vmin;
+}
+
+.transaction-history-card-gif {
+    max-height: 40%;
+    object-fit: contain;
+}
+
+.transaction-history-card-message {
+    overflow-y: auto;
+    word-break: break-word;
+
 }

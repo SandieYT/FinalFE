@@ -67,12 +67,6 @@
     border-color: #ff5a5f;
 }
 
-.error-message {
-    color: #ff5a5f;
-    font-size: 13px;
-    margin-top: 6px;
-}
-
 /* ===== Password Strength Indicator ===== */
 .password-strength {
     font-size: 13px;

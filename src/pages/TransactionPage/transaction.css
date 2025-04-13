@@ -1,0 +1,330 @@
+/* ===== Main Structure Styles ===== */
+#main-tx {
+    background: #222222;
+    color: #fff;
+    padding: 3rem 1rem;
+}
+
+.tx-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* ===== Welcome Section Styles ===== */
+.tx-welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Left Section - Welcome Content */
+.tx-left {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.tx-left h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.gradient-text {
+    color: #FFD700;
+    /* Gold color for accent text */
+}
+
+.tx-subtext {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+/* Features Grid */
+.tx-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    gap: 1rem;
+    text-align: center;
+    background: #111;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.tx-features-grid div {
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    background-color: #1a1a1a;
+    color: #FFD700;
+}
+
+/* Right Section - Card and Form */
+.tx-right {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Card Styles - Inspired by Visa/Mastercard */
+.tx-card {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+}
+
+.tx-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: rotate(30deg);
+}
+
+.tx-eth-icon {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+}
+
+.tx-card-address {
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+}
+
+.tx-card-network {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.3rem 0.8rem;
+    border-radius: 1rem;
+}
+
+/* Form Styles */
+.tx-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tx-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tx-form label {
+    font-size: 0.9rem;
+    color: #FFD700;
+    font-weight: 500;
+}
+
+.tx-form input,
+.tx-form textarea {
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #333;
+    background: #121212;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.tx-form input:focus,
+.tx-form textarea:focus {
+    border-color: #FFD700;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.tx-form input::placeholder,
+.tx-form textarea::placeholder {
+    color: #666;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.input-error {
+    border-color: #ff6b6b !important;
+}
+
+/* Button Styles */
+.tx-btn {
+    background: linear-gradient(to right, #FFD700, #FFA500);
+    color: #000;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+.tx-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.tx-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Transaction History Styles */
+.tx-history {
+    margin-top: 40px;
+}
+
+.tx-history h3 {
+    font-size: 24px;
+    color: #FFD700;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.tx-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tx-history-item {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 24px;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    position: relative;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.tx-history-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(255, 215, 0, 0.2);
+    border-color: #FFD700;
+}
+
+/* Transaction Item Components */
+.tx-history-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tx-history-address {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.tx-history-label {
+    font-size: 14px;
+    color: #FFD700;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+}
+
+.tx-history-value {
+    font-size: 16px;
+    font-weight: 500;
+    word-break: break-all;
+    color: #fff;
+}
+
+.tx-history-amount {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFD700;
+    margin: 12px 0;
+}
+
+.tx-history-keyword {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 8px;
+}
+
+.tx-history-message {
+    background: rgba(255, 215, 0, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.tx-history-gif {
+    grid-column: span 2;
+    margin-top: 16px;
+}
+
+.tx-history-gif img {
+    width: 100%;
+    max-height: 240px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.tx-history-time {
+    font-size: 13px;
+    color: #aaa;
+    text-align: right;
+    margin-top: 16px;
+    grid-column: span 2;
+    padding-top: 8px;
+    border-top: 1px solid #333;
+}

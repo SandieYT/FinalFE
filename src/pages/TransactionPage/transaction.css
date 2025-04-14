@@ -2,7 +2,7 @@
 #main-tx {
     background: #222222;
     color: #fff;
-    padding: 3rem 1rem;
+    padding: 48px 16px;
 }
 
 .tx-container {
@@ -10,7 +10,7 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 48px;
 }
 
 /* ===== Welcome Section Styles ===== */
@@ -19,7 +19,7 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 32px;
 }
 
 /* Left Section - Welcome Content */
@@ -29,8 +29,8 @@
 }
 
 .tx-left h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 48px;
+    margin-bottom: 16px;
     font-weight: bold;
     line-height: 1.2;
     color: #fff;
@@ -41,26 +41,26 @@
 }
 
 .tx-subtext {
-    font-size: 1.1rem;
+    font-size: 17.6px;
     color: #ccc;
-    margin-bottom: 2rem;
+    margin-bottom: 32px;
 }
 
 /* Features Grid */
 .tx-features-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(100px, 1fr));
-    gap: 1rem;
+    gap: 16px;
     text-align: center;
     background: #111;
-    padding: 1rem;
-    border-radius: 1rem;
+    padding: 16px;
+    border-radius: 16px;
 }
 
 .tx-features-grid div {
-    padding: 1rem;
+    padding: 16px;
     border: 1px solid #333;
-    border-radius: 0.75rem;
+    border-radius: 12px;
     font-weight: 500;
     background-color: #1a1a1a;
     color: #FFD700;
@@ -71,18 +71,18 @@
     flex: 0.8;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 24px;
 }
 
 /* Card Styles */
 .tx-card {
     background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: 16px;
+    padding: 24px;
     color: white;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 16px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
@@ -101,67 +101,67 @@
 }
 
 .tx-eth-icon {
-    font-size: 2rem;
+    font-size: 32px;
     color: rgba(255, 255, 255, 0.8);
     position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
+    right: 24px;
+    top: 24px;
 }
 
 .tx-card-address {
-    font-size: 1.2rem;
+    font-size: 19.2px;
     font-weight: 500;
     letter-spacing: 1px;
-    margin-top: 1rem;
+    margin-top: 16px;
     background: rgba(0, 0, 0, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    padding: 8px 16px;
+    border-radius: 8px;
     display: inline-block;
     backdrop-filter: blur(5px);
 }
 
 .tx-card-network {
     position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    font-size: 1rem;
+    bottom: 24px;
+    left: 24px;
+    font-size: 16px;
     font-weight: 600;
     background: rgba(0, 0, 0, 0.3);
-    padding: 0.3rem 0.8rem;
-    border-radius: 1rem;
+    padding: 4.8px 12.8px;
+    border-radius: 16px;
 }
 
 /* ===== Form Section Styles ===== */
 .tx-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 24px;
     background: #1a1a1a;
-    padding: 1.5rem;
-    border-radius: 1rem;
+    padding: 24px;
+    border-radius: 16px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .tx-form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 .tx-form label {
-    font-size: 0.9rem;
+    font-size: 14.4px;
     color: #FFD700;
     font-weight: 500;
 }
 
 .tx-form input,
 .tx-form textarea {
-    padding: 0.8rem 1rem;
-    border-radius: 0.5rem;
+    padding: 12.8px 16px;
+    border-radius: 8px;
     border: 1px solid #333;
     background: #121212;
     color: #fff;
-    font-size: 1rem;
+    font-size: 16px;
     transition: all 0.3s ease;
 }
 
@@ -169,7 +169,7 @@
 .tx-form textarea:focus {
     border-color: #FFD700;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 0 3.2px rgba(255, 215, 0, 0.2);
 }
 
 .tx-form input::placeholder,
@@ -177,34 +177,28 @@
     color: #666;
 }
 
-.error-message {
-    color: #ff6b6b;
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
-}
-
 .input-error {
-    border-color: #ff6b6b !important;
+    border-color: #ff5a5f;
 }
 
 /* ===== Button Styles ===== */
 .tx-btn {
     background: linear-gradient(to right, #FFD700, #FFA500);
     color: #000;
-    padding: 1rem;
-    font-size: 1rem;
+    padding: 16px;
+    font-size: 16px;
     font-weight: bold;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 0.5rem;
+    margin-top: 8px;
 }
 
 .tx-btn:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3.2px);
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
 }
 
@@ -217,14 +211,14 @@
 
 /* ===== Transaction History Section ===== */
 .tx-history {
-    margin-top: 4rem;
+    margin-top: 64px;
 }
 
 .tx-history h3 {
-    font-size: 2rem;
+    font-size: 32px;
     color: #FFD700;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
     border-bottom: 1px solid #333;
     text-align: center;
 }
@@ -232,27 +226,27 @@
 .tx-history-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
+    gap: 32px;
+    padding: 16px;
 }
 
 /* ===== Transaction Item Styles ===== */
 .tx-history-item {
     background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: 16px;
+    padding: 24px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 19.2px;
     border: 1px solid #333;
     position: relative;
     overflow: hidden;
 }
 
 .tx-history-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
     border-color: #FFD700;
 }
@@ -263,19 +257,19 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 6.4px;
     background: linear-gradient(to right, #FFD700, #FFA500);
 }
 
 .tx-history-details {
     color: #eee;
-    font-size: 0.95rem;
+    font-size: 15.2px;
     line-height: 1.5;
     width: 100%;
 }
 
 .tx-history-details p {
-    margin: 0.5rem 0;
+    margin: 8px 0;
     display: flex;
     justify-content: space-between;
     word-break: break-word;
@@ -300,10 +294,10 @@
 
 /* Special styling for message */
 .tx-history-details p.message-container {
-    margin-top: 1rem;
+    margin-top: 16px;
     background: rgba(0, 0, 0, 0.2);
-    padding: 0.8rem;
-    border-radius: 0.5rem;
+    padding: 12.8px;
+    border-radius: 8px;
     max-height: 100px;
     overflow-y: auto;
 }
@@ -315,14 +309,14 @@
     text-align: left;
     max-width: 100%;
     color: #ccc;
-    font-size: 0.9rem;
+    font-size: 14.4px;
     line-height: 1.4;
 }
 
 .tx-history-gif {
     width: 100%;
     height: 180px;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     overflow: hidden;
     position: relative;
 }
@@ -341,10 +335,10 @@
 .tx-history-date {
     background: rgba(0, 0, 0, 0.3);
     color: #00bfff;
-    font-size: 0.85rem;
+    font-size: 13.6px;
     font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    padding: 8px 16px;
+    border-radius: 8px;
     align-self: flex-start;
     margin-top: auto;
     backdrop-filter: blur(5px);

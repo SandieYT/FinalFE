@@ -11,11 +11,11 @@ export default function Transaction() {
   const { currentAccount, sendTransaction, transactions } =
     useContext(TransactionContext);
 
-  console.log(transactions);
-
-  const sortedTransactions = [...transactions].sort((a, b) => {
-    return new Date(b.timestamp) - new Date(a.timestamp);
-  });
+  const sortedTransactions = [...transactions]
+    .sort((a, b) => {
+      return new Date(b.timestamp) - new Date(a.timestamp);
+    })
+    .slice(0, 6);
 
   const formik = useFormik({
     initialValues: {
@@ -87,7 +87,17 @@ export default function Transaction() {
           {transaction.message && (
             <p className="message-container">
               <span>Message:</span>
-              <span>{transaction.message}</span>
+              <span
+                style={{
+                  display: "-webkit-box",
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {transaction.message}
+              </span>
             </p>
           )}
         </div>
@@ -240,15 +250,27 @@ export default function Transaction() {
           </div>
         </div>
         <div className="tx-history">
-          <h3>Transaction History</h3>
+          <h3>Latest Transactions</h3>
           <div className="tx-history-list">
-            {sortedTransactions.map((tx, idx) => (
-              <TransactionItem
-                key={idx}
-                transaction={tx}
-                forceUpdate={idx === 0}
-              />
-            ))}
+            {sortedTransactions.length > 0 ? (
+              sortedTransactions.map((tx, idx) => (
+                <TransactionItem
+                  key={idx}
+                  transaction={tx}
+                  forceUpdate={idx === 0}
+                />
+              ))
+            ) : (
+              <p
+                style={{
+                  color: "#ccc",
+                  textAlign: "center",
+                  gridColumn: "1/-1",
+                }}
+              >
+                No transactions yet
+              </p>
+            )}
           </div>
         </div>
       </div>

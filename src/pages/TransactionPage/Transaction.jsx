@@ -10,7 +10,7 @@ import useFetchGifFromKeyword from "../../hooks/useFetchGif";
 import "./transaction.css";
 
 export default function Transaction() {
-  const { currentAccount, sendTransaction, transactions } =
+  const { currentAccount, sendTransaction, connectWallet, transactions } =
     useContext(TransactionContext);
 
   const sortedTransactions = [...transactions]
@@ -286,7 +286,7 @@ export default function Transaction() {
                 Connect your wallet
               </Link>}
         </div>
-      </section>
+      </div>
       <section className="transaction-history">
               {transactions.map((i)=>(
                 <div className="transaction-history-card">

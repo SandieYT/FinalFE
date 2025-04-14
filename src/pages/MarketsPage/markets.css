@@ -36,7 +36,7 @@
     border-radius: 2px;
 }
 
-/* ===== Currencies Table Styles ===== */
+/* ===== Currencies Table Container Styles ===== */
 .market-currencies {
     display: flex;
     flex-direction: column;
@@ -68,7 +68,7 @@
     margin-bottom: 8px;
 }
 
-/* ===== Currency Item Styles ===== */
+/* ===== Individual Currency Item Styles ===== */
 .market-currency {
     color: #141414;
     border-top: 1px solid #eaeaea;
@@ -90,7 +90,7 @@
     font-weight: 500;
 }
 
-/* ===== Currency Cell Styles ===== */
+/* ===== Currency Cell Specific Styles ===== */
 .currency-icon {
     height: 32px;
     width: 32px;
@@ -132,7 +132,7 @@
     font-weight: 600;
 }
 
-/* ===== Percentage Change Styles ===== */
+/* ===== Percentage Change Variant Styles ===== */
 .percentage-increase {
     color: #00aa5b;
     background-color: rgba(0, 170, 91, 0.1);
@@ -154,7 +154,7 @@
     border-radius: 4px;
 }
 
-/* ===== Pagination Styles ===== */
+/* ===== Pagination Controls Styles ===== */
 .pagination-buttons {
     display: flex;
     justify-content: center;
@@ -196,14 +196,42 @@
     font-weight: 600;
 }
 
-.next, .prev {
+.next,
+.prev {
     background-color: #333;
     color: white;
     font-weight: 600;
     border: none;
 }
 
-.next:hover, .prev:hover {
+.next:hover,
+.prev:hover {
     background-color: #555;
 }
 
+.loading-indicator {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #666;
+}
+
+.market-currency-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.pagination-ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 12px;
+    font-size: 14px;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

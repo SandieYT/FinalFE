@@ -110,7 +110,10 @@ export default function Coin() {
             <div className="coin-stat-item">
               <span className="coin-stat-label">Price</span>
               <span className="coin-stat-value">
-                ${coinDetails?.market_data?.current_price?.usd}
+                $
+                {formatter.format(
+                  coinDetails?.market_data?.current_price?.usd || 0
+                )}
               </span>
             </div>
           </div>

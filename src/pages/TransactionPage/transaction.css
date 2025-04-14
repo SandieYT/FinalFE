@@ -38,7 +38,6 @@
 
 .gradient-text {
     color: #FFD700;
-    /* Gold color for accent text */
 }
 
 .tx-subtext {
@@ -67,7 +66,7 @@
     color: #FFD700;
 }
 
-/* Right Section - Card and Form */
+/* ===== Right Section - Card and Form ===== */
 .tx-right {
     flex: 0.8;
     display: flex;
@@ -75,7 +74,7 @@
     gap: 1.5rem;
 }
 
-/* Card Styles - Inspired by Visa/Mastercard */
+/* Card Styles */
 .tx-card {
     background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
     border-radius: 1rem;
@@ -132,7 +131,7 @@
     border-radius: 1rem;
 }
 
-/* Form Styles */
+/* ===== Form Section Styles ===== */
 .tx-form {
     display: flex;
     flex-direction: column;
@@ -188,7 +187,7 @@
     border-color: #ff6b6b !important;
 }
 
-/* Button Styles */
+/* ===== Button Styles ===== */
 .tx-btn {
     background: linear-gradient(to right, #FFD700, #FFA500);
     color: #000;
@@ -216,115 +215,137 @@
     box-shadow: none;
 }
 
-/* Transaction History Styles */
+/* ===== Transaction History Section ===== */
 .tx-history {
-    margin-top: 40px;
+    margin-top: 4rem;
 }
 
 .tx-history h3 {
-    font-size: 24px;
+    font-size: 2rem;
     color: #FFD700;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid #333;
+    text-align: center;
 }
 
 .tx-history-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
 }
 
+/* ===== Transaction Item Styles ===== */
 .tx-history-item {
-    background: #1a1a1a;
-    border-radius: 12px;
-    padding: 24px;
-    color: #fff;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    position: relative;
-    border: 1px solid #333;
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
 }
 
 .tx-history-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 25px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
     border-color: #FFD700;
 }
 
-/* Transaction Item Components */
-.tx-history-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.tx-history-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #FFD700, #FFA500);
 }
 
-.tx-history-address {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 12px;
-}
-
-.tx-history-label {
-    font-size: 14px;
-    color: #FFD700;
-    opacity: 0.8;
-    letter-spacing: 0.5px;
-}
-
-.tx-history-value {
-    font-size: 16px;
-    font-weight: 500;
-    word-break: break-all;
-    color: #fff;
-}
-
-.tx-history-amount {
-    font-size: 20px;
-    font-weight: bold;
-    color: #FFD700;
-    margin: 12px 0;
-}
-
-.tx-history-keyword {
-    font-size: 14px;
-    color: #aaa;
-    margin-top: 8px;
-}
-
-.tx-history-message {
-    background: rgba(255, 215, 0, 0.1);
-    padding: 12px;
-    border-radius: 8px;
-    margin: 12px 0;
-    font-style: italic;
-    font-size: 15px;
+.tx-history-details {
+    color: #eee;
+    font-size: 0.95rem;
     line-height: 1.5;
+    width: 100%;
+}
+
+.tx-history-details p {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    word-break: break-word;
+}
+
+.tx-history-details p:last-of-type {
+    flex-direction: column;
+}
+
+.tx-history-details span:first-child {
+    color: #FFD700;
+    font-weight: 500;
+    min-width: 80px;
+}
+
+.tx-history-details span:last-child {
+    text-align: right;
+    max-width: calc(100% - 90px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Special styling for message */
+.tx-history-details p.message-container {
+    margin-top: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.tx-history-details p.message-container span {
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-align: left;
+    max-width: 100%;
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 .tx-history-gif {
-    grid-column: span 2;
-    margin-top: 16px;
+    width: 100%;
+    height: 180px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    position: relative;
 }
 
 .tx-history-gif img {
     width: 100%;
-    max-height: 240px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #333;
+    transition: transform 0.3s ease;
 }
 
-.tx-history-time {
-    font-size: 13px;
-    color: #aaa;
-    text-align: right;
-    margin-top: 16px;
-    grid-column: span 2;
-    padding-top: 8px;
-    border-top: 1px solid #333;
+.tx-history-item:hover .tx-history-gif img {
+    transform: scale(1.05);
+}
+
+.tx-history-date {
+    background: rgba(0, 0, 0, 0.3);
+    color: #00bfff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    align-self: flex-start;
+    margin-top: auto;
+    backdrop-filter: blur(5px);
 }

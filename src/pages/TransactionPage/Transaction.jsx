@@ -66,52 +66,50 @@ export default function Transaction() {
     },
   });
 
-  const TransactionItem = ({ transaction }) => {
-    const gifUrl = useFetchGifFromKeyword(transaction.keyword);
+  const TransactionItem = React.memo(({ transaction, forceUpdate }) => {
+    const gifUrl = useFetchGifFromKeyword(transaction.keyword, forceUpdate);
 
     return (
       <div className="tx-history-item">
-        <div className="tx-history-meta">
-          <div className="tx-history-address">
-            <span className="tx-history-label">From:</span>
-            <span className="tx-history-value">
-              {shortenAddress(transaction.addressFrom)}
-            </span>
-          </div>
-          <div className="tx-history-address">
-            <span className="tx-history-label">To:</span>
-            <span className="tx-history-value">
-              {shortenAddress(transaction.addressTo)}
-            </span>
-          </div>
-          <div className="tx-history-amount">{transaction.amount} ETH</div>
-        </div>
-        <div className="tx-history-meta">
-          <div className="tx-history-message">{transaction.message}</div>
-          {transaction.keyword && (
-            <div className="tx-history-label">
-              Keyword: {transaction.keyword}
-            </div>
+        <div className="tx-history-details">
+          <p>
+            <span>From:</span>
+            <span>{shortenAddress(transaction?.addressFrom)}</span>
+          </p>
+          <p>
+            <span>To:</span>
+            <span>{shortenAddress(transaction?.addressTo)}</span>
+          </p>
+          <p>
+            <span>Amount:</span>
+            <span>{parseFloat(transaction.amount).toFixed(10)} ETH</span>
+          </p>
+          {transaction.message && (
+            <p className="message-container">
+              <span>Message:</span>
+              <span>{transaction.message}</span>
+            </p>
           )}
         </div>
-        {gifUrl && (
+
+        {transaction.keyword && gifUrl && (
           <div className="tx-history-gif">
             <img
               src={gifUrl}
               alt={transaction.keyword}
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "https://via.placeholder.com/150";
+                e.target.src =
+                  "https://via.placeholder.com/300x180?text=No+GIF+Found";
               }}
             />
           </div>
         )}
-        <div className="tx-history-time">
-          {new Date(transaction.timestamp).toLocaleString()}
-        </div>
+
+        <div className="tx-history-date">{transaction.timestamp}</div>
       </div>
     );
-  };
+  });
   return (
     <div id="main-tx">
       <div className="tx-container">
@@ -245,7 +243,11 @@ export default function Transaction() {
           <h3>Transaction History</h3>
           <div className="tx-history-list">
             {sortedTransactions.map((tx, idx) => (
-              <TransactionItem key={idx} transaction={tx} />
+              <TransactionItem
+                key={idx}
+                transaction={tx}
+                forceUpdate={idx === 0}
+              />
             ))}
           </div>
         </div>

@@ -23,7 +23,15 @@ export default function FAQ() {
     },
     {
       question: "What products does Wiki provide?",
-      answer: <span className="highlight">Wiki token</span>,
+      answer: (
+        <>
+          Wiki provides a wide range of products including a{" "}
+          <span className="highlight">cryptocurrency directory</span>,{" "}
+          <span className="highlight">market analysis tools</span>, and{" "}
+          <span className="highlight">educational resources</span> to help users
+          understand and navigate the crypto market.
+        </>
+      ),
     },
     {
       question: "How to track cryptocurrency prices",

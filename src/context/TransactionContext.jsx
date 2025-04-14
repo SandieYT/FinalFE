@@ -119,6 +119,7 @@ export const TransactionProvider = ({ children }) => {
       const updatedTransactionCount =
         await transactionContract.getTransactionCount();
       setTransactionCount(Number(updatedTransactionCount));
+      await getAllTransactions();
     } catch (error) {
       console.error("Error sending transaction:", error);
     }

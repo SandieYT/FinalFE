@@ -1,194 +1,342 @@
-#main-transaction {
-    background: linear-gradient(150deg, #ffffff 30%, #ffaf37 100%);
-
+/* ===== Main Structure Styles ===== */
+#main-tx {
+    background: #222222;
+    color: #fff;
 }
 
-.transaction-container {
+.tx-container {
+    max-width: 1200px;
+    padding: 48px 16px;
+    margin: 0 auto;
+}
+
+/* ===== Welcome Section Styles ===== */
+.tx-welcome {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    width: 100%;
-    height: 100%;
-    gap: 32px;
-    padding: 64px;
-}
-
-.transaction-right {
-    gap: 2vmin;
-    flex: 1;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-
-.transaction-form-container {
-    border-radius: 4vmin;
-    background-color: #000;
-    padding: 2vmin;
-    color:#fff;
-    height: 100%;
-    width: 80%;
-}
-
-.transaction-form-header {
-    border-radius: 3vmin;
-    border: 3px groove #814d12;
-    color: #3b2307;
-    background: linear-gradient(180deg, #ffd17a 0%, #ffe18f 10%, #ffb732 30%, rgb(231, 133, 4) 80%, #f59d19 95%, #be5f06 100%);
-    padding: 1vmin;
-    height: 25vh;
-    aspect-ratio: 1.6;
-    display: flex;
-    flex-direction: column;
-}
-
-.transaction-form-header-top {
-    flex: 3;
-}
-
-.transaction-form-header-icon {
-    width: 64px;
-    height: 64px;
-    -webkit-mask: url("/images/WIK.png") no-repeat center;
-    -webkit-mask-size: contain;
-    mask: url("/images/WIK.png") no-repeat center;
-    mask-size: contain;
-    background-color: #3b2307;
-}
-
-.transaction-form-header-bottom {
-    flex: 1;
-}
-
-.transaction-left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap:32px;
-}
-
-.transaction-wallet-button {
-    background: linear-gradient(90deg, #ff6b00, #ffa502);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 1000px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
-    width: fit-content;
-}
-
-.transaction-wallet-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
-}
-
-.transaction-form-label {
-    font-weight: bold;
-    text-align: start;
-}
-
-.transaction-form-field {
-    border-radius: 3vmin;
-    padding: 1vmin;
-    width: 100%;
-    resize: none;
-    overflow-y: auto;
-    background-clip: padding-box;
-    background-color: #222222;
-    color: #FFF;
-    border: 0.1vmin solid #797979;
-    font-size: 2.5vmin;
-}
-
-.transaction-form-submit {
-    border-radius: 4vmin;
-    padding: 1.5vmin;
-    width: 100%;
-    background: linear-gradient(90deg, #ff6b00, #ffa502);
-    border: none;
-    font-weight: bold;
-    font-size: 2.5vmin;
-    color: white;
-}
-
-.transaction-form-submit-unavailable {
-    border-radius: 4vmin;
-    padding: 1.5vmin;
-    width: 100%;
-    background: linear-gradient(90deg, #4d4d4d, #6b6b6b);
-    border: none;
-    font-weight: bold;
-    font-size: 2.5vmin;
-    color: white;
-}
-
-
-.transaction-error-message {
-    color: #ff6385;
-    font-size: 2vmin;
-}
-
-.transaction-form-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 1.5vmin;
-}
-
-.transaction-form-flex1 {
-    flex: 1;
-}
-
-.transaction-form-flex3 {
-    flex: 3;
-}
-
-.transaction-history {
-    display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
     flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 5%;
-    gap: 4vmin;
+    gap: 32px;
 }
 
-.transaction-history-card {
+/* Left Section - Welcome Content */
+.tx-left {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.tx-left h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.gradient-text {
+    color: #FFD700;
+}
+
+.tx-subtext {
+    font-size: 17.6px;
+    color: #ccc;
+    margin-bottom: 32px;
+}
+
+/* Features Grid */
+.tx-features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    gap: 16px;
+    text-align: center;
+    background: #111;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.tx-features-grid div {
+    padding: 16px;
+    border: 1px solid #333;
+    border-radius: 12px;
+    font-weight: 500;
+    background-color: #1a1a1a;
+    color: #FFD700;
+}
+
+/* ===== Right Section - Card and Form ===== */
+.tx-right {
+    flex: 0.8;
     display: flex;
     flex-direction: column;
-    aspect-ratio: 0.7;
-    width: 30%;
-    background-color: #fff;
-    border-radius: 4vmin;
-    box-shadow: 1vmin 1vmin 1vmin 1vmin #00000028;
-    border: 2px outset #d4d4d4;
-    padding: 3vmin;
-    font-size: 3vmin;
-    gap: 1vmin;
+    gap: 24px;
 }
 
-.transaction-history-card-amount {
-    background: linear-gradient(90deg, #ff6b00, #ffa502);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 6vmin;
+/* Card Styles */
+.tx-card {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+}
+
+.tx-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: rotate(30deg);
+}
+
+.tx-eth-icon {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    right: 24px;
+    top: 24px;
+}
+
+.tx-card-address {
+    font-size: 19.2px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    backdrop-filter: blur(5px);
+}
+
+.tx-card-network {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4.8px 12.8px;
+    border-radius: 16px;
+}
+
+/* ===== Form Section Styles ===== */
+.tx-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background: #1a1a1a;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tx-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tx-form label {
+    font-size: 14.4px;
+    color: #FFD700;
+    font-weight: 500;
+}
+
+.tx-form input,
+.tx-form textarea {
+    padding: 12.8px 16px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #121212;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.tx-form input:focus,
+.tx-form textarea:focus {
+    border-color: #FFD700;
+    outline: none;
+    box-shadow: 0 0 0 3.2px rgba(255, 215, 0, 0.2);
+}
+
+.tx-form input::placeholder,
+.tx-form textarea::placeholder {
+    color: #666;
+}
+
+.input-error {
+    border-color: #ff5a5f;
+}
+
+/* ===== Button Styles ===== */
+.tx-btn {
+    background: linear-gradient(to right, #FFD700, #FFA500);
+    color: #000;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 8px;
+}
+
+.tx-btn:hover {
+    transform: translateY(-3.2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.tx-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== Transaction History Section ===== */
+.tx-history {
+    margin-top: 64px;
+}
+
+.tx-history h3 {
+    font-size: 32px;
+    color: #FFD700;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #333;
     text-align: center;
-    margin: 2vmin;
 }
 
-.transaction-history-card-gif {
-    max-height: 40%;
-    object-fit: contain;
+.tx-history-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+    padding: 16px;
 }
 
-.transaction-history-card-message {
-    overflow-y: auto;
+/* ===== Transaction Item Styles ===== */
+.tx-history-item {
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 19.2px;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+}
+
+.tx-history-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    border-color: #FFD700;
+}
+
+.tx-history-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6.4px;
+    background: linear-gradient(to right, #FFD700, #FFA500);
+}
+
+.tx-history-details {
+    color: #eee;
+    font-size: 15.2px;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.tx-history-details p {
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
     word-break: break-word;
+}
 
+.tx-history-details p:last-of-type {
+    flex-direction: column;
+}
+
+.tx-history-details span:first-child {
+    color: #FFD700;
+    font-weight: 500;
+    min-width: 80px;
+}
+
+.tx-history-details span:last-child {
+    text-align: right;
+    max-width: calc(100% - 90px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Special styling for message */
+.tx-history-details p.message-container {
+    margin-top: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12.8px;
+    border-radius: 8px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.tx-history-details p.message-container span {
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    text-align: left;
+    max-width: 100%;
+    color: #ccc;
+    font-size: 14.4px;
+    line-height: 1.4;
+}
+
+.tx-history-gif {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.tx-history-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.tx-history-item:hover .tx-history-gif img {
+    transform: scale(1.05);
+}
+
+.tx-history-date {
+    background: rgba(0, 0, 0, 0.3);
+    color: #00bfff;
+    font-size: 13.6px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    align-self: flex-start;
+    margin-top: auto;
+    backdrop-filter: blur(5px);
 }

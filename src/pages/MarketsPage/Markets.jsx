@@ -6,7 +6,8 @@ import "./markets.css";
 export default function Markets() {
   const [cryptoData, setCryptoData] = useState([]);
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const formatter = Intl.NumberFormat("en-US", {
     notation: "compact",
@@ -16,11 +17,7 @@ export default function Markets() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response2 = await axios.get(
-          "https://api.coingecko.com/api/v3/simple/supported_vs_currencies"
-        );
-
-        setTotal(Math.ceil(response2.data.length / 20));
+        setLoading(true);
         const response = await axios.get(
           "https://api.coingecko.com/api/v3/coins/markets",
           {
@@ -33,119 +30,178 @@ export default function Markets() {
           }
         );
         setCryptoData(response.data);
+
+        // Thay vì dùng supported_vs_currencies, ta có thể dùng total_items từ header (nếu API hỗ trợ)
+        // Giả sử API trả về khoảng 1000 coins phổ biến
+        setTotalPages(50); // 1000 coins / 20 items per page = 50 pages
       } catch (error) {
-        console.error("Error fetching data from CoinGecko API:", error);
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [page]);
 
+  const renderPaginationButtons = () => {
+    const buttons = [];
+    const maxVisibleButtons = 2; 
+    let startPage, endPage;
+
+    if (totalPages <= maxVisibleButtons) {
+      startPage = 1;
+      endPage = totalPages;
+    } else {
+      const maxButtonsBeforeCurrent = Math.floor(maxVisibleButtons / 2);
+      const maxButtonsAfterCurrent = Math.ceil(maxVisibleButtons / 2) - 1;
+
+      if (page <= maxButtonsBeforeCurrent) {
+        startPage = 1;
+        endPage = maxVisibleButtons;
+      } else if (page + maxButtonsAfterCurrent >= totalPages) {
+        startPage = totalPages - maxVisibleButtons + 1;
+        endPage = totalPages;
+      } else {
+        startPage = page - maxButtonsBeforeCurrent;
+        endPage = page + maxButtonsAfterCurrent;
+      }
+    }
+
+    buttons.push(
+      <button
+        key="prev"
+        className={`pagination-button prev ${page === 1 ? "disabled" : ""}`}
+        onClick={() => setPage(Math.max(1, page - 1))}
+        disabled={page === 1}
+      >
+        &lt;
+      </button>
+    );
+
+    if (startPage > 1) {
+      buttons.push(
+        <button
+          key={1}
+          className={`pagination-button ${page === 1 ? "current" : ""}`}
+          onClick={() => setPage(1)}
+        >
+          1
+        </button>
+      );
+      if (startPage > 2) {
+        buttons.push(
+          <span key="start-ellipsis" className="pagination-ellipsis">
+            ...
+          </span>
+        );
+      }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      buttons.push(
+        <button
+          key={i}
+          className={`pagination-button ${page === i ? "current" : ""}`}
+          onClick={() => setPage(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        buttons.push(
+          <span key="end-ellipsis" className="pagination-ellipsis">
+            ...
+          </span>
+        );
+      }
+      buttons.push(
+        <button
+          key={totalPages}
+          className={`pagination-button ${
+            page === totalPages ? "current" : ""
+          }`}
+          onClick={() => setPage(totalPages)}
+        >
+          {totalPages}
+        </button>
+      );
+    }
+
+    buttons.push(
+      <button
+        key="next"
+        className={`pagination-button next ${
+          page === totalPages ? "disabled" : ""
+        }`}
+        onClick={() => setPage(Math.min(totalPages, page + 1))}
+        disabled={page === totalPages}
+      >
+        &gt;
+      </button>
+    );
+
+    return buttons;
+  };
+
   return (
     <div id="main-markets">
       <div className="market-container">
         <h1 className="market-header">Crypto Hub</h1>
-        <ul className="market-currencies">
-          <li className="market-currency-header">
-            <p className="currency-icon" />
-            <h2 className="currency-name-header">Coin Name</h2>
-            <h2 className="currency-price">Price</h2>
-            <h2 className="currency-cap">Market Cap</h2>
-            <h2 className="currency-percentage">24h Change</h2>
-          </li>
-          {cryptoData.map((coin) => (
-            <Link key={coin.id} to={"/coin/" + coin.id}>
-              <li className="market-currency">
-                <img className="currency-icon" src={coin.image} />
-                <p className="currency-name">
-                  {coin.name} ({coin.symbol.toUpperCase()})
-                </p>
-                <p className="currency-price">${coin.current_price}</p>
-                <p className="currency-cap">
-                  ${formatter.format(coin.market_cap)}
-                </p>
-                <p
-                  className={
-                    (coin.price_change_percentage_24h > 0
-                      ? "percentage-increase"
-                      : coin.price_change_percentage_24h < 0
-                      ? "percentage-decrease"
-                      : "percentage-neutral") + " currency-percentage"
-                  }
-                >
-                  {coin.price_change_percentage_24h}%
-                </p>
-              </li>
-            </Link>
-          ))}
-          <div className="market-pagination-buttons">
-            <button
-              className="market-pagination-button prev"
-              disabled={page === 1}
-              onClick={() => setPage(page - 1)}
-            >
-              {"<"}
-            </button>
-            {page > 3 && (
-              <button
-                className="market-pagination-button"
-                onClick={() => setPage(page - 3)}
+        {loading ? (
+          <div className="loading-indicator">Loading...</div>
+        ) : (
+          <div className="market-currencies">
+            <div className="market-currency-header">
+              <div className="currency-icon" />
+              <h2 className="currency-name-header">Coin Name</h2>
+              <h2 className="currency-price">Price</h2>
+              <h2 className="currency-cap">Market Cap</h2>
+              <h2 className="currency-percentage">24h Change</h2>
+            </div>
+            {cryptoData.map((coin) => (
+              <Link
+                key={coin.id}
+                to={`/coin/${coin.id}`}
+                className="market-currency-link"
               >
-                {page - 3}
-              </button>
-            )}
-            {page > 2 && (
-              <button
-                className="market-pagination-button"
-                onClick={() => setPage(page - 2)}
-              >
-                {page - 2}
-              </button>
-            )}
-            {page > 1 && (
-              <button
-                className="market-pagination-button"
-                onClick={() => setPage(page - 1)}
-              >
-                {page - 1}
-              </button>
-            )}
-            <button className="market-pagination-button current" disabled>
-              {page}
-            </button>
-            {page < total && (
-              <button
-                className="market-pagination-button"
-                onClick={() => setPage(page + 1)}
-              >
-                {page + 1}
-              </button>
-            )}
-            {page < total - 1 && (
-              <button
-                className="market-pagination-button"
-                onClick={() => setPage(page + 2)}
-              >
-                {page + 2}
-              </button>
-            )}
-            {page < total - 2 && (
-              <button
-                className="market-pagination-button"
-                onClick={() => setPage(page + 3)}
-              >
-                {page + 3}
-              </button>
-            )}
-            <button
-              className="market-pagination-button next"
-              disabled={page === total}
-              onClick={() => setPage(page + 1)}
-            >
-              {">"}
-            </button>
+                <div className="market-currency">
+                  <img
+                    className="currency-icon"
+                    src={coin.image}
+                    alt={coin.name}
+                  />
+                  <p className="currency-name">
+                    {coin.name} ({coin.symbol.toUpperCase()})
+                  </p>
+                  <p className="currency-price">
+                    ${coin.current_price.toLocaleString()}
+                  </p>
+                  <p className="currency-cap">
+                    ${formatter.format(coin.market_cap)}
+                  </p>
+                  <p
+                    className={`currency-percentage ${
+                      coin.price_change_percentage_24h > 0
+                        ? "percentage-increase"
+                        : coin.price_change_percentage_24h < 0
+                        ? "percentage-decrease"
+                        : "percentage-neutral"
+                    }`}
+                  >
+                    {coin.price_change_percentage_24h?.toFixed(2)}%
+                  </p>
+                </div>
+              </Link>
+            ))}
+            <div className="pagination-buttons">
+              {renderPaginationButtons()}
+            </div>
           </div>
-        </ul>
+        )}
       </div>
     </div>
   );

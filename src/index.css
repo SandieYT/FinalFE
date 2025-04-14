@@ -23,4 +23,8 @@ a {
     text-decoration: none;
 }
 
-
+.error-message {
+    color: #ff5a5f;
+    font-size: 13px;
+    margin-top: 6px;
+}

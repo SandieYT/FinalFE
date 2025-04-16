@@ -5,12 +5,12 @@
 
 /* ===== Footer Content Wrapper ===== */
 .footer-container {
-    margin: 0 auto;
-    padding: 0 5%;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
     max-width: 1200px;
+    padding: 0 5%;
 }
 
 /* ===== Footer Column Section ===== */
@@ -22,27 +22,27 @@
 .footer-column h4 {
     color: #fbbf24;
     font-size: 18px;
-    margin-bottom: 16px;
     font-weight: 700;
+    margin-bottom: 16px;
     position: relative;
 }
 
 .footer-column h4::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 40px;
-    height: 3px;
     background-color: #fbbf24;
     border-radius: 2px;
+    bottom: -6px;
+    content: "";
+    height: 3px;
+    left: 0;
+    position: absolute;
+    width: 40px;
 }
 
 .footer-column a {
-    display: block;
     color: #1f2937;
-    margin-bottom: 12px;
+    display: block;
     font-size: 15px;
+    margin-bottom: 12px;
     transition: color 0.2s ease, transform 0.3s ease;
 }
 

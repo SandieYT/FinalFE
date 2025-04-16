@@ -8,7 +8,7 @@ const Home = lazy(() => import("../pages/HomePage/Home"));
 const Login = lazy(() => import("../pages/LoginPage/Login"));
 const Register = lazy(() => import("../pages/RegisterPage/Register"));
 const Transaction = lazy(() => import("../pages/TransactionPage/Transaction"));
-const Markets = lazy(() => import("../pages/MarketsPage/Markets"));
+const Market = lazy(() => import("../pages/MarketPage/Market"));
 const Coin = lazy(() => import("../pages/CoinPage/Coin"));
 
 const Router = createBrowserRouter([
@@ -52,12 +52,12 @@ const Router = createBrowserRouter([
         path: "markets",
         element: (
           <Suspense fallback={<LoadingSpinner />}>
-            <Markets />
+            <Market />
           </Suspense>
         ),
       },
       {
-        path: "coin/:id",
+        path: "coins/:id",
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <Coin />

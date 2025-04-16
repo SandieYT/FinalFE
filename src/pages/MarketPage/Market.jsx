@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./markets.css";
+import "./market.css";
 
-export default function Markets() {
+export default function Market() {
   const [cryptoData, setCryptoData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -31,8 +31,6 @@ export default function Markets() {
         );
         setCryptoData(response.data);
 
-        // Thay vì dùng supported_vs_currencies, ta có thể dùng total_items từ header (nếu API hỗ trợ)
-        // Giả sử API trả về khoảng 1000 coins phổ biến
         setTotalPages(50); // 1000 coins / 20 items per page = 50 pages
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -148,7 +146,7 @@ export default function Markets() {
   };
 
   return (
-    <div id="main-markets">
+    <div id="main-market">
       <div className="market-container">
         <h1 className="market-header">Crypto Hub</h1>
         {loading ? (
@@ -165,7 +163,7 @@ export default function Markets() {
             {cryptoData.map((coin) => (
               <Link
                 key={coin.id}
-                to={`/coin/${coin.id}`}
+                to={`/coins/${coin.id}`}
                 className="market-currency-link"
               >
                 <div className="market-currency">

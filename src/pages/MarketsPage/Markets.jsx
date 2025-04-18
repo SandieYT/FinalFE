@@ -71,7 +71,7 @@ export default function Markets() {
     buttons.push(
       <button
         key="prev"
-        className={`pagination-button prev ${page === 1 ? "disabled" : ""}`}
+        className={`market-pagination-button prev ${page === 1 ? "disabled" : ""}`}
         onClick={() => setPage(Math.max(1, page - 1))}
         disabled={page === 1}
       >
@@ -83,7 +83,7 @@ export default function Markets() {
       buttons.push(
         <button
           key={1}
-          className={`pagination-button ${page === 1 ? "current" : ""}`}
+          className={`market-pagination-button ${page === 1 ? "current" : ""}`}
           onClick={() => setPage(1)}
         >
           1
@@ -91,8 +91,8 @@ export default function Markets() {
       );
       if (startPage > 2) {
         buttons.push(
-          <span key="start-ellipsis" className="pagination-ellipsis">
-            ...
+          <span key="start-ellipsis" className="market-pagination-ellipsis">
+            ···
           </span>
         );
       }
@@ -102,7 +102,7 @@ export default function Markets() {
       buttons.push(
         <button
           key={i}
-          className={`pagination-button ${page === i ? "current" : ""}`}
+          className={`market-pagination-button ${page === i ? "current" : ""}`}
           onClick={() => setPage(i)}
         >
           {i}
@@ -113,15 +113,15 @@ export default function Markets() {
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         buttons.push(
-          <span key="end-ellipsis" className="pagination-ellipsis">
-            ...
+          <span key="end-ellipsis" className="market-pagination-ellipsis">
+            ···
           </span>
         );
       }
       buttons.push(
         <button
           key={totalPages}
-          className={`pagination-button ${
+          className={`market-pagination-button ${
             page === totalPages ? "current" : ""
           }`}
           onClick={() => setPage(totalPages)}
@@ -134,7 +134,7 @@ export default function Markets() {
     buttons.push(
       <button
         key="next"
-        className={`pagination-button next ${
+        className={`market-pagination-button next ${
           page === totalPages ? "disabled" : ""
         }`}
         onClick={() => setPage(Math.min(totalPages, page + 1))}
@@ -197,7 +197,7 @@ export default function Markets() {
                 </div>
               </Link>
             ))}
-            <div className="pagination-buttons">
+            <div className="market-pagination-buttons">
               {renderPaginationButtons()}
             </div>
           </div>

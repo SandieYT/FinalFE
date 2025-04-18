@@ -219,14 +219,14 @@
     color: inherit;
 }
 
-.pagination-ellipsis {
+.market-pagination-ellipsis {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 36px;
     height: 36px;
     padding: 0 12px;
-    font-size: 14px;
+    font-size: 24px;
 }
 
 .disabled {

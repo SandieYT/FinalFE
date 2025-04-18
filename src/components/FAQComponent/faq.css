@@ -16,7 +16,7 @@
 /* ===== Title Section Styles ===== */
 .faq-content h2 {
     font-size: 32px;
-    color: #ff6b00;
+    color: #FFD700;
     margin-bottom: 24px;
     text-align: center;
     text-transform: uppercase;
@@ -46,7 +46,7 @@
 
 /* ===== Item Hover Effects ===== */
 .faq-collapse-item:hover {
-    border-color: rgba(255, 107, 0, 0.5);
+    border-color: rgba(255, 166, 0, 0.5);
     transform: translateY(-2px);
 }
 
@@ -61,7 +61,7 @@
 }
 
 .faq-collapse-header:hover {
-    background: rgba(255, 107, 0, 0.15);
+    background: rgba(255, 174, 0, 0.15);
 }
 
 .faq-collapse-header-text {
@@ -71,7 +71,7 @@
 }
 
 .faq-collapse-header svg {
-    color: #ff6b00;
+    color: #FFD700;
     transition: transform 0.3s ease;
 }
 
@@ -103,6 +103,6 @@
 
 /* ===== Highlight Text Styles ===== */
 .highlight {
-    color: #ffa502 !important;
-    font-weight: normal;
+    color: #FFD700 !important;
+    font-weight: bold;
 }

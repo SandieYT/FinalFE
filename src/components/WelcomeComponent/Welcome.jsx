@@ -16,7 +16,7 @@ export default function Welcome() {
           <div className="slogan-spotlight">
             <h1 className="slogan-title">
               {isAuthenticated
-                ? `Welcome back ${username}!`
+                ? `Welcome back, ${username}!`
                 : "Wiki Indices Unleashed!"}
             </h1>
             <div className="slogan-description">

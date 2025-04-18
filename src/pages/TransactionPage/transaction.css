@@ -37,6 +37,8 @@
 
 .gradient-text {
     color: #FFD700;
+    text-shadow: 0 0 20px #ffd9009a,
+    0 0 40px #ffd90038;
 }
 
 .tx-subtext {
@@ -59,9 +61,12 @@
     padding: 16px;
     border: 1px solid #333;
     border-radius: 12px;
-    font-weight: 500;
+    font-size: 24px;
     background-color: #1a1a1a;
     color: #FFD700;
+    text-shadow: 0 0 10px #FFD700,
+    0 0 20px #ffd9009a,
+    0 0 30px #ffd90038;
 }
 
 /* ===== Right Section - Card and Form ===== */

@@ -34,7 +34,7 @@ export default function FAQ() {
       ),
     },
     {
-      question: "How to track cryptocurrency prices",
+      question: "How to track cryptocurrency prices?",
       answer: (
         <>
           The easiest way to track the latest cryptocurrency prices, trading
@@ -50,7 +50,9 @@ export default function FAQ() {
     },
     {
       question: "What are the trading fees on Wiki?",
-      answer: <span className="highlight">Free</span>,
+      answer:<>
+      The trading fees on Wiki is absolutely <span className="highlight">Free</span>. This means that there will be no additional charges for trades made on Wiki.
+      </>,
     },
   ];
 

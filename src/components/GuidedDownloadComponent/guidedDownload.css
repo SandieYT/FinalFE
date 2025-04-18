@@ -161,21 +161,26 @@
 .app-store {
     background: linear-gradient(135deg, #5e72e4 0%, #825ee4 100%);
     border-top-left-radius: 1000px;
+    justify-content: flex-end;
+
 }
 
 .google-play {
     background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
     border-bottom-left-radius: 1000px;
+    justify-content: flex-end;
 }
 
 .android-apk {
     background: linear-gradient(135deg, #3DDC84 0%, #2BB673 100%);
     border-top-right-radius: 1000px;
+    justify-content: flex-start;
 }
 
 .api {
     background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
     border-bottom-right-radius: 1000px;
+    justify-content: flex-start;
 }
 
 /* ===== Download Icon Styles ===== */

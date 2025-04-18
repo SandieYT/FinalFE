@@ -129,7 +129,7 @@ export default function Transaction() {
           <div className="tx-left">
             <h1>
               Send Crypto <br /> across the{" "}
-              <span className="gradient-text">world</span>
+              <span className="gradient-text">World</span>
             </h1>
             <p className="tx-subtext">
               Explore the crypto world. Buy and sell cryptocurrencies easily on
@@ -143,10 +143,17 @@ export default function Transaction() {
               <div>Low fees</div>
               <div>Blockchain</div>
             </div>
+            {currentAccount?
+              // <Link to="/transaction" className="tx-wallet-btn" onClick={disconnectWallet}>
+              //   Disconnect your wallet
+              // </Link>
+              <></>
+              :<Link to="/transaction" className="tx-wallet-btn" onClick={connectWallet}>
+                Connect your wallet
+              </Link>}
           </div>
           <div className="tx-right">
             <div className="tx-card">
-              <div className="tx-eth-icon">⬤</div>
               <p className="tx-card-address">
                 {currentAccount ? shortenAddress(currentAccount) : "0x..."}
               </p>
@@ -243,10 +250,10 @@ export default function Transaction() {
 
               <button
                 type="submit"
-                disabled={!formik.isValid || formik.isSubmitting}
+                disabled={!currentAccount || (!formik.isValid || formik.isSubmitting)}
                 className="tx-btn"
               >
-                {formik.isSubmitting ? "Sending..." : "Send"}
+                {!currentAccount ? "Connect to Send" : (formik.isSubmitting ? "Sending..." : "Send")}
               </button>
             </form>
           </div>
@@ -275,29 +282,7 @@ export default function Transaction() {
             )}
           </div>
         </div>
-        <div className="transaction-left">
-          <h1>Send Crypto Easily with Wiki</h1>
-          {currentAccount?
-              // <Link to="/transaction" className="transaction-wallet-button" onClick={disconnectWallet}>
-              //   Disconnect your wallet
-              // </Link>
-              <></>
-              :<Link to="/transaction" className="transaction-wallet-button" onClick={connectWallet}>
-                Connect your wallet
-              </Link>}
-        </div>
       </div>
-      <section className="transaction-history">
-              {transactions.map((i)=>(
-                <div className="transaction-history-card">
-                  <h1 className="transaction-history-card-amount">{i.amount} ETH</h1>
-                <p><strong>From: </strong>{shortenAddress(i.addressFrom)}</p>
-                <p><strong>To: </strong>{shortenAddress(i.addressTo)}</p>
-                <img className="transaction-history-card-gif" src={i.keyword||null}/>
-                <p className="transaction-history-card-message">{i.message}</p>
-                </div>
-              ))}
-      </section>
     </div>
   );
 }

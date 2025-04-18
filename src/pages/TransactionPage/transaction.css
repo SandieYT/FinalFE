@@ -23,11 +23,13 @@
 .tx-left {
     flex: 1.5;
     min-width: 300px;
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
 }
 
 .tx-left h1 {
     font-size: 48px;
-    margin-bottom: 16px;
     font-weight: bold;
     line-height: 1.2;
     color: #fff;
@@ -40,7 +42,6 @@
 .tx-subtext {
     font-size: 17.6px;
     color: #ccc;
-    margin-bottom: 32px;
 }
 
 /* Features Grid */
@@ -339,4 +340,22 @@
     align-self: flex-start;
     margin-top: auto;
     backdrop-filter: blur(5px);
+}
+
+.tx-wallet-btn {
+    background: linear-gradient(90deg, #ff6b00, #ffa502);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 1000px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    width: fit-content;
+}
+
+.tx-wallet-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
 }

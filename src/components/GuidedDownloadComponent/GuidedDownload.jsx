@@ -34,12 +34,12 @@ export default function GuidedDownload() {
               App Store
             </Link>
             <Link to="#" className="download-btn android-apk">
+              Android APK
               <img
                 src="/images/android-bd8aee1484ce1680a0a815eac2a3e211.svg"
                 alt="Android"
                 className="download-icon"
               />
-              Android APK
             </Link>
             <Link to="#" className="download-btn google-play">
               <img
@@ -50,12 +50,12 @@ export default function GuidedDownload() {
               Google Play
             </Link>
             <Link to="#" className="download-btn api">
+              API
               <img
                 src="/images/api-03d915f9273477c6390cdc44006eb22f.svg"
                 alt="API"
                 className="download-icon"
               />
-              API
             </Link>
           </div>
         </div>

@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { FiLogOut, FiUser } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutSuccess } from "../../features/authSlice";
 
 import "./header.css";
 
 export default function Header() {
-  const [searchActive, setSearchActive] = React.useState(false);
+  const [searchActive, setSearchActive] = useState(false);
   const searchRef = React.useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated, username } = useSelector((state) => state.auth);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleSearchIconClick = () => {
     setSearchActive(true);
@@ -66,11 +68,31 @@ export default function Header() {
           </div>
           <div className="header-auth">
             {isAuthenticated ? (
-              <div className="user-info">
-                <span className="username">Hello {username}</span>
-                <button onClick={handleLogout} className="header-logout-btn">
-                  Logout
-                </button>
+              <div className="user-dropdown">
+                <img
+                  src={`https://api.dicebear.com/5.x/initials/svg?seed=${username}`}
+                  alt="avatar"
+                  className="user-avatar"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                />
+                {showDropdown && (
+                  <div className="dropdown-menu">
+                    <div
+                      className="dropdown-item "
+                      onClick={() => navigate("/profile")}
+                    >
+                      <FiUser className="dropdown-icon" />
+                      Profile
+                    </div>
+                    <div
+                      className="dropdown-item header-logout-btn"
+                      onClick={handleLogout}
+                    >
+                      <FiLogOut className="dropdown-icon" />
+                      Logout
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <>

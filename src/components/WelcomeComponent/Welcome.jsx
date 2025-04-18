@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { TransactionContext } from "../../context/TransactionContext";
-
 import "./welcome.css";
 
 export default function Welcome() {

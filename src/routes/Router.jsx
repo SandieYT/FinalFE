@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 import RootLayout from "./RootLayout";
+import Private from "./Private";
 
 const LoadingSpinner = () => <div>Loading...</div>;
 
@@ -10,6 +11,7 @@ const Register = lazy(() => import("../pages/RegisterPage/Register"));
 const Transaction = lazy(() => import("../pages/TransactionPage/Transaction"));
 const Market = lazy(() => import("../pages/MarketPage/Market"));
 const Coin = lazy(() => import("../pages/CoinPage/Coin"));
+const Profile = lazy(() => import("../pages/ProfilePage/Profile"));
 
 const Router = createBrowserRouter([
   {
@@ -62,6 +64,16 @@ const Router = createBrowserRouter([
           <Suspense fallback={<LoadingSpinner />}>
             <Coin />
           </Suspense>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <Private>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Profile />
+            </Suspense>
+          </Private>
         ),
       },
     ],

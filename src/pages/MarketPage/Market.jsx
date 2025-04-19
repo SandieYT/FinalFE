@@ -44,7 +44,7 @@ export default function Market() {
 
   const renderPaginationButtons = () => {
     const buttons = [];
-    const maxVisibleButtons = 2; 
+    const maxVisibleButtons = 2;
     let startPage, endPage;
 
     if (totalPages <= maxVisibleButtons) {

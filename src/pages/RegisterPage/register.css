@@ -1,33 +1,33 @@
 /* ===== Main Structure Styles ===== */
 #main-register {
+    align-items: center;
+    background-color: #f5f5f5;
     display: flex;
     justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    background-color: #f5f5f5;
 }
 
 .register-container {
-    width: 100%;
     max-width: 450px;
     padding: 20px;
+    width: 100%;
 }
 
 .register-box {
     background-color: white;
     border-radius: 8px;
-    padding: 40px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     border-top: 4px solid #FFD700;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 40px;
 }
 
 /* ===== Header Section Styles ===== */
 .register-title {
-    font-size: 28px;
-    margin-bottom: 10px;
     color: #333;
-    text-align: center;
+    font-size: 28px;
     font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 /* ===== Form Section Styles ===== */
@@ -40,27 +40,27 @@
 }
 
 .register-input-group label {
-    display: block;
-    margin-bottom: 8px;
     color: #555;
+    display: block;
     font-size: 14px;
     font-weight: 500;
+    margin-bottom: 8px;
 }
 
 .register-input-group input {
-    width: 100%;
-    padding: 14px 16px;
+    background-color: #fafafa;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 15px;
+    padding: 14px 16px;
     transition: all 0.3s ease;
-    background-color: #fafafa;
+    width: 100%;
 }
 
 .register-input-group input:focus {
-    outline: none;
     border-color: #FFD700;
     box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    outline: none;
 }
 
 .register-input-group input.input-error {
@@ -69,46 +69,46 @@
 
 /* ===== Password Strength Indicator ===== */
 .password-strength {
-    font-size: 13px;
     color: #777;
+    font-size: 13px;
     margin-top: 6px;
 }
 
 /* ===== Submit Button Styles ===== */
 .register-btn {
-    width: 100%;
-    padding: 14px;
     background-color: #FFD700;
-    color: #333;
     border: none;
     border-radius: 4px;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(255, 215, 0, 0.3);
+    color: #333;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
 .register-btn:hover {
     background-color: #f1c40f;
-    transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+    transform: translateY(-2px);
 }
 
 .register-btn:disabled {
     background-color: #e0e0e0;
+    box-shadow: none;
     color: #999;
     cursor: not-allowed;
     transform: none;
-    box-shadow: none;
 }
 
 /* ===== Footer Link Styles ===== */
 .login-prompt {
-    margin-top: 25px;
-    text-align: center;
     color: #666;
     font-size: 14px;
+    margin-top: 25px;
+    text-align: center;
 }
 
 .login-prompt a {

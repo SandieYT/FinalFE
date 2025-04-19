@@ -1,26 +1,26 @@
 /* ===== Main Container Styles ===== */
 .faq-container {
-    margin: 16px 0;
     background: linear-gradient(135deg, #1e1e1e, #292929);
     border-radius: 16px;
-    padding: 24px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 16px 0;
+    padding: 24px;
 }
 
 /* ===== Content Layout Styles ===== */
 .faq-content {
-    max-width: 800px;
     margin: 0 auto;
+    max-width: 800px;
 }
 
 /* ===== Title Section Styles ===== */
 .faq-content h2 {
+    color: #ff6b00;
     font-size: 32px;
     color: #FFD700;
     margin-bottom: 24px;
     text-align: center;
     text-transform: uppercase;
-    font-weight: bold;
 }
 
 /* ===== FAQ Items Section Styles ===== */
@@ -35,13 +35,13 @@
 }
 
 .faq-collapse-item {
-    margin-bottom: 16px;
-    border-radius: 12px;
-    overflow: hidden;
     background-color: #2a2a2a;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease-in-out;
+    border-radius: 12px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
 }
 
 /* ===== Item Hover Effects ===== */
@@ -52,11 +52,11 @@
 
 /* ===== Header Section Styles ===== */
 .faq-collapse-header {
+    align-items: center;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 18px 24px;
-    cursor: pointer;
     transition: background 0.3s;
 }
 
@@ -65,9 +65,9 @@
 }
 
 .faq-collapse-header-text {
+    color: #fff;
     font-size: 18px;
     font-weight: bold;
-    color: #fff;
 }
 
 .faq-collapse-header svg {
@@ -82,17 +82,17 @@
 
 /* ===== Content Section Styles ===== */
 .faq-collapse-content {
+    background: #1e1e1e;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out;
     padding: 0 24px;
-    background: #1e1e1e;
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease-in-out;
 }
 
 .faq-collapse-item.active .faq-collapse-content {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     max-height: 500px;
     padding: 16px 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .faq-collapse-content span {

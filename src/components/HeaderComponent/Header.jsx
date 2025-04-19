@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { FiLogOut, FiUser } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutSuccess } from "../../features/authSlice";
-
 import "./header.css";
 
 export default function Header() {
-  const [searchActive, setSearchActive] = React.useState(false);
-  const searchRef = React.useRef(null);
+  const [searchActive, setSearchActive] = useState(false);
+  const searchRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated, username } = useSelector((state) => state.auth);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleSearchIconClick = () => {
     setSearchActive(true);
@@ -21,7 +23,26 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(logoutSuccess());
     navigate("/");
+    setShowDropdown(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setShowDropdown(false);
+  }, [isAuthenticated]);
+
   return (
     <header id="main-header">
       <div className="header-container">
@@ -66,11 +87,34 @@ export default function Header() {
           </div>
           <div className="header-auth">
             {isAuthenticated ? (
-              <div className="user-info">
-                <span className="username">Hello {username}</span>
-                <button onClick={handleLogout} className="header-logout-btn">
-                  Logout
-                </button>
+              <div className="user-dropdown" ref={dropdownRef}>
+                <img
+                  src={`https://api.dicebear.com/5.x/initials/svg?seed=${username}`}
+                  alt="avatar"
+                  className="user-avatar"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                />
+                {showDropdown && (
+                  <div className="dropdown-menu">
+                    <div
+                      className="dropdown-item"
+                      onClick={() => {
+                        navigate("/profile");
+                        setShowDropdown(false);
+                      }}
+                    >
+                      <FiUser className="dropdown-icon" />
+                      Profile
+                    </div>
+                    <div
+                      className="dropdown-item header-logout-btn"
+                      onClick={handleLogout}
+                    >
+                      <FiLogOut className="dropdown-icon" />
+                      Logout
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <>

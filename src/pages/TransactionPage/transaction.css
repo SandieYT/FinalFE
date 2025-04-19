@@ -5,18 +5,18 @@
 }
 
 .tx-container {
+    margin: 0 auto;
     max-width: 1200px;
     padding: 48px 16px;
-    margin: 0 auto;
 }
 
 /* ===== Welcome Section Styles ===== */
 .tx-welcome {
-    display: flex;
-    justify-content: space-between;
     align-items: flex-start;
+    display: flex;
     flex-wrap: wrap;
     gap: 32px;
+    justify-content: space-between;
 }
 
 /* Left Section - Welcome Content */
@@ -29,10 +29,11 @@
 }
 
 .tx-left h1 {
+    color: #fff;
     font-size: 48px;
     font-weight: bold;
     line-height: 1.2;
-    color: #fff;
+    margin-bottom: 16px;
 }
 
 .gradient-text {
@@ -42,23 +43,24 @@
 }
 
 .tx-subtext {
+    color: #ccc;
     font-size: 17.6px;
     color: #ccc;
 }
 
 /* Features Grid */
 .tx-features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
-    gap: 16px;
-    text-align: center;
     background: #111;
-    padding: 16px;
     border-radius: 16px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    padding: 16px;
+    text-align: center;
 }
 
 .tx-features-grid div {
-    padding: 16px;
+    background-color: #1a1a1a;
     border: 1px solid #333;
     border-radius: 12px;
     font-size: 24px;
@@ -71,8 +73,8 @@
 
 /* ===== Right Section - Card and Form ===== */
 .tx-right {
-    flex: 0.8;
     display: flex;
+    flex: 0.8;
     flex-direction: column;
     gap: 24px;
 }
@@ -81,68 +83,68 @@
 .tx-card {
     background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
     border-radius: 16px;
-    padding: 24px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     color: white;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
     min-height: 180px;
+    overflow: hidden;
+    padding: 24px;
+    position: relative;
 }
 
 .tx-card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+    content: "";
+    height: 200%;
+    position: absolute;
+    right: -50%;
+    top: -50%;
     transform: rotate(30deg);
+    width: 200%;
 }
 
 .tx-eth-icon {
-    font-size: 32px;
     color: rgba(255, 255, 255, 0.8);
+    font-size: 32px;
     position: absolute;
     right: 24px;
     top: 24px;
 }
 
 .tx-card-address {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    display: inline-block;
     font-size: 19.2px;
     font-weight: 500;
     letter-spacing: 1px;
     margin-top: 16px;
-    background: rgba(0, 0, 0, 0.2);
     padding: 8px 16px;
-    border-radius: 8px;
-    display: inline-block;
     backdrop-filter: blur(5px);
 }
 
 .tx-card-network {
-    position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
     bottom: 24px;
-    left: 24px;
     font-size: 16px;
     font-weight: 600;
-    background: rgba(0, 0, 0, 0.3);
+    left: 24px;
     padding: 4.8px 12.8px;
-    border-radius: 16px;
+    position: absolute;
 }
 
 /* ===== Form Section Styles ===== */
 .tx-form {
+    background: #1a1a1a;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     gap: 24px;
-    background: #1a1a1a;
     padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .tx-form-group {
@@ -152,27 +154,27 @@
 }
 
 .tx-form label {
-    font-size: 14.4px;
     color: #FFD700;
+    font-size: 14.4px;
     font-weight: 500;
 }
 
 .tx-form input,
 .tx-form textarea {
-    padding: 12.8px 16px;
-    border-radius: 8px;
-    border: 1px solid #333;
     background: #121212;
+    border: 1px solid #333;
+    border-radius: 8px;
     color: #fff;
     font-size: 16px;
+    padding: 12.8px 16px;
     transition: all 0.3s ease;
 }
 
 .tx-form input:focus,
 .tx-form textarea:focus {
     border-color: #FFD700;
-    outline: none;
     box-shadow: 0 0 0 3.2px rgba(255, 215, 0, 0.2);
+    outline: none;
 }
 
 .tx-form input::placeholder,
@@ -187,29 +189,29 @@
 /* ===== Button Styles ===== */
 .tx-btn {
     background: linear-gradient(to right, #FFD700, #FFA500);
-    color: #000;
-    padding: 16px;
-    font-size: 16px;
-    font-weight: bold;
     border: none;
     border-radius: 8px;
+    color: #000;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
     letter-spacing: 1px;
     margin-top: 8px;
+    padding: 16px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
 }
 
 .tx-btn:hover {
-    transform: translateY(-3.2px);
     box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    transform: translateY(-3.2px);
 }
 
 .tx-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
     box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+    transform: none;
 }
 
 /* ===== Transaction History Section ===== */
@@ -218,50 +220,50 @@
 }
 
 .tx-history h3 {
-    font-size: 32px;
+    border-bottom: 1px solid #333;
     color: #FFD700;
+    font-size: 32px;
     margin-bottom: 32px;
     padding-bottom: 16px;
-    border-bottom: 1px solid #333;
     text-align: center;
 }
 
 .tx-history-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     padding: 16px;
 }
 
 /* ===== Transaction Item Styles ===== */
 .tx-history-item {
     background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+    border: 1px solid #333;
     border-radius: 16px;
-    padding: 24px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     gap: 19.2px;
-    border: 1px solid #333;
-    position: relative;
     overflow: hidden;
+    padding: 24px;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
 .tx-history-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
     border-color: #FFD700;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px);
 }
 
 .tx-history-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6.4px;
     background: linear-gradient(to right, #FFD700, #FFA500);
+    content: "";
+    height: 6.4px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .tx-history-details {
@@ -272,9 +274,9 @@
 }
 
 .tx-history-details p {
-    margin: 8px 0;
     display: flex;
     justify-content: space-between;
+    margin: 8px 0;
     word-break: break-word;
 }
 
@@ -289,46 +291,45 @@
 }
 
 .tx-history-details span:last-child {
-    text-align: right;
     max-width: calc(100% - 90px);
     overflow: hidden;
+    text-align: right;
     text-overflow: ellipsis;
 }
 
-/* Special styling for message */
 .tx-history-details p.message-container {
-    margin-top: 16px;
     background: rgba(0, 0, 0, 0.2);
-    padding: 12.8px;
     border-radius: 8px;
+    font-size: 14.4px;
+    line-height: 1.4;
+    margin-top: 16px;
     max-height: 100px;
     overflow-y: auto;
+    padding: 12.8px;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .tx-history-details p.message-container span {
-    display: block;
-    white-space: pre-wrap;
-    word-break: break-word;
-    text-align: left;
-    max-width: 100%;
     color: #ccc;
-    font-size: 14.4px;
-    line-height: 1.4;
+    display: block;
+    max-width: 100%;
 }
 
 .tx-history-gif {
-    width: 100%;
-    height: 180px;
     border-radius: 8px;
+    height: 180px;
     overflow: hidden;
     position: relative;
+    width: 100%;
 }
 
 .tx-history-gif img {
-    width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    width: 100%;
 }
 
 .tx-history-item:hover .tx-history-gif img {
@@ -336,15 +337,15 @@
 }
 
 .tx-history-date {
+    align-self: flex-start;
     background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
     color: #00bfff;
     font-size: 13.6px;
     font-weight: 600;
-    padding: 8px 16px;
-    border-radius: 8px;
-    align-self: flex-start;
     margin-top: auto;
-    backdrop-filter: blur(5px);
+    padding: 8px 16px;
 }
 
 .tx-wallet-btn {

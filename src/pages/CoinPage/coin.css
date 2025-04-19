@@ -7,52 +7,52 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    max-width: 1200px;
     margin: 0 auto;
+    max-width: 1200px;
 }
 
 /* ===== Info Section Styles ===== */
 .coin-info-section {
     background: white;
-    padding: 32px;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-top: 4px solid #FFD700;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 32px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .coin-info-section:hover {
-    transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
 }
 
 /* ===== Header Section Styles ===== */
 .coin-header-section {
-    display: flex;
     align-items: center;
+    animation: slideIn 0.5s ease-out;
+    display: flex;
     gap: 16px;
     margin-bottom: 16px;
-    animation: slideIn 0.5s ease-out;
 }
 
 @keyframes slideIn {
     from {
-        transform: translateX(-20px);
         opacity: 0;
+        transform: translateX(-20px);
     }
 
     to {
-        transform: translateX(0);
         opacity: 1;
+        transform: translateX(0);
     }
 }
 
 .coin-icon {
-    width: 48px;
-    height: 48px;
     border-radius: 50%;
+    height: 48px;
     object-fit: contain;
     transition: transform 0.3s ease;
+    width: 48px;
 }
 
 .coin-icon:hover {
@@ -60,39 +60,39 @@
 }
 
 .coin-name {
+    color: #1f2937;
     font-size: 32px;
     font-weight: bold;
-    margin: 0;
-    color: #1f2937;
     letter-spacing: -0.5px;
+    margin: 0;
 }
 
 .coin-symbol {
-    font-size: 19px;
-    color: #6b7280;
     background: #f3f4f6;
-    padding: 4px 12px;
     border-radius: 16px;
+    color: #6b7280;
+    font-size: 19px;
     font-weight: 500;
+    padding: 4px 12px;
 }
 
 /* ===== Categories Section Styles ===== */
 .coin-categories {
-    margin: 24px 0;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin: 24px 0;
 }
 
 .coin-category-tag {
-    display: inline-block;
     background-color: #e5e7eb;
-    color: #374151;
-    padding: 6px 16px;
     border-radius: 16px;
+    color: #374151;
+    display: inline-block;
     font-size: 14px;
-    transition: all 0.3s ease;
     font-weight: 500;
+    padding: 6px 16px;
+    transition: all 0.3s ease;
 }
 
 .coin-category-tag:hover {
@@ -102,22 +102,17 @@
 
 /* ===== Description Section Styles ===== */
 .coin-description {
-    margin-top: 24px;
-    line-height: 1.7;
+    animation: fadeIn 0.8s ease-in-out;
     color: #4b5563;
+    line-height: 1.7;
+    margin-top: 24px;
     max-height: 200px;
     overflow-y: auto;
     padding-right: 8px;
-    animation: fadeIn 0.8s ease-in-out;
 }
 
 .coin-description::-webkit-scrollbar {
     width: 6px;
-}
-
-.coin-description::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
 }
 
 .coin-description::-webkit-scrollbar-thumb {
@@ -127,6 +122,11 @@
 
 .coin-description::-webkit-scrollbar-thumb:hover {
     background: #a3a3a3;
+}
+
+.coin-description::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
 /* ===== Stats Section Container ===== */
@@ -139,11 +139,11 @@
 /* ===== Graph Container Styles ===== */
 .coin-graph-container {
     background: white;
-    padding: 24px;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
     border-top: 4px solid #3b82f6;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+    transition: transform 0.3s ease;
 }
 
 .coin-graph-container:hover {
@@ -153,22 +153,22 @@
 /* ===== Stats Container Styles ===== */
 .coin-stats-container {
     background: white;
-    padding: 24px;
     border-radius: 16px;
+    border-top: 4px solid #10b981;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 16px;
-    border-top: 4px solid #10b981;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 24px;
 }
 
 .coin-stat-item {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 16px;
     background: #f8fafc;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
     transition: all 0.3s ease;
 }
 
@@ -178,14 +178,14 @@
 }
 
 .coin-stat-label {
-    font-size: 14px;
     color: #64748b;
-    margin-bottom: 8px;
+    font-size: 14px;
     font-weight: 500;
+    margin-bottom: 8px;
 }
 
 .coin-stat-value {
+    color: #1e293b;
     font-size: 19px;
     font-weight: 700;
-    color: #1e293b;
 }

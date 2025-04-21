@@ -117,15 +117,16 @@
     backdrop-filter: blur(5px);
 }
 
-.tx-card-network {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
-    bottom: 24px;
-    font-size: 16px;
-    font-weight: 600;
-    left: 24px;
-    padding: 4.8px 12.8px;
-    position: absolute;
+.tx-card-balance {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 8px 16px;
+    color: #FFD700;
+    width: fit-content;
+    margin-top: 8px;
+    backdrop-filter: blur(4px);
 }
 
 /* ===== Form Section Styles ===== */

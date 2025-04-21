@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { BrowserProvider, Contract, parseEther } from "ethers";
 import { contractABI, contractAddress } from "../utils/constants.js";
+import { formatEther } from "ethers";
 
 export const TransactionContext = createContext();
 
@@ -24,6 +25,17 @@ export const TransactionProvider = ({ children }) => {
     localStorage.getItem("transactionCount") || 0
   );
   const [transactions, setTransactions] = useState([]);
+  const [accountBalance, setAccountBalance] = useState("");
+
+  const getAccountBalance = async (account) => {
+    try {
+      const provider = getEthereumProvider();
+      const balance = await provider.getBalance(account);
+      setAccountBalance(formatEther(balance));
+    } catch (error) {
+      console.error("Error fetching balance:", error);
+    }
+  };
 
   const getAllTransactions = async () => {
     try {
@@ -54,12 +66,10 @@ export const TransactionProvider = ({ children }) => {
     try {
       const provider = getEthereumProvider();
       const accounts = await provider.send("eth_accounts", []);
-
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
         await getAllTransactions();
-      } else {
-        console.log("No wallet connected.");
+        await getAccountBalance(accounts[0]);
       }
     } catch (error) {
       console.error("Error checking wallet connection:", error);
@@ -82,7 +92,7 @@ export const TransactionProvider = ({ children }) => {
       const provider = getEthereumProvider();
       const accounts = await provider.send("eth_requestAccounts", []);
       setCurrentAccount(accounts[0]);
-      console.log("Wallet connected:", accounts[0]);
+      await getAccountBalance(accounts[0]);
     } catch (error) {
       console.error("Error connecting wallet:", error);
     }
@@ -135,6 +145,7 @@ export const TransactionProvider = ({ children }) => {
       value={{
         connectWallet,
         currentAccount,
+        accountBalance,
         sendTransaction,
         transactionCount,
         transactions,

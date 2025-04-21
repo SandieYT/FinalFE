@@ -10,7 +10,7 @@ import useFetchGifFromKeyword from "../../hooks/useFetchGif";
 import "./transaction.css";
 
 export default function Transaction() {
-  const { currentAccount, sendTransaction, connectWallet, transactions } =
+  const { currentAccount, accountBalance, sendTransaction, transactions } =
     useContext(TransactionContext);
 
   const sortedTransactions = [...transactions]
@@ -157,7 +157,11 @@ export default function Transaction() {
               <p className="tx-card-address">
                 {currentAccount ? shortenAddress(currentAccount) : "0x..."}
               </p>
-              <p className="tx-card-network">Ethereum</p>
+              <p className="tx-card-balance">
+                {accountBalance
+                  ? `${parseFloat(accountBalance).toFixed(4)} ETH`
+                  : "Loading..."}
+              </p>
             </div>
 
             <form onSubmit={formik.handleSubmit} className="tx-form">

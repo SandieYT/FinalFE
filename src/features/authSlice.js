@@ -10,6 +10,7 @@ const loadInitialState = () => {
         email: "",
         accessToken: "",
         userId: "",
+        role: "",
       };
 };
 
@@ -23,6 +24,7 @@ export const authSlice = createSlice({
       state.email = action.payload.email;
       state.accessToken = action.payload.accessToken;
       state.userId = action.payload.userId;
+      state.role = action.payload.role;
       localStorage.setItem("auth", JSON.stringify(state));
     },
     logoutSuccess: (state) => {
@@ -31,6 +33,7 @@ export const authSlice = createSlice({
       state.email = "";
       state.accessToken = "";
       state.userId = "";
+      state.role = "";
       localStorage.removeItem("auth");
     },
     initializeAuth: (state) => {
@@ -42,11 +45,13 @@ export const authSlice = createSlice({
         state.email = parsedData.email;
         state.accessToken = parsedData.accessToken;
         state.userId = parsedData.userId;
+        state.role = parsedData.role;
       }
     },
   },
 });
 
-export const { loginSuccess, logoutSuccess, initializeAuth } = authSlice.actions;
+export const { loginSuccess, logoutSuccess, initializeAuth } =
+  authSlice.actions;
 
 export default authSlice.reducer;

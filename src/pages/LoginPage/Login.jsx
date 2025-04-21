@@ -56,8 +56,10 @@ export default function Login() {
               email: decoded.data.email,
               accessToken: response.data.accessToken,
               userId: decoded.data.userId,
+              role: decoded.data.role,
             })
           );
+          console.log("Login successful:", decoded.data);
           navigate("/");
         }
       } catch (error) {

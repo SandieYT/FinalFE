@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
-import { FiLogOut, FiUser } from "react-icons/fi";
+import { FiLogOut, FiUser, FiSettings } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutSuccess } from "../../features/authSlice";
 import "./header.css";
@@ -11,7 +11,9 @@ export default function Header() {
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated, username } = useSelector((state) => state.auth);
+  const { isAuthenticated, username, role } = useSelector(
+    (state) => state.auth
+  );
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -106,6 +108,18 @@ export default function Header() {
                       <FiUser className="dropdown-icon" />
                       Profile
                     </div>
+                    {role === "admin" && (
+                      <div
+                        className="dropdown-item"
+                        onClick={() => {
+                          navigate("/dashboard");
+                          setShowDropdown(false);
+                        }}
+                      >
+                        <FiSettings className="dropdown-icon" />
+                        Admin
+                      </div>
+                    )}
                     <div
                       className="dropdown-item header-logout-btn"
                       onClick={handleLogout}

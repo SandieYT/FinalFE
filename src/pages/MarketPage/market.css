@@ -173,12 +173,10 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
     font-size: 14px;
     height: 36px;
     justify-content: center;
     min-width: 36px;
-    padding: 0 12px;
     text-align: center;
     transition: all 0.2s ease;
 }

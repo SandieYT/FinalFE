@@ -1,0 +1,238 @@
+/* ===== Main Dashboard Container Styles ===== */
+#main-dashboard {
+  margin: 32px;
+}
+
+.dashboard-container {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-container:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Header Section Styles ===== */
+.dashboard-header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.search-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 10px 16px;
+  transition: all 0.3s ease;
+  width: 250px;
+}
+
+.search-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  outline: none;
+}
+
+/* ===== Action Buttons Styles ===== */
+.dashboard-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.refresh-btn,
+.add-btn {
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 16px;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.refresh-btn:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.add-btn {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.add-btn:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+}
+
+.btn-icon {
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.btn-icon.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== Table Info Styles ===== */
+.table-info {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 16px;
+  text-align: right;
+}
+
+/* ===== User Table Styles ===== */
+.user-table {
+  border-collapse: collapse;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.user-table thead {
+  background-color: #f4f1ff;
+  color: #333;
+}
+
+.user-table th,
+.user-table td {
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 14px;
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.user-table th {
+  font-weight: 600;
+}
+
+.user-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.user-table tbody tr:hover {
+  background-color: #f9f9f9;
+  transform: translateX(2px);
+}
+
+/* ===== Action Buttons in Table ===== */
+.action-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+  color: #1976d2;
+}
+
+.edit-btn:hover {
+  background-color: #bbdefb;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  color: #d32f2f;
+}
+
+.delete-btn:hover {
+  background-color: #ffcdd2;
+  transform: translateY(-2px);
+}
+
+/* ===== Empty State Styles ===== */
+.empty-state {
+  animation: fadeIn 0.5s ease-out;
+  color: #64748b;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.empty-state p {
+  margin-top: 8px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== Pagination Styles ===== */
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.page-btn {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px 14px;
+  transition: all 0.3s ease;
+}
+
+.page-btn.active {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+  color: #fff;
+}
+
+.page-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.page-btn:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
+}

@@ -50,6 +50,33 @@ const userService = {
       throw new Error(error.message || "An error occurred during registration");
     }
   },
+
+  listUsers: async ({ page, limit, search }) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/user/admin`,
+        {
+          params: { page, limit, search },
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Failed to fetch users",
+            },
+          },
+        };
+      }
+      throw new Error(
+        error.message || "An error occurred while fetching users"
+      );
+    }
+  },
 };
 
 export default userService;

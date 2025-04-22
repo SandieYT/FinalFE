@@ -8,7 +8,6 @@ const loadInitialState = () => {
         isAuthenticated: false,
         username: "",
         email: "",
-        accessToken: "",
         userId: "",
         role: "",
       };
@@ -22,7 +21,6 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
       state.username = action.payload.username;
       state.email = action.payload.email;
-      state.accessToken = action.payload.accessToken;
       state.userId = action.payload.userId;
       state.role = action.payload.role;
       localStorage.setItem("auth", JSON.stringify(state));
@@ -31,7 +29,6 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
       state.username = "";
       state.email = "";
-      state.accessToken = "";
       state.userId = "";
       state.role = "";
       localStorage.removeItem("auth");
@@ -43,7 +40,6 @@ export const authSlice = createSlice({
         state.isAuthenticated = parsedData.isAuthenticated;
         state.username = parsedData.username;
         state.email = parsedData.email;
-        state.accessToken = parsedData.accessToken;
         state.userId = parsedData.userId;
         state.role = parsedData.role;
       }

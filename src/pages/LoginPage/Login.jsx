@@ -8,6 +8,7 @@ import { useTodoMutation } from "../../hooks/useTodoMutation";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 import { loginSuccess } from "../../features/authSlice";
 import "./login.css";
 
@@ -50,6 +51,13 @@ export default function Login() {
 
         if (response?.success) {
           const decoded = jwtDecode(response?.data.accessToken);
+
+          Cookies.set("accessToken", response.data.accessToken, {
+            expires: 7, 
+            secure: true, 
+            sameSite: "Strict",
+          });
+
           dispatch(
             loginSuccess({
               username: decoded.data.username,

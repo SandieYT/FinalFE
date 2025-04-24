@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import userService from "../../services/userService";
+import Modal from "../../components/ModalComponent/Modal";
 import { FiRefreshCcw, FiUserPlus } from "react-icons/fi";
+import toast from "react-hot-toast";
 import "./dashboard.css";
 
 export default function Dashboard() {
@@ -15,6 +17,8 @@ export default function Dashboard() {
     total: 0,
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchUsers = async () => {
     try {
@@ -36,6 +40,70 @@ export default function Dashboard() {
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
     setPage(1);
+  };
+
+  const handleDeleteUser = async (userId) => {
+    const confirm = await toast.promise(
+      new Promise((resolve) => {
+        toast(
+          (t) => (
+            <div className="confirm-toast">
+              <p>Are you sure you want to delete this user?</p>
+              <div className="confirm-buttons">
+                <button
+                  className="confirm-btn confirm-yes"
+                  onClick={() => {
+                    toast.dismiss(t.id);
+                    resolve(true);
+                  }}
+                >
+                  Yes
+                </button>
+                <button
+                  className="confirm-btn confirm-no"
+                  onClick={() => {
+                    toast.dismiss(t.id);
+                    resolve(false);
+                  }}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          ),
+          {
+            duration: Infinity,
+          }
+        );
+      }),
+      {
+        loading: "Processing...",
+        success: null,
+        error: null,
+      }
+    );
+
+    if (!confirm) return;
+
+    try {
+      setDeletingId(userId);
+      await userService.deleteUser(userId);
+      await fetchUsers();
+      toast.success("User deleted successfully");
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      const errorMessage =
+        error.response?.data?.error?.message ||
+        error.response?.data?.message ||
+        "Failed to delete user";
+      toast.error(errorMessage);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
   };
 
   return (
@@ -83,19 +151,33 @@ export default function Dashboard() {
           </thead>
           <tbody>
             {users.length > 0 ? (
-              users.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.role}</td>
-                  <td>{new Date(user.lastLogin).toLocaleString()}</td>
-                  <td>{new Date(user.createdAt).toLocaleString()}</td>
-                  <td className="action-btns">
-                    <button className="edit-btn">Edit</button>
-                    <button className="delete-btn">Delete</button>
-                  </td>
-                </tr>
-              ))
+              users.map((user) => {
+                const userId = user._id || user.id;
+                return (
+                  <tr key={userId}>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.role}</td>
+                    <td>{new Date(user.lastLogin).toLocaleString()}</td>
+                    <td>{new Date(user.createdAt).toLocaleString()}</td>
+                    <td className="action-btns">
+                      <button
+                        className="edit-btn"
+                        onClick={() => setShowModal(true)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDeleteUser(userId)}
+                        disabled={deletingId === userId}
+                      >
+                        {deletingId === userId ? "Deleting..." : "Delete"}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan="6" className="empty-state">
@@ -134,6 +216,7 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
+      <Modal show={showModal} onClose={handleModalClose} />
     </div>
   );
 }

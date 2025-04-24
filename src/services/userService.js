@@ -77,6 +77,29 @@ const userService = {
       );
     }
   },
+
+  deleteUser: async (userId) => {
+    console.log("Deleting user with ID:", userId);
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/user/delete/${userId}`,
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Failed to delete user",
+            },
+          },
+        };
+      }
+      throw new Error(error.message || "An error occurred while deleting user");
+    }
+  },
 };
 
 export default userService;

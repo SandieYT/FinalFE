@@ -1,0 +1,93 @@
+.upForm-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.upForm-content {
+    width: 100%;
+    padding: 32px;
+}
+
+.upForm-title {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.upForm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.upForm-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.upForm-input-group label {
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.upForm-input-group input,
+.upForm-input-group select {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    padding: 12px 15px;
+    transition: border-color 0.3s ease;
+}
+
+.upForm-input-group input:focus,
+.upForm-input-group select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+.upForm-input-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+}
+
+.input-error {
+    border-color: #e74c3c !important;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.upForm-btn {
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 8px;
+    padding: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.upForm-btn:hover {
+    background-color: #3a7bc8;
+}
+
+.upForm-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

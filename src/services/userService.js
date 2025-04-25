@@ -9,6 +9,7 @@ const userService = {
           username: userData.username,
           email: userData.email,
           password: userData.password,
+          role: userData.role || "user",
           confirmPassword: userData.password,
         }
       );

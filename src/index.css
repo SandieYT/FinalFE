@@ -13,6 +13,10 @@ a {
     text-decoration: none;
 }
 
+.input-error {
+    border-color: #ff5a5f;
+}
+
 .error-message {
     color: #ff5a5f;
     font-size: 13px;

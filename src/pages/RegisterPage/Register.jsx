@@ -167,7 +167,7 @@ export default function Register() {
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
-                autoComplete="new-password"
+                autoComplete="confirmPassword"
                 placeholder="Confirm your password"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

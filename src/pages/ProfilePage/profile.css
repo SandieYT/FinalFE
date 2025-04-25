@@ -37,6 +37,7 @@
     flex: 2;
     display: flex;
     flex-direction: column;
+    gap: 0.5vw;
 }
 
 .profile-info-right {
@@ -111,4 +112,9 @@
     justify-content: center;
     display: flex;
     gap: 0.5vw;
+}
+
+.profile-email {
+    color: #494949;
+    text-align: center;
 }

@@ -1,0 +1,114 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-banner {
+    object-fit: cover;
+    width: 100%;
+}
+
+.profile-card {
+    padding: 4vw;
+    box-shadow: 5px 5px 10px 0 #0000004b;
+    border-radius: 24px;
+    position: absolute;
+    background-color: #fff;
+    margin-top: calc(5% + 32px);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 10vw;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profile-info-middle {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-info-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 1;
+}
+
+.profile-info-left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2vw 0;
+    flex: 1;
+}
+
+.profile-info-left div {
+    min-width: 8vw;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-info-left div h2 {
+    flex: 1;
+    font-size: 1.75vw;
+    width: 100%;
+    text-align: center;
+}
+.profile-info-left div p {
+    width: 75%;
+    flex: 1;
+    font-size: 1.25vw;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+.profile-picture {
+    border-radius: 100%;
+    max-width: 10vw;
+    max-height: 10vw;
+    border: .75vw solid #fff;
+    margin: -6.5vw auto 0 auto;
+    display: block;
+}
+
+.profile-wallet-btn {
+    background: linear-gradient(90deg, #ff6b00, #ffa502);
+    color: white;
+    padding: 1vw 2vw;
+    border-radius: 1000px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2vw;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+    width: fit-content;
+}
+
+.profile-wallet-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+}
+
+.profile-username {
+    font-size: 1.5vw;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 0.5vw;
+}

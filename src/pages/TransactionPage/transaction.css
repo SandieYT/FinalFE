@@ -295,7 +295,7 @@
 .tx-history-details span:last-child {
     max-width: calc(100% - 90px);
     overflow: hidden;
-    text-align: right;
+    text-align: left;
     text-overflow: ellipsis;
 }
 

@@ -1,4 +1,6 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
 
 const userService = {
   loginUser: async ({ email, password }) => {
@@ -48,6 +50,27 @@ const userService = {
         };
       }
       throw new Error(error.message || "An error occurred during registration");
+    }
+  },
+
+  getUser: async () => {
+    try {
+      const token = jwtDecode(Cookies.get("accessToken"));
+      return token.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Failed to fetch user",
+            },
+          },
+        };
+      }
+      throw new Error(
+        error.message || "An error occurred while fetching users"
+      );
     }
   },
 

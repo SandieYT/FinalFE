@@ -68,7 +68,17 @@ const Router = createBrowserRouter([
         ),
       },
       {
-        path: "profile",
+        path: "profile/:id",
+        element: (
+          <Private>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Profile />
+            </Suspense>
+          </Private>
+        ),
+      },
+      {
+        path: "my-profile",
         element: (
           <Private>
             <Suspense fallback={<LoadingSpinner />}>

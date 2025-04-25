@@ -10,7 +10,7 @@ import useFetchGifFromKeyword from "../../hooks/useFetchGif";
 import "./transaction.css";
 
 export default function Transaction() {
-  const { currentAccount, accountBalance, sendTransaction, transactions } =
+  const { currentAccount, accountBalance, connectWallet, sendTransaction, transactions } =
     useContext(TransactionContext);
 
   const sortedTransactions = [...transactions]

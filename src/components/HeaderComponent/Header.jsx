@@ -101,7 +101,7 @@ export default function Header() {
                     <div
                       className="dropdown-item"
                       onClick={() => {
-                        navigate("/profile");
+                        navigate("/my-profile");
                         setShowDropdown(false);
                       }}
                     >

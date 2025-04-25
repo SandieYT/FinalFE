@@ -4,6 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { FiLogOut, FiUser, FiSettings } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutSuccess } from "../../features/authSlice";
+import userService from "../../services/userService";
 import "./header.css";
 
 export default function Header() {
@@ -22,10 +23,18 @@ export default function Header() {
     searchRef.current.focus();
   };
 
-  const handleLogout = () => {
-    dispatch(logoutSuccess());
-    navigate("/");
-    setShowDropdown(false);
+  const handleLogout = async () => {
+    try {
+      await userService.logoutUser();
+      dispatch(logoutSuccess());
+      navigate("/");
+      setShowDropdown(false);
+    } catch (error) {
+      console.error(
+        "Logout failed:",
+        error.response?.data?.message || error.message
+      );
+    }
   };
 
   useEffect(() => {

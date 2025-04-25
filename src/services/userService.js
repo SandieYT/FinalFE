@@ -1,28 +1,6 @@
 import axios from "axios";
 
 const userService = {
-  loginUser: async ({ email, password }) => {
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user/login`,
-        { email, password }
-      );
-      return response.data;
-    } catch (error) {
-      if (error.response?.data) {
-        throw {
-          response: {
-            data: {
-              ...error.response.data,
-              message: error.response.data.message || "Login failed",
-            },
-          },
-        };
-      }
-      throw new Error(error.message || "An error occurred during login");
-    }
-  },
-
   registerUser: async (userData) => {
     try {
       const response = await axios.post(
@@ -48,6 +26,51 @@ const userService = {
         };
       }
       throw new Error(error.message || "An error occurred during registration");
+    }
+  },
+
+  loginUser: async ({ email, password }) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user/login`,
+        { email, password }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Login failed",
+            },
+          },
+        };
+      }
+      throw new Error(error.message || "An error occurred during login");
+    }
+  },
+
+  logoutUser: async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user/logout`,
+        {},
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Logout failed",
+            },
+          },
+        };
+      }
+      throw new Error(error.message || "An error occurred during logout");
     }
   },
 

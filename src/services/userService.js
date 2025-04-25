@@ -73,6 +73,8 @@ const userService = {
 
   logoutUser: async () => {
     try {
+      const token = jwtDecode(Cookies.get("accessToken"));
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/user/logout`,
         {},

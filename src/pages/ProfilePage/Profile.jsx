@@ -45,7 +45,7 @@ export default function Profile() {
                     <p><strong>{username}</strong></p>
                     <p className="profile-role">{role?`(${role})`:""}</p>
                   </div>
-                  <p className="profile-email">{profile.email}</p>
+                  <p className="profile-email">{profile?profile.email:""}</p>
                   </div>
                   <div className="profile-info-right">
                     {currentAccount?

@@ -67,7 +67,6 @@ export default function Login() {
               role: decoded.data.role,
             })
           );
-          console.log("Login successful:", decoded.data);
           navigate("/");
         }
       } catch (error) {

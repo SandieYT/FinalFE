@@ -1,15 +1,18 @@
+/* ===== Main Container Styles ===== */
 .upForm-container {
     display: flex;
     justify-content: center;
-    width: 100%;
     padding: 20px;
-}
-
-.upForm-content {
     width: 100%;
-    padding: 32px;
 }
 
+/* ===== Content Layout Styles ===== */
+.upForm-content {
+    padding: 12px;
+    width: 100%;
+}
+
+/* ===== Title Section Styles ===== */
 .upForm-title {
     color: #333;
     font-size: 18px;
@@ -18,12 +21,14 @@
     text-align: center;
 }
 
+/* ===== Form Layout Styles ===== */
 .upForm-form {
     display: flex;
     flex-direction: column;
     gap: 19px;
 }
 
+/* ===== Input Group Styles ===== */
 .upForm-input-group {
     display: flex;
     flex-direction: column;
@@ -36,6 +41,7 @@
     font-weight: 500;
 }
 
+/* ===== Input/Select Field Styles ===== */
 .upForm-input-group input,
 .upForm-input-group select {
     border: 1px solid #ddd;
@@ -52,6 +58,7 @@
     outline: none;
 }
 
+/* ===== Select Field Specific Styles ===== */
 .upForm-input-group select {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -64,30 +71,34 @@
     border-color: #e74c3c !important;
 }
 
-.error-message {
-    color: #e74c3c;
-    font-size: 13px;
-    margin-top: 3px;
-}
-
+/* ===== Button Styles ===== */
 .upForm-btn {
-    background-color: #4a90e2;
+    background: linear-gradient(135deg, #4a90e2 0%, #3a7bc8 100%);
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: white;
     cursor: pointer;
     font-size: 16px;
-    font-weight: 500;
-    margin-top: 8px;
-    padding: 12px;
-    transition: background-color 0.3s ease;
+    font-weight: 600;
+    margin-top: 16px;
+    padding: 16px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .upForm-btn:hover {
-    background-color: #3a7bc8;
+    background: linear-gradient(135deg, #3a7bc8 0%, #2a6bb8 100%);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.upForm-btn:active {
+    transform: translateY(0);
 }
 
 .upForm-btn:disabled {
-    background-color: #cccccc;
+    background: #cccccc;
+    box-shadow: none;
     cursor: not-allowed;
+    transform: none;
 }

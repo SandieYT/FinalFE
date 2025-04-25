@@ -1,9 +1,16 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import userService from "../../services/userService";
+import toast from "react-hot-toast";
+import { useTodoMutation } from "../../hooks/useTodoMutation";
 import "./updateForm.css";
 
-export default function UpdateForm() {
+export default function UpdateForm({ userId, onUpdateSuccess }) {
+  const updateMutation = useTodoMutation((data) =>
+    userService.updateUser(userId, data)
+  );
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -13,25 +20,40 @@ export default function UpdateForm() {
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      username: Yup.string()
-        .min(3, "Username must be at least 3 characters")
-        .max(20, "Username must be 20 characters or less")
-        .required("Username is required"),
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-      role: Yup.string()
-        .oneOf(["admin", "user"], "Invalid role")
-        .required("Role is required"),
-      password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
-        .required("Password is required"),
-
+      username: Yup.string().min(3, "Must be at least 3 characters").max(20),
+      email: Yup.string().email("Invalid email"),
+      role: Yup.string().oneOf(["admin", "user"], "Invalid role"),
+      password: Yup.string().min(6, "Password must be at least 6 characters"),
+      confirmPassword: Yup.string().when("password", {
+        is: (val) => val && typeof val === "string" && val.length > 0,
+        then: (schema) =>
+          schema
+            .required("Confirm Password is required")
+            .oneOf([Yup.ref("password")], "Passwords must match"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
     }),
-    onSubmit: (values) => {
-      // Handle form submission
-      console.log("Form submitted:", values);
-      // You can add your API call here
+    onSubmit: async (values) => {
+      const updateData = {};
+      if (values.username) updateData.username = values.username;
+      if (values.email) updateData.email = values.email;
+      if (values.role) updateData.role = values.role;
+      if (values.password) updateData.password = values.password;
+      try {
+        await toast.promise(updateMutation.mutateAsync(updateData), {
+          loading: "Updating user...",
+          success: "User updated successfully",
+          error: (err) =>
+            err?.response?.data?.error?.message ||
+            err?.response?.data?.message ||
+            "Failed to update user",
+        });
+
+        formik.resetForm();
+        onUpdateSuccess?.();
+      } catch (error) {
+        console.error("Update failed:", error);
+      }
     },
   });
 
@@ -39,7 +61,6 @@ export default function UpdateForm() {
     <div className="upForm-container">
       <div className="upForm-content">
         <h2 className="upForm-title">Update User</h2>
-        
         <form onSubmit={formik.handleSubmit} className="upForm-form">
           <div className="upForm-input-group">
             <label htmlFor="username">Username</label>
@@ -47,6 +68,7 @@ export default function UpdateForm() {
               id="username"
               name="username"
               type="text"
+              autoComplete="off"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.username}
@@ -68,13 +90,12 @@ export default function UpdateForm() {
               id="email"
               name="email"
               type="email"
+              autoComplete="off"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
               className={
-                formik.touched.email && formik.errors.email
-                  ? "input-error"
-                  : ""
+                formik.touched.email && formik.errors.email ? "input-error" : ""
               }
               placeholder="Enter email"
             />
@@ -92,9 +113,7 @@ export default function UpdateForm() {
               onBlur={formik.handleBlur}
               value={formik.values.role}
               className={
-                formik.touched.role && formik.errors.role
-                  ? "input-error"
-                  : ""
+                formik.touched.role && formik.errors.role ? "input-error" : ""
               }
             >
               <option value="">Select a role</option>
@@ -112,6 +131,7 @@ export default function UpdateForm() {
               id="password"
               name="password"
               type="password"
+              autoComplete="off"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
@@ -127,10 +147,35 @@ export default function UpdateForm() {
             )}
           </div>
 
+          <div className="upForm-input-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              autoComplete="off"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.confirmPassword}
+              className={
+                formik.touched.confirmPassword && formik.errors.confirmPassword
+                  ? "input-error"
+                  : ""
+              }
+              placeholder="Confirm password"
+            />
+            {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword && (
+                <div className="error-message">
+                  {formik.errors.confirmPassword}
+                </div>
+              )}
+          </div>
+
           <button
             type="submit"
             className="upForm-btn"
-            disabled={!formik.isValid || formik.isSubmitting}
+            disabled={!formik.isValid || formik.isSubmitting || !formik.dirty}
           >
             {formik.isSubmitting ? "Updating..." : "Update User"}
           </button>

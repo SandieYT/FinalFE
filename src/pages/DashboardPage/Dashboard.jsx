@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import userService from "../../services/userService";
-import Modal from "../../components/ModalComponent/Modal";
+import { Modal } from "../../components";
 import { FiRefreshCcw, FiUserPlus } from "react-icons/fi";
 import toast from "react-hot-toast";
 import "./dashboard.css";
@@ -19,6 +19,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   const fetchUsers = async () => {
     try {
@@ -106,6 +107,16 @@ export default function Dashboard() {
     setShowModal(false);
   };
 
+  const handleEditClick = (id) => {
+    setUserId(id);
+    setShowModal(true);
+  };
+
+  const handleUpdateSuccess = () => {
+    setShowModal(false);
+    fetchUsers();
+  };
+
   return (
     <div id="main-dashboard">
       <div className="dashboard-container">
@@ -163,7 +174,7 @@ export default function Dashboard() {
                     <td className="action-btns">
                       <button
                         className="edit-btn"
-                        onClick={() => setShowModal(true)}
+                        onClick={() => handleEditClick(userId)}
                       >
                         Edit
                       </button>
@@ -216,7 +227,12 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
-      <Modal show={showModal} onClose={handleModalClose} />
+      <Modal
+        show={showModal}
+        onClose={handleModalClose}
+        userId={userId}
+        onUpdateSuccess={handleUpdateSuccess}
+      />
     </div>
   );
 }

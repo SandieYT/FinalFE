@@ -79,7 +79,6 @@ const userService = {
   },
 
   deleteUser: async (userId) => {
-    console.log("Deleting user with ID:", userId);
     try {
       const response = await axios.delete(
         `${import.meta.env.VITE_API_URL}/user/delete/${userId}`,
@@ -98,6 +97,29 @@ const userService = {
         };
       }
       throw new Error(error.message || "An error occurred while deleting user");
+    }
+  },
+
+  updateUser: async (userId, updateData) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_URL}/user/update/${userId}`,
+        updateData,
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Failed to update user",
+            },
+          },
+        };
+      }
+      throw new Error(error.message || "An error occurred while updating user");
     }
   },
 };

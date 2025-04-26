@@ -19,6 +19,12 @@ a {
 
 .error-message {
     color: #ff5a5f;
-    font-size: 13px;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* ===== Password Strength Indicator ===== */
+.password-strength {
+    font-size: 12px;
     margin-top: 6px;
 }

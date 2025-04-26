@@ -5,11 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTodoMutation } from "../../hooks/useTodoMutation";
 import userService from "../../services/userService";
 import toast from "react-hot-toast";
+import { PasswordStrengthIndicator } from "../../utils/passwordStrength";
 import "./register.css";
 
 export default function Register() {
   const navigate = useNavigate();
-
   const registerMutation = useTodoMutation(userService.registerUser);
 
   const getErrorMessage = (error) => {
@@ -17,25 +17,6 @@ export default function Register() {
       error.response?.data?.error?.details?.message ||
       "Registration failed. Please try again."
     );
-  };
-
-  const getPasswordStrength = (password) => {
-    if (!password) return { level: "", color: "" };
-    if (password.length < 6) return { level: "Weak", color: "#ff4d4f" };
-
-    const strengthChecks = [
-      /[A-Z]/.test(password),
-      /[a-z]/.test(password),
-      /\d/.test(password),
-      /[!@#$%^&*(),.?":{}|<>]/.test(password),
-    ];
-
-    const passedChecks = strengthChecks.filter(Boolean).length;
-
-    if (passedChecks <= 1) return { level: "Weak", color: "#ff4d4f" };
-    if (passedChecks === 2 || passedChecks === 3)
-      return { level: "Medium", color: "#faad14" };
-    return { level: "Strong", color: "#52c41a" };
   };
 
   const formik = useFormik({
@@ -72,13 +53,11 @@ export default function Register() {
         if (response?.success) {
           navigate("/login");
         }
-      } catch (err) {
-        console.log("Registration error:", err);
+      } catch (error) {
+        console.error("Registration error:", error);
       }
     },
   });
-
-  const passwordStrength = getPasswordStrength(formik.values.password);
 
   return (
     <div id="main-register">
@@ -151,14 +130,7 @@ export default function Register() {
               {formik.touched.password && formik.errors.password && (
                 <div className="error-message">{formik.errors.password}</div>
               )}
-              {formik.values.password && (
-                <div
-                  className="password-strength"
-                  style={{ color: passwordStrength.color }}
-                >
-                  Strength: {passwordStrength.level}
-                </div>
-              )}
+              <PasswordStrengthIndicator password={formik.values.password} />
             </div>
 
             <div className="register-input-group">

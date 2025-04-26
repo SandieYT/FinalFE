@@ -67,13 +67,6 @@
     border-color: #ff5a5f;
 }
 
-/* ===== Password Strength Indicator ===== */
-.password-strength {
-    color: #777;
-    font-size: 13px;
-    margin-top: 6px;
-}
-
 /* ===== Submit Button Styles ===== */
 .register-btn {
     background-color: #FFD700;

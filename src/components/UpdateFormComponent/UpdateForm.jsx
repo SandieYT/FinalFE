@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import userService from "../../services/userService";
 import toast from "react-hot-toast";
 import { useTodoMutation } from "../../hooks/useTodoMutation";
+import { PasswordStrengthIndicator } from "../../utils/passwordStrength";
 import "./updateForm.css";
 
 export default function UpdateForm({ userId, onUpdateSuccess }) {
@@ -39,18 +40,34 @@ export default function UpdateForm({ userId, onUpdateSuccess }) {
       if (values.email) updateData.email = values.email;
       if (values.role) updateData.role = values.role;
       if (values.password) updateData.password = values.password;
-      try {
-        await toast.promise(updateMutation.mutateAsync(updateData), {
-          loading: "Updating user...",
-          success: "User updated successfully",
-          error: (err) =>
-            err?.response?.data?.error?.message ||
-            err?.response?.data?.message ||
-            "Failed to update user",
-        });
 
-        formik.resetForm();
-        onUpdateSuccess?.();
+      try {
+        await updateMutation.mutateAsync(updateData, {
+          onSuccess: () => {
+            toast.success("User updated successfully");
+            formik.resetForm();
+            onUpdateSuccess?.();
+          },
+          onError: (error) => {
+            const serverError = error?.response?.data?.error;
+
+            if (
+              serverError?.code === "VAL_001" &&
+              serverError?.details?.errors
+            ) {
+              formik.setErrors(serverError.details.errors);
+              const firstError = Object.values(serverError.details.errors)[0];
+              toast.error(firstError);
+              return;
+            }
+
+            toast.error(
+              serverError?.message ||
+                error?.response?.data?.message ||
+                "Failed to update user"
+            );
+          },
+        });
       } catch (error) {
         console.error("Update failed:", error);
       }
@@ -145,6 +162,7 @@ export default function UpdateForm({ userId, onUpdateSuccess }) {
             {formik.touched.password && formik.errors.password && (
               <div className="error-message">{formik.errors.password}</div>
             )}
+            <PasswordStrengthIndicator password={formik.values.password} />
           </div>
 
           <div className="upForm-input-group">

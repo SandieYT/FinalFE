@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import userService from "../../services/userService";
 import toast from "react-hot-toast";
 import { useTodoMutation } from "../../hooks/useTodoMutation";
+import { PasswordStrengthIndicator } from "../../utils/passwordStrength";
 import "./addForm.css";
 
 export default function AddForm({ onSuccess }) {
@@ -39,8 +40,7 @@ export default function AddForm({ onSuccess }) {
           loading: "Creating user...",
           success: "User created successfully",
           error: (err) =>
-            err?.response?.data?.error?.message ||
-            err?.response?.data?.message ||
+            err?.response?.data?.error?.details?.message ||
             "Failed to create user",
         });
 
@@ -125,7 +125,7 @@ export default function AddForm({ onSuccess }) {
               id="password"
               name="password"
               type="password"
-              autoComplete="password"
+              autoComplete="new-password"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
@@ -139,6 +139,7 @@ export default function AddForm({ onSuccess }) {
             {formik.touched.password && formik.errors.password && (
               <div className="error-message">{formik.errors.password}</div>
             )}
+            <PasswordStrengthIndicator password={formik.values.password} />
           </div>
 
           <div className="addForm-input-group">

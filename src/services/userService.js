@@ -1,7 +1,4 @@
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import Cookies from "js-cookie";
-import { JsonRpcApiProvider } from "ethers";
+import axios from "../utils/axiosConfig";
 
 const userService = {
   registerUser: async (userData) => {
@@ -12,6 +9,7 @@ const userService = {
           username: userData.username,
           email: userData.email,
           password: userData.password,
+          role: userData.role || "user",
           confirmPassword: userData.password,
         }
       );
@@ -68,6 +66,30 @@ const userService = {
         };
       }
       throw new Error(error.message || "An error occurred during login");
+    }
+  },
+
+  refreshToken: async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user/refresh-token`,
+        { withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Token refresh failed",
+            },
+          },
+        };
+      }
+      throw new Error(
+        error.message || "An error occurred during token refresh"
+      );
     }
   },
 

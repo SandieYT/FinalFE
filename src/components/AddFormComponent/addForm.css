@@ -1,5 +1,5 @@
 /* ===== Main Container Styles ===== */
-.upForm-container {
+.addForm-container {
     display: flex;
     justify-content: center;
     padding: 20px;
@@ -7,13 +7,13 @@
 }
 
 /* ===== Content Layout Styles ===== */
-.upForm-content {
+.addForm-content {
     padding: 12px;
     width: 100%;
 }
 
 /* ===== Title Section Styles ===== */
-.upForm-title {
+.addForm-title {
     color: #333;
     font-size: 24px;
     font-weight: 600;
@@ -22,28 +22,28 @@
 }
 
 /* ===== Form Layout Styles ===== */
-.upForm-form {
+.addForm-form {
     display: flex;
     flex-direction: column;
-    gap: 19px;
+    gap: 16px;
 }
 
 /* ===== Input Group Styles ===== */
-.upForm-input-group {
+.addForm-input-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.upForm-input-group label {
+.addForm-input-group label {
     color: #555;
     font-size: 14px;
     font-weight: 500;
 }
 
 /* ===== Input/Select Field Styles ===== */
-.upForm-input-group input,
-.upForm-input-group select {
+.addForm-input-group input,
+.addForm-input-group select {
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 15px;
@@ -51,15 +51,15 @@
     transition: border-color 0.3s ease;
 }
 
-.upForm-input-group input:focus,
-.upForm-input-group select:focus {
+.addForm-input-group input:focus,
+.addForm-input-group select:focus {
     border-color: #4a90e2;
     box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
     outline: none;
 }
 
 /* ===== Select Field Specific Styles ===== */
-.upForm-input-group select {
+.addForm-input-group select {
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-position: right 10px center;
@@ -67,12 +67,19 @@
     background-size: 16px;
 }
 
-.upForm-input-group input.input-error {
+.addForm-input-group input.input-error {
     border-color: #ff5a5f;
 }
 
+/* ===== Error Message Styles ===== */
+.error-message {
+    color: #ff5a5f;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
 /* ===== Button Styles ===== */
-.upForm-btn {
+.addForm-btn {
     background: linear-gradient(135deg, #4a90e2 0%, #3a7bc8 100%);
     border: none;
     border-radius: 12px;
@@ -84,19 +91,20 @@
     margin-top: 16px;
     padding: 16px;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: 100%;
 }
 
-.upForm-btn:hover {
+.addForm-btn:hover {
     background: linear-gradient(135deg, #3a7bc8 0%, #2a6bb8 100%);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
 }
 
-.upForm-btn:active {
+.addForm-btn:active {
     transform: translateY(0);
 }
 
-.upForm-btn:disabled {
+.addForm-btn:disabled {
     background: #cccccc;
     box-shadow: none;
     cursor: not-allowed;

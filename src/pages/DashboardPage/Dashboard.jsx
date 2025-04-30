@@ -19,6 +19,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState(null);
   const [userId, setUserId] = useState(null);
 
   const fetchUsers = async () => {
@@ -93,11 +94,6 @@ export default function Dashboard() {
       toast.success("User deleted successfully");
     } catch (error) {
       console.error("Error deleting user:", error);
-      const errorMessage =
-        error.response?.data?.error?.message ||
-        error.response?.data?.message ||
-        "Failed to delete user";
-      toast.error(errorMessage);
     } finally {
       setDeletingId(null);
     }
@@ -109,6 +105,13 @@ export default function Dashboard() {
 
   const handleEditClick = (id) => {
     setUserId(id);
+    setModalType("edit");
+    setShowModal(true);
+  };
+
+  const handleAddClick = () => {
+    setUserId(null);
+    setModalType("add");
     setShowModal(true);
   };
 
@@ -138,7 +141,7 @@ export default function Dashboard() {
               {isLoading ? "Refreshing..." : "Refresh"}
             </button>
 
-            <button className="add-btn">
+            <button className="add-btn" onClick={handleAddClick}>
               <FiUserPlus className="btn-icon" />
               Add New
             </button>
@@ -231,6 +234,7 @@ export default function Dashboard() {
         show={showModal}
         onClose={handleModalClose}
         userId={userId}
+        type={modalType}
         onUpdateSuccess={handleUpdateSuccess}
       />
     </div>

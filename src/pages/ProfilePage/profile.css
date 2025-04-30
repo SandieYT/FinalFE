@@ -12,14 +12,14 @@
 .profile-card {
     padding: 4vw;
     box-shadow: 5px 5px 10px 0 #0000004b;
-    border-radius: 24px;
+    border-radius: 4vw;
     position: absolute;
     background-color: #fff;
     margin-top: calc(5% + 32px);
     width: 60%;
     display: flex;
     flex-direction: column;
-    gap: 10vw;
+    gap: 5vw;
 }
 
 .profile-section {
@@ -117,4 +117,12 @@
 .profile-email {
     color: #494949;
     text-align: center;
+    font-size: 1.25vw;
+}
+
+.profile-description {
+    background-color: #eeeeee;
+    padding: 2vw;
+    border-radius: 2vw;
+    font-size: 1.2vw;
 }

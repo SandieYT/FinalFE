@@ -1,6 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
+import { JsonRpcApiProvider } from "ethers";
 
 const userService = {
   registerUser: async (userData) => {
@@ -33,8 +34,7 @@ const userService = {
 
   getUser: async () => {
     try {
-      const token = jwtDecode(Cookies.get("accessToken"));
-      return token.data;
+      return JSON.parse(localStorage.getItem("auth"));
     } catch (error) {
       if (error.response?.data) {
         throw {
@@ -73,8 +73,6 @@ const userService = {
 
   logoutUser: async () => {
     try {
-      const token = jwtDecode(Cookies.get("accessToken"));
-
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/user/logout`,
         {},

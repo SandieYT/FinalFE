@@ -58,8 +58,8 @@ export default function Profile() {
                                 </a>}</div>
 
                 </div>
-                <div>
-                  lorem ipsum dolor sit amet
+                <div className="profile-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in aliquet erat, id pharetra ante. Nunc eu orci dolor. Ut in iaculis sapien. In ac est in enim pharetra posuere a ac augue. Nam sed ligula sit amet leo lacinia tempor quis id lorem. Ut vulputate blandit finibus. Donec sollicitudin.
                 </div>
             </div>
           </div>

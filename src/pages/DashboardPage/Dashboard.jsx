@@ -94,11 +94,6 @@ export default function Dashboard() {
       toast.success("User deleted successfully");
     } catch (error) {
       console.error("Error deleting user:", error);
-      const errorMessage =
-        error.response?.data?.error?.message ||
-        error.response?.data?.message ||
-        "Failed to delete user";
-      toast.error(errorMessage);
     } finally {
       setDeletingId(null);
     }

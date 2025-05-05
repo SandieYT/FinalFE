@@ -2,11 +2,24 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import "./profile.css"
 import axios from 'axios';
 import userService from "../../services/userService";
-
+import * as Yup from "yup";
 import { Link, useParams } from "react-router-dom";
 import { TransactionContext } from "../../context/TransactionContext";
 import { useSelector } from "react-redux";
 import { IoCameraReverseOutline } from "react-icons/io5";
+import { MdEdit } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import toast from "react-hot-toast";
+
+const usernameSchema = Yup.string()
+  .min(3, "Username must be at least 3 characters")
+  .max(20, "Username must be at most 20 characters")
+  .matches(
+    /^[a-zA-Z0-9 _-]+$/,
+    "Only letters, numbers, spaces, dashes, and underscores allowed"
+  );
+
 
 export default function Profile() {
     const [profile, setProfile] = useState([]);
@@ -15,6 +28,11 @@ export default function Profile() {
       const { isAuthenticated, username, role } = useSelector(
         (state) => state.auth
       );
+      
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedUsername, setEditedUsername] = useState(username);
+    const [error, setError] = useState("");
       const [profileImageUrl, setProfileImageUrl] = useState(
         localStorage.getItem('profileImageUrl') ||
         `https://api.dicebear.com/5.x/initials/svg?seed=${username}`
@@ -38,21 +56,50 @@ export default function Profile() {
       };
     
 
-    useEffect(() => {
-      const fetchProfile = async () => {
-        const res = await userService.getUser()
-        setProfile(res)
-      };
-    
-      fetchProfile();
-    }, []);
+      useEffect(() => {
+        const fetchProfile = async () => {
+          const res = await userService.getUser();
+          setProfile(res);
+          setEditedUsername(res.username); // sync edit buffer
+        };
+        fetchProfile();
+      }, []);
 
     const fileInputRef = useRef(null);
 
     const handleButtonClick = () => {
       fileInputRef.current.click();
     };
-    
+
+    const handleConfirm = async () => {
+      try {
+        await usernameSchema.validate(editedUsername);
+        if (editedUsername !== profile.username) {
+          await userService.updateUser(profile.userId, { username: editedUsername });
+          toast.success("Username updated successfully!");
+          setProfile((p) => ({ ...p, username: editedUsername }));
+        }
+        setIsEditing(false);
+        setError("");
+      } catch (err) {
+        if (err.name === "ValidationError") {
+          setError(err.message);
+        } else {
+          console.error("Failed to update username:", err);
+          toast.error(
+            err?.response?.data?.message || "Failed to update username."
+          );
+        }
+      }
+    };
+  
+    const handleCancel = () => {
+      setIsEditing(false);
+      setEditedUsername(username);
+      setError("");
+    };
+
+
   return (
         <div id="main-profile">
           <div className="profile-container">
@@ -81,10 +128,48 @@ export default function Profile() {
                     ref={fileInputRef}
                     onChange={handleImageChange}
                   />
-                  <div className="profile-username">
-                    <p><strong>{username}</strong></p>
-                    <p className="profile-role">{role?`(${role})`:""}</p>
-                  </div>
+                <div className="profile-username">
+                      {isEditing ? (
+                        <>
+                          <button
+                            className="profile-username-confirm-button"
+                            onClick={handleCancel}
+                          >
+                            <IoClose />
+                          </button>
+                          <input
+                            className="profile-username-input"
+                            type="text"
+                            value={editedUsername}
+                            onChange={(e) => setEditedUsername(e.target.value)}
+                          />
+                          <button
+                            className="profile-username-confirm-button"
+                            onClick={handleConfirm}
+                          >
+                            <FaCheck />
+                          </button>
+                          {error && <p className="error-message">{error}</p>}
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            className="profile-username-edit-button"
+                            onClick={() => {
+                              setIsEditing(true);
+                              setEditedUsername(username);
+                            }}
+                          >
+                            <MdEdit />
+                          </button>
+                          <p><strong>{username}</strong></p>
+                          <p className="profile-role">{role ? `(${role})` : ""}</p>
+                        </>
+                      )}
+                    </div>
+                  {isEditing?<>
+                    {error && <p className="profile-error-message">{error}</p>}
+                  </>:<></>}
                   <p className="profile-email">{profile?profile.email:""}</p>
                   </div>
                   <div className="profile-info-right">

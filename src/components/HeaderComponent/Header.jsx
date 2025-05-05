@@ -18,6 +18,11 @@ export default function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
+        const [profileImageUrl, setProfileImageUrl] = useState(
+          localStorage.getItem('profileImageUrl') ||
+          `https://api.dicebear.com/5.x/initials/svg?seed=${username}`
+        );
+
   const handleSearchIconClick = () => {
     setSearchActive(true);
     searchRef.current.focus();
@@ -100,7 +105,7 @@ export default function Header() {
             {isAuthenticated ? (
               <div className="user-dropdown" ref={dropdownRef}>
                 <img
-                  src={`https://api.dicebear.com/5.x/initials/svg?seed=${username}`}
+                  src={profileImageUrl}
                   alt="avatar"
                   className="user-avatar"
                   onClick={() => setShowDropdown(!showDropdown)}

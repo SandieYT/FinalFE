@@ -85,6 +85,8 @@
     border: .75vw solid #fff;
     margin: -6.5vw auto 0 auto;
     display: block;
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 
 .profile-wallet-btn {
@@ -125,4 +127,41 @@
     padding: 2vw;
     border-radius: 2vw;
     font-size: 1.2vw;
+}
+
+.profile-picture-input {
+    display: none;
+}
+
+.profile-picture-button {
+    margin: -6.5vw auto 0 auto;
+    height: 10vw;
+    width: 10vw;
+    aspect-ratio: 1;
+    border: .75vw solid #fff;
+    border-radius: 100%;
+    position: absolute;
+    transform: translate(80%);
+    opacity: 0;
+    background-color: #0000007c;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.1s;
+}
+
+.profile-picture-button:hover {
+    opacity: 1;
+}
+
+.profile-picture-button-icon {
+    color: #fff;
+    width: 50%;
+    height: 50%;
+    aspect-ratio: 1;
+    filter: drop-shadow(0 0 .5vw #000000);
 }

@@ -38,7 +38,7 @@ export default function Profile() {
 
       useEffect(() => {
         const fetchProfile = async () => {
-          setProfile(JSON.parse(localStorage.getItem("auth")))
+          setProfile(auth)
           setEditedUsername(profile.username); // sync edit buffer
         };
         fetchProfile();

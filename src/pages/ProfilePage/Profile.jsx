@@ -22,6 +22,8 @@ const usernameSchema = Yup.string()
 
 
 export default function Profile() {
+    const auth = useSelector((state) => state.auth);
+    console.log(auth)
     const [profile, setProfile] = useState([]);
     const { connectWallet, currentAccount, accountBalance } =
       useContext(TransactionContext);
@@ -33,37 +35,38 @@ export default function Profile() {
     const [isEditing, setIsEditing] = useState(false);
     const [editedUsername, setEditedUsername] = useState(username);
     const [error, setError] = useState("");
-      const [profileImageUrl, setProfileImageUrl] = useState(
-        localStorage.getItem('profileImageUrl') ||
-        `https://api.dicebear.com/5.x/initials/svg?seed=${username}`
-      );
-    
-      const handleImageChange = async (e) => {
-        const selectedImage = e.target.files[0];
-        if (!selectedImage) return;
-    
-        const formData = new FormData();
-        formData.append('image', selectedImage);
-    
-        try {
-          const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData);
-          const imageUrl = res.data.url;
-          setProfileImageUrl(imageUrl);
-          localStorage.setItem('profileImageUrl', imageUrl);
-        } catch (err) {
-          console.error('Upload failed:', err);
-        }
-      };
-    
 
       useEffect(() => {
         const fetchProfile = async () => {
-          const res = await userService.getUser();
-          setProfile(res);
-          setEditedUsername(res.username); // sync edit buffer
+          setProfile(JSON.parse(localStorage.getItem("auth")))
+          setEditedUsername(profile.username); // sync edit buffer
         };
         fetchProfile();
       }, []);
+
+      
+      const handleImageChange = async (e) => {
+        const selectedImage = e.target.files[0];
+        if (!selectedImage) return;
+      
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+      
+        try {
+          const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData);
+          const imageUrl = res.data.url;
+      
+          await userService.updateUser(profile.userId, { profile_picture: imageUrl });
+          setProfile((prev) => ({ ...prev, profile_picture: imageUrl }));
+      
+          toast.success("Profile picture updated successfully!");
+        } catch (err) {
+          console.error('Upload or update failed:', err);
+          toast.error(
+            err?.response?.data?.message || "Failed to update profile picture."
+          );
+        }
+      };
 
     const fileInputRef = useRef(null);
 
@@ -117,7 +120,7 @@ export default function Profile() {
                   <div className="profile-picture-container">
                 <img
                   className="profile-picture unselectable"
-                  src={profileImageUrl}
+                  src={profile.profile_picture}
                   alt="Profile"
                 />
               </div>

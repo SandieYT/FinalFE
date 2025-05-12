@@ -10,6 +10,7 @@ const loadInitialState = () => {
         email: "",
         userId: "",
         role: "",
+        profile_picture: "",
       };
 };
 
@@ -23,6 +24,7 @@ export const authSlice = createSlice({
       state.email = action.payload.email;
       state.userId = action.payload.userId;
       state.role = action.payload.role;
+      state.profile_picture = action.payload.profile_picture;
       localStorage.setItem("auth", JSON.stringify(state));
     },
     logoutSuccess: (state) => {
@@ -31,6 +33,7 @@ export const authSlice = createSlice({
       state.email = "";
       state.userId = "";
       state.role = "";
+      state.profile_picture = "";
       localStorage.removeItem("auth");
     },
     initializeAuth: (state) => {
@@ -42,6 +45,7 @@ export const authSlice = createSlice({
         state.email = parsedData.email;
         state.userId = parsedData.userId;
         state.role = parsedData.role;
+        state.profile_picture = parsedData.profile_picture;
       }
     },
   },

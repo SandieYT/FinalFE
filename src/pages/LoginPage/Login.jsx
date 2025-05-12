@@ -63,6 +63,7 @@ export default function Login() {
               username: decoded.data.username,
               email: decoded.data.email,
               accessToken: response.data.accessToken,
+              profile_picture: decoded.data.profile_picture,
               userId: decoded.data.userId,
               role: decoded.data.role,
             })

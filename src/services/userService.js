@@ -30,9 +30,13 @@ const userService = {
     }
   },
 
-  getUser: async () => {
+  getUser: async (userId) => {
     try {
-      return JSON.parse(localStorage.getItem("auth"));
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/user/get/${userId}`,
+        { withCredentials: true }
+      );
+      return response.data;
     } catch (error) {
       if (error.response?.data) {
         throw {

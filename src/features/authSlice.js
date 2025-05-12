@@ -35,6 +35,9 @@ export const authSlice = createSlice({
       state.role = "";
       state.profile_picture = "";
       localStorage.removeItem("auth");
+      if (window.kommunicate) {
+        window.kommunicate.logout?.();
+      }
     },
     initializeAuth: (state) => {
       const authData = localStorage.getItem("auth");

@@ -77,6 +77,7 @@ const userService = {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/user/refresh-token`,
+        {},
         { withCredentials: true }
       );
       return response.data;

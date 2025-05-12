@@ -1,6 +1,7 @@
 import { RouterProvider } from "react-router-dom";
 import Router from "./routes/Router";
 import { ToastConfig } from "./config/toastConfig";
+import { ChatBot } from "./hooks/chatBot";
 import "./index.css";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <>
       <RouterProvider router={Router} />
       <ToastConfig />
+      <ChatBot />
     </>
   );
 }

@@ -32,6 +32,9 @@ export const authSlice = createSlice({
       state.userId = "";
       state.role = "";
       localStorage.removeItem("auth");
+      if (window.kommunicate) {
+        window.kommunicate.logout?.();
+      }
     },
     initializeAuth: (state) => {
       const authData = localStorage.getItem("auth");

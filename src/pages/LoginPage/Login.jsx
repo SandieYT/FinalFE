@@ -19,6 +19,7 @@ export default function Login() {
   const loginMutation = useTodoMutation((data) => userService.loginUser(data));
 
   const getErrorMessage = (error) => {
+    console.log(error)
     return (
       error?.response?.data?.error?.details?.message ||
       "Login failed. Please check your credentials and try again."

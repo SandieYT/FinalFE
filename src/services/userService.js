@@ -75,6 +75,28 @@ const userService = {
     }
   },
 
+  loginWithGoogle: async ({ token }) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user/google-login`,
+        { token }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Google login failed",
+            },
+          },
+        };
+      }
+      throw new Error(error.message || "An error occurred during Google login");
+    }
+  },
+
   refreshToken: async () => {
     try {
       const response = await axios.post(

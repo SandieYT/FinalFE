@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle, FaApple, FaTelegram } from "react-icons/fa";
+import { FaApple, FaTelegram } from "react-icons/fa";
 import userService from "../../services/userService";
 import { useTodoMutation } from "../../hooks/useTodoMutation";
 import toast from "react-hot-toast";
@@ -10,6 +10,7 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { loginSuccess } from "../../features/authSlice";
+import { GoogleLogin } from "@react-oauth/google";
 import "./login.css";
 
 export default function Login() {
@@ -19,11 +20,54 @@ export default function Login() {
   const loginMutation = useTodoMutation((data) => userService.loginUser(data));
 
   const getErrorMessage = (error) => {
-    console.log(error)
+    console.log(error);
     return (
       error?.response?.data?.error?.details?.message ||
       "Login failed. Please check your credentials and try again."
     );
+  };
+
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    try {
+      const { credential } = credentialResponse;
+      if (!credential) throw new Error("No credential returned");
+
+      const decoded = jwtDecode(credential);
+      console.log("Decoded Google Token", decoded);
+
+      const response = await toast.promise(
+        userService.loginWithGoogle({ token: credential }),
+        {
+          loading: "Logging in with Google...",
+          success: "Google login successful!",
+          error: "Google login failed.",
+        }
+      );
+
+      if (response?.success) {
+        const user = jwtDecode(response.data.accessToken);
+
+        Cookies.set("accessToken", response.data.accessToken, {
+          expires: 7,
+          secure: true,
+          sameSite: "Strict",
+        });
+
+        dispatch(
+          loginSuccess({
+            username: user.data.username,
+            email: user.data.email,
+            accessToken: response.data.accessToken,
+            userId: user.data.userId,
+            role: user.data.role,
+          })
+        );
+        navigate("/");
+      }
+    } catch (err) {
+      console.error("Google Login Error", err);
+      toast.error("Google login failed.");
+    }
   };
 
   const formik = useFormik({
@@ -54,8 +98,8 @@ export default function Login() {
           const decoded = jwtDecode(response?.data.accessToken);
           console.log(decoded)
           Cookies.set("accessToken", response.data.accessToken, {
-            expires: 7, 
-            secure: true, 
+            expires: 7,
+            secure: true,
             sameSite: "Strict",
           });
 
@@ -85,16 +129,11 @@ export default function Login() {
         <div className="login-box">
           <h2 className="login-title">Login</h2>
 
-          <div className="social-login">
-            <button type="button" className="social-btn google">
-              <FaGoogle className="social-icon" /> Google
-            </button>
-            <button type="button" className="social-btn apple">
-              <FaApple className="social-icon" /> Apple
-            </button>
-            <button type="button" className="social-btn telegram">
-              <FaTelegram className="social-icon" /> Telegram
-            </button>
+          <div className="google-login">
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={() => toast.error("Google login failed.")}
+            />
           </div>
 
           <div className="divider">

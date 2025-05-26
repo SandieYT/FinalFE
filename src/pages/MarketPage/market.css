@@ -176,7 +176,6 @@
     font-size: 14px;
     height: 36px;
     justify-content: center;
-    min-width: 36px;
     text-align: center;
     transition: all 0.2s ease;
 }
@@ -191,6 +190,32 @@
     opacity: 0.5;
 }
 
+.market-pagination-input {
+    width: 72px;
+    height: 36px;
+    padding: 0 12px;
+    text-align: center;
+    background-color: #f0f0f0;
+    border: 1px solid #9e9e9e;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    height: 36px;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.market-pagination-input:focus {
+    width: 80px;
+}
+
+.market-pagination-input::-webkit-inner-spin-button,
+.market-pagination-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .market-pagination-buttons .current {
     background-color: #ffa502;

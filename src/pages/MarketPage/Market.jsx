@@ -44,37 +44,53 @@ export default function Market() {
 
   const renderPaginationButtons = () => {
     const buttons = [];
-    const maxVisibleButtons = 2;
+    const maxVisibleButtons = 3;
     let startPage, endPage;
 
     if (totalPages <= maxVisibleButtons) {
       startPage = 1;
       endPage = totalPages;
     } else {
-      const maxButtonsBeforeCurrent = Math.floor(maxVisibleButtons / 2);
-      const maxButtonsAfterCurrent = Math.ceil(maxVisibleButtons / 2) - 1;
-
-      if (page <= maxButtonsBeforeCurrent) {
+      const before = Math.floor(maxVisibleButtons / 2);
+      const after = Math.ceil(maxVisibleButtons / 2) - 1;
+      if (page <= before) {
         startPage = 1;
         endPage = maxVisibleButtons;
-      } else if (page + maxButtonsAfterCurrent >= totalPages) {
+      } else if (page + after >= totalPages) {
         startPage = totalPages - maxVisibleButtons + 1;
         endPage = totalPages;
       } else {
-        startPage = page - maxButtonsBeforeCurrent;
-        endPage = page + maxButtonsAfterCurrent;
+        startPage = page - before;
+        endPage = page + after;
       }
     }
 
     buttons.push(
+      <>
+                <input
+            key="page-input"
+            type="number"
+            min={1}
+            className="market-pagination-input"
+            placeholder="Go to..."
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                const value = parseInt(e.target.value, 10);
+                if (!isNaN(value)) {
+                  setPage(value);
+                }
+              }
+            }}
+          />
       <button
         key="prev"
         className={`market-pagination-button prev ${page === 1 ? "disabled" : ""}`}
-        onClick={() => setPage(Math.max(1, page - 1))}
+        onClick={() => setPage((p) => Math.max(1, p - 1))}
         disabled={page === 1}
       >
         &lt;
       </button>
+      </>
     );
 
     if (startPage > 1) {
@@ -89,7 +105,7 @@ export default function Market() {
       );
       if (startPage > 2) {
         buttons.push(
-          <span key="start-ellipsis" className="market-pagination-ellipsis">
+                    <span key="start-ellipsis" className="market-pagination-ellipsis">
             ···
           </span>
         );
@@ -119,9 +135,7 @@ export default function Market() {
       buttons.push(
         <button
           key={totalPages}
-          className={`market-pagination-button ${
-            page === totalPages ? "current" : ""
-          }`}
+          className={`market-pagination-button ${page === totalPages ? "current" : ""}`}
           onClick={() => setPage(totalPages)}
         >
           {totalPages}
@@ -132,10 +146,8 @@ export default function Market() {
     buttons.push(
       <button
         key="next"
-        className={`market-pagination-button next ${
-          page === totalPages ? "disabled" : ""
-        }`}
-        onClick={() => setPage(Math.min(totalPages, page + 1))}
+        className={`market-pagination-button next ${page === totalPages ? "disabled" : ""}`}
+        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
         disabled={page === totalPages}
       >
         &gt;

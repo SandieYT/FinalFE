@@ -22,9 +22,9 @@ const usernameSchema = Yup.string()
 
 
 export default function Profile() {
-    const auth = useSelector((state) => state.auth);
-    console.log(auth)
-    const [profile, setProfile] = useState([]);
+    const prof = useSelector((state) => state.auth)
+    console.log(prof)
+    const [profile, setProfile] = useState(prof);
     const { connectWallet, currentAccount, accountBalance } =
       useContext(TransactionContext);
       const { isAuthenticated, username, role } = useSelector(
@@ -37,12 +37,8 @@ export default function Profile() {
     const [error, setError] = useState("");
 
       useEffect(() => {
-        const fetchProfile = async () => {
-          setProfile(auth)
-          setEditedUsername(profile.username); // sync edit buffer
-        };
-        fetchProfile();
-      }, []);
+          setEditedUsername(profile.username);
+      }, [profile]);
 
       
       const handleImageChange = async (e) => {
@@ -53,12 +49,11 @@ export default function Profile() {
         formData.append('image', selectedImage);
       
         try {
-          const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData);
+          const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload/pfp`, formData);
           const imageUrl = res.data.url;
-      
           await userService.updateUser(profile.userId, { profile_picture: imageUrl });
           setProfile((prev) => ({ ...prev, profile_picture: imageUrl }));
-      
+          window.location.reload();
           toast.success("Profile picture updated successfully!");
         } catch (err) {
           console.error('Upload or update failed:', err);
@@ -79,8 +74,9 @@ export default function Profile() {
         await usernameSchema.validate(editedUsername);
         if (editedUsername !== profile.username) {
           await userService.updateUser(profile.userId, { username: editedUsername });
+                    setProfile((prev) => ({ ...prev, username: editedUsername }));
+          setEditedUsername(editedUsername)
           toast.success("Username updated successfully!");
-          setProfile((p) => ({ ...p, username: editedUsername }));
         }
         setIsEditing(false);
         setError("");
@@ -98,15 +94,78 @@ export default function Profile() {
   
     const handleCancel = () => {
       setIsEditing(false);
-      setEditedUsername(username);
+      setEditedUsername(profile.username);
       setError("");
     };
 
+  const [description, setDescription] = useState(profile.description || `Hello! I am ${profile.username}.`);
+  const [editedDescription, setEditedDescription] = useState(description);
+
+  const handleBlur = async (e) => {
+    const content = e.target.value;
+    if (content !== description) {
+      try {
+        await userService.updateUser(profile.userId, { description: content });
+        setProfile((prev) => ({ ...prev, description: content }));
+        toast.success("Description updated successfully!");
+      } catch (err) {
+        setEditedDescription(description); // revert to last good value
+        console.error(err);
+        toast.error(
+          err?.response?.data?.message || "Failed to update description."
+        );
+      }
+    }
+  };
+
+
+
+    const fileThumbnailRef = useRef(null);
+
+    const handleThumbnailClick = () => {
+      fileThumbnailRef.current.click();
+    };
+
+      const handleThumbnailChange = async (e) => {
+        const selectedImage = e.target.files[0];
+        if (!selectedImage) return;
+      
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+      
+        try {
+          const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload/thumbnail`, formData);
+          const imageUrl = res.data.url;
+          await userService.updateUser(profile.userId, { thumbnail: imageUrl });
+          setProfile((prev) => ({ ...prev, thumbnail: imageUrl }));
+          window.location.reload();
+          toast.success("Thumbnail updated successfully!");
+        } catch (err) {
+          console.error('Upload or update failed:', err);
+          toast.error(
+            err?.response?.data?.message || "Failed to update thumbnail."
+          );
+        }
+      };
 
   return (
         <div id="main-profile">
           <div className="profile-container">
-            <img className="profile-banner unselectable" src={"https://www.fuller.edu/wp-content/uploads/2022/11/secondary-banner-placeholder.jpg"}/>
+            <img className="profile-banner unselectable" src={profile.thumbnail || "https://www.jacksonsquareshopping.co.uk/wp-content/uploads/2016/12/placeholder-1920x1080-copy.png"}/>
+            <button className="profile-banner-button" onClick={handleThumbnailClick}>
+              {Array.from({ length: 9 }).map((_, i) => (
+                <div className="profile-banner-button-tile">
+                  <IoCameraReverseOutline className="profile-picture-button-icon unselectable"/>
+                  <p className="unselectable">Change</p>
+                </div>
+              ))}
+            </button>
+            <input
+              className="profile-banner-input"
+              type="file"
+              ref={fileThumbnailRef}
+              onChange={handleThumbnailChange}
+            />
             <div className="profile-card">
                 <div className="profile-info">
                   <div className="profile-info-left">
@@ -118,13 +177,15 @@ export default function Profile() {
                   <div className="profile-info-middle">
 
                   <div className="profile-picture-container">
-                <img
+                <div className="profile-picture-content">
+                  <img
                   className="profile-picture unselectable"
                   src={profile.profile_picture}
                   alt="Profile"
                 />
+                </div>
               </div>
-              <button className="profile-picture-button" onClick={handleButtonClick}><IoCameraReverseOutline className="profile-picture-button-icon"/><p>Change</p></button>
+              <button className="profile-picture-button" onClick={handleButtonClick}><IoCameraReverseOutline className="profile-picture-button-icon unselectable"/><p className="unselectable">Change</p></button>
                   <input
                     className="profile-picture-input"
                     type="file"
@@ -152,7 +213,6 @@ export default function Profile() {
                           >
                             <FaCheck />
                           </button>
-                          {error && <p className="error-message">{error}</p>}
                         </>
                       ) : (
                         <>
@@ -160,12 +220,11 @@ export default function Profile() {
                             className="profile-username-edit-button"
                             onClick={() => {
                               setIsEditing(true);
-                              setEditedUsername(username);
                             }}
                           >
                             <MdEdit />
                           </button>
-                          <p><strong>{username}</strong></p>
+                          <p><strong>{profile.username}</strong></p>
                           <p className="profile-role">{role ? `(${role})` : ""}</p>
                         </>
                       )}
@@ -181,14 +240,18 @@ export default function Profile() {
                                 //   Disconnect wallet
                                 // </a>
                                 <></>
-                                :<a className="profile-wallet-btn" onClick={connectWallet}>
+                                :<a className="profile-wallet-btn unselectable" onClick={connectWallet}>
                                   Connect wallet
                   </a>}</div>
 
                 </div>
-                <div className="profile-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in aliquet erat, id pharetra ante. Nunc eu orci dolor. Ut in iaculis sapien. In ac est in enim pharetra posuere a ac augue. Nam sed ligula sit amet leo lacinia tempor quis id lorem. Ut vulputate blandit finibus. Donec sollicitudin.
-                </div>
+                  <textarea
+                    className="profile-description"
+                    placeholder={`Hello! I am ${profile.username}.`}
+                    value={editedDescription}
+                    onChange={(e) => setEditedDescription(e.target.value)}
+                    onBlur={handleBlur}
+                  />
             </div>
           </div>
         </div>

@@ -52,7 +52,7 @@ export default function Login() {
 
         if (response?.success) {
           const decoded = jwtDecode(response?.data.accessToken);
-
+          console.log(decoded)
           Cookies.set("accessToken", response.data.accessToken, {
             expires: 7, 
             secure: true, 
@@ -67,6 +67,8 @@ export default function Login() {
               profile_picture: decoded.data.profile_picture,
               userId: decoded.data.userId,
               role: decoded.data.role,
+              description: decoded.data.description,
+              thumbnail: decoded.data.thumbnail,
             })
           );
           navigate("/");

@@ -1,4 +1,6 @@
 import axios from "../utils/axiosConfig";
+import store from './store';
+import { updateAuth } from "../features/authSlice"
 
 const userService = {
   registerUser: async (userData) => {
@@ -177,6 +179,11 @@ const userService = {
         updateData,
         { withCredentials: true }
       );
+      const oldauth = JSON.parse(localStorage.getItem("auth"));
+      const newauth = { ...oldauth, ...updateData };
+      store.dispatch(updateAuth(updateData));
+      localStorage.setItem("auth", JSON.stringify(newauth));
+      console.log(oldauth,newauth)
       return response.data;
     } catch (error) {
       if (error.response?.data) {

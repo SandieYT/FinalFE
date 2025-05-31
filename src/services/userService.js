@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios from "../config/axiosConfig";
 import store from './store';
 import { updateAuth } from "../features/authSlice"
+
 
 const userService = {
   registerUser: async (userData) => {

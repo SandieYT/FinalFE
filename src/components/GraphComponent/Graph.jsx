@@ -34,7 +34,15 @@ export default function Graph({ historicalData }) {
           </div>
         `,
       ]);
-      setChartData((prev) => [...prev, ...formattedData]);
+      setChartData([    [
+      "Date",
+      "Low",
+      "Open",
+      "Close",
+      "High",
+      { type: "string", role: "tooltip", p: { html: true } },
+    ],
+    ...formattedData]);
     }
   }, [historicalData]);
 

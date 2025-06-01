@@ -22,9 +22,7 @@ const usernameSchema = Yup.string()
 
 
 export default function Profile() {
-    const prof = useSelector((state) => state.auth)
-    console.log(prof)
-    const [profile, setProfile] = useState(prof);
+    const [profile, setProfile] = useState(useSelector((state) => state.auth)) 
     const { connectWallet, currentAccount, accountBalance } =
       useContext(TransactionContext);
       const { isAuthenticated, username, role } = useSelector(
@@ -154,7 +152,7 @@ export default function Profile() {
             <img className="profile-banner unselectable" src={profile.thumbnail || "https://www.jacksonsquareshopping.co.uk/wp-content/uploads/2016/12/placeholder-1920x1080-copy.png"}/>
             <button className="profile-banner-button" onClick={handleThumbnailClick}>
               {Array.from({ length: 9 }).map((_, i) => (
-                <div className="profile-banner-button-tile">
+                <div className="profile-banner-button-tile" key={i}>
                   <IoCameraReverseOutline className="profile-picture-button-icon unselectable"/>
                   <p className="unselectable">Change</p>
                 </div>

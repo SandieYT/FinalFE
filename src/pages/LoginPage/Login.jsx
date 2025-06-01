@@ -33,7 +33,6 @@ export default function Login() {
       if (!credential) throw new Error("No credential returned");
 
       const decoded = jwtDecode(credential);
-      console.log("Decoded Google Token", decoded);
 
       const response = await toast.promise(
         userService.loginWithGoogle({ token: credential }),
@@ -53,13 +52,18 @@ export default function Login() {
           sameSite: "Strict",
         });
 
+        console.log(user)
+
         dispatch(
           loginSuccess({
-            username: user.data.username,
-            email: user.data.email,
-            accessToken: response.data.accessToken,
-            userId: user.data.userId,
-            role: user.data.role,
+              username: user.data.username,
+              email: user.data.email,
+              accessToken: user.data.accessToken,
+              profile_picture: user.data.profile_picture,
+              userId: user.data.userId,
+              role: user.data.role,
+              description: user.data.description,
+              thumbnail: user.data.thumbnail,
           })
         );
         navigate("/");
@@ -93,7 +97,6 @@ export default function Login() {
             error: (err) => getErrorMessage(err),
           }
         );
-
         if (response?.success) {
           const decoded = jwtDecode(response?.data.accessToken);
           console.log(decoded)

@@ -79,11 +79,11 @@ export default function Header() {
                   <span>Markets</span>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="#">
                   <span>More</span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function Header() {
                           setShowDropdown(false);
                         }}
                       >
-                        <FiDatabase className="dropdown-icon" />
+                        <FiDatabase className="dropdown-icon"/>
                         Admin
                       </div>
                     )}

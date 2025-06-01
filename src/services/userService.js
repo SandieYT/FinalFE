@@ -205,7 +205,6 @@ const userService = {
       const newauth = { ...oldauth, ...updateData };
       store.dispatch(updateAuth(updateData));
       localStorage.setItem("auth", JSON.stringify(newauth));
-      console.log(oldauth,newauth)
       return response.data;
     } catch (error) {
       if (error.response?.data) {
@@ -221,6 +220,34 @@ const userService = {
       throw new Error(error.message || "An error occurred while updating user");
     }
   },
+
+  changePassword: async (userId, passwordData) => {
+        try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_URL}/user/password/${userId}`,
+        passwordData,
+        { withCredentials: true }
+      );
+      const oldauth = JSON.parse(localStorage.getItem("auth"));
+      const pass = { password: passwordData[2] }
+      const newauth = { ...oldauth, ...pass };
+      store.dispatch(updateAuth(pass));
+      localStorage.setItem("auth", JSON.stringify(newauth));
+      return response.data;
+    } catch (error) {
+      if (error.response?.data) {
+        throw {
+          response: {
+            data: {
+              ...error.response.data,
+              message: error.response.data.message || "Failed to update password",
+            },
+          },
+        };
+      }
+      throw new Error(error.message || "An error occurred while updating password");
+    }
+  }
 };
 
 export default userService;

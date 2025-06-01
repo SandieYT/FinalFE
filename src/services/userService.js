@@ -1,4 +1,4 @@
-import axios from "../utils/axiosConfig";
+import axios from "axios";
 import store from './store';
 import { updateAuth } from "../features/authSlice"
 

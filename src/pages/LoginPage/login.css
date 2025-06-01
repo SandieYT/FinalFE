@@ -31,7 +31,7 @@
 }
 
 /* ===== Google Login Section Styles ===== */
-.google-login {
+.login-google {
     display: flex;
     justify-content: center;
     margin: 20px 0;

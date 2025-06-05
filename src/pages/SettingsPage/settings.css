@@ -1,0 +1,62 @@
+#main-settings {
+    background-color: rgb(233, 233, 233);
+    width: 100vw;
+    min-height: calc(100vh - 67px);
+    display: flex;
+    padding: 4vw;
+    gap: 2vw;
+}
+
+.settings-card {
+    border-radius: 2vw;
+    background-color: white;
+    box-shadow: .5vw .5vw 1vw 0 #0000004b;
+}
+
+.settings-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    padding: 1vw;
+}
+
+.settings-content {
+    flex: 4;
+    font-size: 1.25vw;
+    padding: 2vw;
+}
+
+.settings-tab {
+    align-items: center;
+    display: flex;
+    height: 4vw;
+    font-size: 1.25vw;
+    font-weight: bold;
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+.settings-icon {
+    color: #1b1b1b;
+    width: 50%;
+    height: 50%;
+    aspect-ratio: 1;
+}
+
+.settings-input {
+    border: 2px dashed #e6e6e6;
+    background-color: #fff;
+    color: #000000;
+    font-weight: bold;
+    border-radius: 0.5vw;
+    padding: 0.1vw;
+    font-size: 1.5vw;
+    width: 30%;
+}
+
+.settings-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2vw;
+}

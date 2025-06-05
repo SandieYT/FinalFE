@@ -6,7 +6,7 @@
 
 .profile-banner {
     object-fit: cover;
-    width: 100vw;
+    width: 100vmax;
     height: 100vh;
     object-fit: cover;
     position: fixed;
@@ -20,7 +20,7 @@
 
 .profile-banner-button {
     height: 100vh;
-    width: 100vw;
+    width: 100vmax;
     aspect-ratio: 1;
     position: fixed;
     top: 0;
@@ -28,7 +28,7 @@
     background-color: #0000007c;
     color: #fff;
     font-weight: bold;
-    font-size: 1.5vw;
+    font-size: 1.5vmax;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -49,7 +49,7 @@
     width: 10%;
     height: 10%;
     aspect-ratio: 1;
-    filter: drop-shadow(0 0 .5vw #000000);
+    filter: drop-shadow(0 0 .5vmax #000000);
 }
 
 .profile-banner-button-tile {
@@ -62,16 +62,16 @@
 }
 
 .profile-card {
-    padding: 4vw;
+    padding: 4vmax;
     box-shadow: 5px 5px 10px 0 #0000004b;
-    border-radius: 4vw;
+    border-radius: 4vmax;
     position: absolute;
     background-color: #fff;
     margin-top: calc(15% + 32px);
     width: 60%;
     display: flex;
     flex-direction: column;
-    gap: 5vw;
+    gap: 5vmax;
 }
 
 .profile-section {
@@ -89,7 +89,7 @@
     flex: 2;
     display: flex;
     flex-direction: column;
-    gap: 0.5vw;
+    gap: 0.5vmax;
 }
 
 .profile-info-right {
@@ -103,12 +103,12 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 2vw 0;
+    gap: 2vmax 0;
     flex: 1;
 }
 
 .profile-info-left div {
-    min-width: 8vw;
+    min-width: 8vmax;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -117,14 +117,14 @@
 
 .profile-info-left div h2 {
     flex: 1;
-    font-size: 1.75vw;
+    font-size: 1.75vmax;
     width: 100%;
     text-align: center;
 }
 .profile-info-left div p {
     width: 75%;
     flex: 1;
-    font-size: 1.25vw;
+    font-size: 1.25vmax;
     word-break: break-word;
     overflow-wrap: break-word;
     text-align: center;
@@ -142,20 +142,20 @@
 
 .profile-picture-content {
     border-radius: 100%;
-    width: 10vw;
-    height: 10vw;
-    border: .75vw solid #fff;
-    margin: -6.5vw auto 0 auto;
+    width: 10vmax;
+    height: 10vmax;
+    border: .75vmax solid #fff;
+    margin: -6.5vmax auto 0 auto;
 }
 
 .profile-wallet-btn {
     background: linear-gradient(90deg, #ff6b00, #ffa502);
     color: white;
-    padding: 1vw 2vw;
-    border-radius: 1000px;
+    padding: 1vmax 2vmax;
+    border-radius: 100vw;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.2vw;
+    font-size: 1.2vmax;
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
     width: fit-content;
@@ -167,27 +167,27 @@
 }
 
 .profile-username {
-    font-size: 1.5vw;
+    font-size: 1.5vmax;
     width: 100%;
     align-items: center;
     justify-content: center;
     display: flex;
-    gap: 0.5vw;
+    gap: 0.5vmax;
 }
 
 .profile-email {
     color: #494949;
     text-align: center;
-    font-size: 1.25vw;
+    font-size: 1.25vmax;
 }
 
 .profile-description {
     background-color: #eeeeee;
-    padding: 2vw;
-    border-radius: 2vw;
-    font-size: 1.2vw;
+    padding: 2vmax;
+    border-radius: 2vmax;
+    font-size: 1.2vmax;
     resize: none;
-    height: 30vw;
+    height: 30vmax;
     overflow-y: auto;
     border: 2px dashed #bdbdbd;
 }
@@ -197,18 +197,18 @@
 }
 
 .profile-picture-button {
-    margin: -6.5vw auto 0 auto;
-    height: 10vw;
-    width: 10vw;
+    margin: -6.5vmax auto 0 auto;
+    height: 10vmax;
+    width: 10vmax;
     aspect-ratio: 1;
-    border: .75vw solid #fff;
+    border: .75vmax solid #fff;
     border-radius: 100%;
     position: absolute;
     opacity: 0;
     background-color: #0000007c;
     color: #fff;
     font-weight: bold;
-    font-size: 1.5vw;
+    font-size: 1.5vmax;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -227,7 +227,7 @@
     width: 50%;
     height: 50%;
     aspect-ratio: 1;
-    filter: drop-shadow(0 0 .5vw #000000);
+    filter: drop-shadow(0 0 .5vmax #000000);
 }
 
 .profile-username-edit-button {
@@ -278,13 +278,13 @@
     color: #000000;
     font-weight: bold;
     height: 100%;
-    border-radius: 0.5vw;
-    padding: 0.1vw;
-    font-size: 1.5vw;
+    border-radius: 0.5vmax;
+    padding: 0.1vmax;
+    font-size: 1.5vmax;
 }
 
 .profile-error-message {
-    font-size: 1vw;
+    font-size: 1vmax;
     font-weight: bold;
     margin: 0;
     text-align: center;

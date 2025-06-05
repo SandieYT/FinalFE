@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import Router from "./routes/Router";
-import { ToastConfig } from "./config/ToastConfig";
+import { ToastConfig } from "./config/toastConfig";
 import { ChatBot } from "./hooks/ChatBot";
 import "./index.css";
 

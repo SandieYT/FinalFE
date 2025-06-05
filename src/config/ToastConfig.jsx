@@ -1,4 +1,4 @@
-import { Toaster } from "react-hot-toast";
+timport { Toaster } from "react-hot-toast";
 
 export const ToastConfig = () => (
   <Toaster

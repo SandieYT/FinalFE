@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 import RootLayout from "./RootLayout";
 import Private from "./Private";
+import { id } from "ethers";
 
 const LoadingSpinner = () => <div>Loading...</div>;
 
@@ -10,6 +11,7 @@ const Login = lazy(() => import("../pages/LoginPage/Login"));
 const Register = lazy(() => import("../pages/RegisterPage/Register"));
 const Transaction = lazy(() => import("../pages/TransactionPage/Transaction"));
 const Market = lazy(() => import("../pages/MarketPage/Market"));
+const Search = lazy(() => import("../pages/SearchPage/Search"));
 const Coin = lazy(() => import("../pages/CoinPage/Coin"));
 const Profile = lazy(() => import("../pages/ProfilePage/Profile"));
 const Dashboard = lazy(() => import("../pages/DashboardPage/Dashboard"));
@@ -57,6 +59,14 @@ const Router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <Market />
+          </Suspense>
+        ),
+      },
+      {
+        path: "search/:qr",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Search/>
           </Suspense>
         ),
       },

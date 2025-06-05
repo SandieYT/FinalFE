@@ -9,7 +9,6 @@ import "./header.css";
 
 export default function Header() {
   const profile = useSelector((state) => state.auth);
-  const [searchActive, setSearchActive] = useState(false);
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,9 +19,20 @@ export default function Header() {
   const dropdownRef = useRef(null);
 
   const handleSearchIconClick = () => {
-    setSearchActive(true);
-    searchRef.current.focus();
+    const query = searchRef.current?.value.trim();
+    if (query) {
+     navigate(`/search/${query}`);
+    }
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const query = searchRef.current?.value.trim();
+      if (query) {
+         navigate(`/search/${query}`);
+      }
+    }
+  }
 
   const handleLogout = async () => {
     try {
@@ -57,7 +67,7 @@ export default function Header() {
 
   return (
     <header id="main-header">
-      <div className="header-container">
+      <div className="header-container unselectable">
         <div className="header-left">
           <div className="header-logo wave-container">
             <Link to="/" className="wave-text">
@@ -88,12 +98,12 @@ export default function Header() {
           </div>
         </div>
         <div className="header-right">
-          <div className={`header-search ${searchActive ? "active" : ""}`}>
+          <div className="header-search">
             <input
               type="search"
               placeholder="Search"
               ref={searchRef}
-              onBlur={() => setSearchActive(false)}
+              onKeyDown={handleKeyDown}
             />
             <CiSearch className="search-icon" onClick={handleSearchIconClick} />
           </div>

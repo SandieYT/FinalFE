@@ -1,13 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import "./market.css";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-export default function Market() {
+import "./search.css";
+import { CiSearch } from "react-icons/ci";
+
+function highlightMatch(text, query) {
+  if (!query) return text;
+
+  const index = text.toLowerCase().indexOf(query.toLowerCase());
+  if (index === -1) return text;
+
+  const before = text.slice(0, index);
+  const match = text.slice(index, index + query.length);
+  const after = text.slice(index + query.length);
+
+  return (
+    <>
+      {before}
+      <u><b>{match}</b></u>
+      {after}
+    </>
+  );
+}
+
+export default function Search() {
   const [cryptoData, setCryptoData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const { qr } = useParams();
+  const searchRef = useRef(null);
+  const navigate = useNavigate();
+
   const formatter = Intl.NumberFormat("en-US", {
     notation: "compact",
     maximumFractionDigits: 3,
@@ -17,20 +42,19 @@ export default function Market() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
-          "https://api.coingecko.com/api/v3/coins/markets",
+          const response = await axios.get(
+          "https://api.coingecko.com/api/v3/search",
           {
             params: {
-              vs_currency: "usd",
-              order: "market_cap_desc",
-              per_page: 20,
-              page: page,
+              query: qr,
             },
           }
         );
-        
-        setCryptoData(response.data);
-        setTotalPages(50); // 1000 coins / 20 items per page = 50 pages
+        const start = (page - 1) * 20;
+        const end = start + 20;
+        setCryptoData(response.data.coins.slice(start, end));
+        console.log(response.data,cryptoData)
+        setTotalPages(Math.ceil(response.data.coins.length/20));
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -39,7 +63,7 @@ export default function Market() {
     };
 
     fetchData();
-  }, [page]);
+  }, [page, qr]);
 
   const renderPaginationButtons = () => {
     const buttons = [];
@@ -70,7 +94,7 @@ export default function Market() {
             key="page-input"
             type="number"
             min={1}
-            className="market-pagination-input"
+            className="search-pagination-input"
             placeholder="Go to..."
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
@@ -83,7 +107,7 @@ export default function Market() {
           />
       <button
         key="prev"
-        className={`market-pagination-button prev ${page === 1 ? "disabled" : ""}`}
+        className={`search-pagination-button prev ${page === 1 ? "disabled" : ""}`}
         onClick={() => setPage((p) => Math.max(1, p - 1))}
         disabled={page === 1}
       >
@@ -96,7 +120,7 @@ export default function Market() {
       buttons.push(
         <button
           key={1}
-          className={`market-pagination-button ${page === 1 ? "current" : ""}`}
+          className={`search-pagination-button ${page === 1 ? "current" : ""}`}
           onClick={() => setPage(1)}
         >
           1
@@ -104,7 +128,7 @@ export default function Market() {
       );
       if (startPage > 2) {
         buttons.push(
-                    <span key="start-ellipsis" className="market-pagination-ellipsis">
+                    <span key="start-ellipsis" className="search-pagination-ellipsis">
             ···
           </span>
         );
@@ -115,7 +139,7 @@ export default function Market() {
       buttons.push(
         <button
           key={i}
-          className={`market-pagination-button ${page === i ? "current" : ""}`}
+          className={`search-pagination-button ${page === i ? "current" : ""}`}
           onClick={() => setPage(i)}
         >
           {i}
@@ -126,7 +150,7 @@ export default function Market() {
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         buttons.push(
-          <span key="end-ellipsis" className="market-pagination-ellipsis">
+          <span key="end-ellipsis" className="search-pagination-ellipsis">
             ···
           </span>
         );
@@ -134,7 +158,7 @@ export default function Market() {
       buttons.push(
         <button
           key={totalPages}
-          className={`market-pagination-button ${page === totalPages ? "current" : ""}`}
+          className={`search-pagination-button ${page === totalPages ? "current" : ""}`}
           onClick={() => setPage(totalPages)}
         >
           {totalPages}
@@ -145,7 +169,7 @@ export default function Market() {
     buttons.push(
       <button
         key="next"
-        className={`market-pagination-button next ${page === totalPages ? "disabled" : ""}`}
+        className={`search-pagination-button next ${page === totalPages ? "disabled" : ""}`}
         onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
         disabled={page === totalPages}
       >
@@ -156,60 +180,65 @@ export default function Market() {
     return buttons;
   };
 
+  const handleSearchIconClick = () => {
+    const query = searchRef.current?.value.trim();
+    if (query) {
+     navigate(`/search/${query}`);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const query = searchRef.current?.value.trim();
+      if (query) {
+         navigate(`/search/${query}`);
+      }
+    }
+  }
+
   return (
-    <div id="main-market">
-      <div className="market-container">
-        <h1 className="market-header">Crypto Hub</h1>
+    <div id="main-search">
+      <div className="search-container">
+        <h1 className="search-header">Search for "{qr}"</h1>
         {loading ? (
           <div className="loading-indicator">Loading...</div>
         ) : (
-          <div className="market-currencies">
-            <div className="market-currency-header">
-              <div className="currency-icon" />
-              <h2 className="currency-name-header">Coin Name</h2>
-              <h2 className="currency-price">Price</h2>
-              <h2 className="currency-cap">Market Cap</h2>
-              <h2 className="currency-percentage">24h Change</h2>
+          <div className="search-currencies">
+            <div className="search-currency-header">
+              <h2 className="currency-name-header">{cryptoData.length} Results for "{qr}"</h2>
+              <div className="search-search">
+                <input
+                  type="search"
+                  placeholder="Search"
+                  ref={searchRef}
+                  onKeyDown={handleKeyDown}
+                />
+                <CiSearch className="search-icon" onClick={handleSearchIconClick} />
+              </div>
             </div>
             {
-cryptoData.map((coin) => (
+              cryptoData.map((coin) => (
             
               <Link
                 key={coin.id}
                 to={`/coins/${coin.id}`}
-                className="market-currency-link"
+                className="search-currency-link"
               >
-                <div className="market-currency">
+                <div className="search-currency">
                   <img
                     className="currency-icon"
-                    src={coin.image}
+                    src={coin.large}
                     alt={coin.name}
                   />
                   <p className="currency-name">
-                    {coin.name} ({coin.symbol.toUpperCase()})
-                  </p>
-                  <p className="currency-price">
-                    ${coin.current_price.toLocaleString()}
-                  </p>
-                  <p className="currency-cap">
-                    ${formatter.format(coin.market_cap)}
-                  </p>
-                  <p
-                    className={`currency-percentage ${
-                      coin.price_change_percentage_24h > 0
-                        ? "percentage-increase"
-                        : coin.price_change_percentage_24h < 0
-                        ? "percentage-decrease"
-                        : "percentage-neutral"
-                    }`}
-                  >
-                    {coin.price_change_percentage_24h?.toFixed(2)}%
+                    
+                    {highlightMatch(coin.name,qr)} ({coin.symbol.toUpperCase()})
                   </p>
                 </div>
               </Link>
             ))
             }
-            <div className="market-pagination-buttons">
+            <div className="search-pagination-buttons">
               {renderPaginationButtons()}
             </div>
           </div>

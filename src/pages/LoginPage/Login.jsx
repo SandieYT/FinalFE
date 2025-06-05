@@ -101,12 +101,7 @@ export default function Login() {
         if (response?.success) {
 
           const decoded = jwtDecode(response?.data.accessToken);
-          
-          Cookies.set("accessToken", response.data.accessToken, {
-            expires: 7,
-            secure: true,
-            sameSite: "Strict",
-          });
+
 
           dispatch(
             loginSuccess({

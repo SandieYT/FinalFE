@@ -1,5 +1,4 @@
-import axiosConfig from "../config/axiosConfig";
-import axios from "axios";
+import axios from "../config/axiosConfig";
 import store from './store';
 import { updateAuth } from "../features/authSlice"
 
@@ -35,7 +34,7 @@ const userService = {
 
   getUser: async (userId) => {
     try {
-      const response = await axiosConfig.get(
+      const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/user/get/${userId}`,
         { withCredentials: true }
       );
@@ -60,6 +59,7 @@ const userService = {
         `${import.meta.env.VITE_API_URL}/user/login`,
         { email, password }
       );
+
       return response.data;
     } catch (error) {
       if (error.response?.data) {
@@ -125,7 +125,7 @@ const userService = {
 
   logoutUser: async () => {
     try {
-      const response = await axiosConfig.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/user/logout`,
         {},
         { withCredentials: true }
@@ -148,7 +148,7 @@ const userService = {
 
   listUsers: async ({ page, limit, search }) => {
     try {
-      const response = await axiosConfig.get(
+      const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/user/admin`,
         {
           params: { page, limit, search },
@@ -175,7 +175,7 @@ const userService = {
 
   deleteUser: async (userId) => {
     try {
-      const response = await axiosConfig.delete(
+      const response = await axios.delete(
         `${import.meta.env.VITE_API_URL}/user/delete/${userId}`,
         { withCredentials: true }
       );
@@ -197,7 +197,7 @@ const userService = {
 
   updateUser: async (userId, updateData) => {
     try {
-      const response = await axiosConfig.put(
+      const response = await axios.put(
         `${import.meta.env.VITE_API_URL}/user/update/${userId}`,
         updateData,
         { withCredentials: true }
@@ -224,7 +224,7 @@ const userService = {
 
   changePassword: async (userId, passwordData) => {
         try {
-      const response = await axiosConfig.put(
+      const response = await axios.put(
         `${import.meta.env.VITE_API_URL}/user/password/${userId}`,
         passwordData,
         { withCredentials: true }

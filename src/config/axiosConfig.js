@@ -26,21 +26,16 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-
-    const isAuthRequest =
-      originalRequest.url.includes("/user/login") ||
-      originalRequest.url.includes("/user/register");
-
     if (
       error.response?.status === 401 &&
-      !originalRequest._retry &&
-      !isAuthRequest
+      !originalRequest._retry
     ) {
       if (isRefreshing) {
         return new Promise(function (resolve, reject) {
           failedQueue.push({ resolve, reject });
         })
           .then((token) => {
+            console.log(token)
             originalRequest.headers["Authorization"] = `Bearer ${token}`;
             return axios(originalRequest);
           })
@@ -53,7 +48,7 @@ instance.interceptors.response.use(
       try {
         const data = await userService.refreshToken();
         const newAccessToken = data.accessToken;
-
+        console.log(newAccessToken)
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         processQueue(null, newAccessToken);
         return instance(originalRequest);

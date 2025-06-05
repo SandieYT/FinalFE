@@ -26,6 +26,7 @@ function highlightMatch(text, query) {
 
 export default function Search() {
   const [cryptoData, setCryptoData] = useState([]);
+  const [fullData, setFullData] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -43,20 +44,22 @@ export default function Search() {
       try {
         setLoading(true);
           const response = await axios.get(
-          "https://api.coingecko.com/api/v3/search",
-          {
-            params: {
-              query: qr,
-            },
-          }
-        );
-        const start = (page - 1) * 20;
-        const end = start + 20;
-        setCryptoData(response.data.coins.slice(start, end));
-        console.log(response.data,cryptoData)
-        setTotalPages(Math.ceil(response.data.coins.length/20));
+            "https://api.coingecko.com/api/v3/search",
+            {
+              params: {
+                query: qr,
+              },
+            }
+          );
+          const start = (page - 1) * 20;
+          const end = start + 20;
+          setFullData(response.data.coins)
+          setCryptoData(response.data.coins.slice(start, end));
+          setTotalPages(Math.floor(response.data.coins.length/20)+1);
       } catch (error) {
-        console.error("Error fetching data:", error);
+          setFullData([])
+          setCryptoData([]);
+          setTotalPages(1);
       } finally {
         setLoading(false);
       }
@@ -66,6 +69,9 @@ export default function Search() {
   }, [page, qr]);
 
   const renderPaginationButtons = () => {
+    if (totalPages == 1) {
+      return []
+    }
     const buttons = [];
     const maxVisibleButtons = 3;
     let startPage, endPage;
@@ -205,7 +211,8 @@ export default function Search() {
         ) : (
           <div className="search-currencies">
             <div className="search-currency-header">
-              <h2 className="currency-name-header">{cryptoData.length} Results for "{qr}"</h2>
+              <h2 className="currency-name-header">{fullData.length} Results for "{qr}"</h2>
+              <p className="currency-name-header">Showing result no. {page*20-19} - {page*20-20+cryptoData.length} for "{qr}"</p>
               <div className="search-search">
                 <input
                   type="search"

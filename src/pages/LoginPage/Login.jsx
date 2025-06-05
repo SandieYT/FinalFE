@@ -93,13 +93,15 @@ export default function Login() {
           loginMutation.mutateAsync(values),
           {
             loading: "Logging in...",
-            success: "Login successful!",
+            success: "Login successful!", 
             error: (err) => getErrorMessage(err),
           }
         );
+        console.log(response)
         if (response?.success) {
+
           const decoded = jwtDecode(response?.data.accessToken);
-          console.log(decoded)
+          
           Cookies.set("accessToken", response.data.accessToken, {
             expires: 7,
             secure: true,

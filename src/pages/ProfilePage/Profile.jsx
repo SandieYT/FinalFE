@@ -22,7 +22,7 @@ const usernameSchema = Yup.string()
 
 
 export default function Profile() {
-    const [profile, setProfile] = useState(useSelector((state) => state.auth)) 
+    const [profile, setProfile] = useState(useSelector((state) => state.auth))
     const { connectWallet, currentAccount, accountBalance } =
       useContext(TransactionContext);
       const { isAuthenticated, username, role } = useSelector(

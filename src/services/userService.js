@@ -1,3 +1,4 @@
+import axiosConfig from "../config/axiosConfig";
 import axios from "axios";
 import store from './store';
 import { updateAuth } from "../features/authSlice"
@@ -34,7 +35,7 @@ const userService = {
 
   getUser: async (userId) => {
     try {
-      const response = await axios.get(
+      const response = await axiosConfig.get(
         `${import.meta.env.VITE_API_URL}/user/get/${userId}`,
         { withCredentials: true }
       );
@@ -124,7 +125,7 @@ const userService = {
 
   logoutUser: async () => {
     try {
-      const response = await axios.post(
+      const response = await axiosConfig.post(
         `${import.meta.env.VITE_API_URL}/user/logout`,
         {},
         { withCredentials: true }
@@ -147,7 +148,7 @@ const userService = {
 
   listUsers: async ({ page, limit, search }) => {
     try {
-      const response = await axios.get(
+      const response = await axiosConfig.get(
         `${import.meta.env.VITE_API_URL}/user/admin`,
         {
           params: { page, limit, search },
@@ -174,7 +175,7 @@ const userService = {
 
   deleteUser: async (userId) => {
     try {
-      const response = await axios.delete(
+      const response = await axiosConfig.delete(
         `${import.meta.env.VITE_API_URL}/user/delete/${userId}`,
         { withCredentials: true }
       );
@@ -196,7 +197,7 @@ const userService = {
 
   updateUser: async (userId, updateData) => {
     try {
-      const response = await axios.put(
+      const response = await axiosConfig.put(
         `${import.meta.env.VITE_API_URL}/user/update/${userId}`,
         updateData,
         { withCredentials: true }
@@ -223,7 +224,7 @@ const userService = {
 
   changePassword: async (userId, passwordData) => {
         try {
-      const response = await axios.put(
+      const response = await axiosConfig.put(
         `${import.meta.env.VITE_API_URL}/user/password/${userId}`,
         passwordData,
         { withCredentials: true }

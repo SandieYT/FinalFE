@@ -185,10 +185,10 @@ export default function Settings() {
   return (
     <div id="main-settings">
       <div className="settings-card settings-sidebar">
-        <button onClick={() => setTab("Account")} className={`settings-tab ${tab === "Account" ? "active" : ""}`}>
+        <button onClick={() => setTab("Account")} className={`settings-tab ${tab === "Account" ? "settings-tab-active" : ""}`}>
           <FaRegCircleUser className="settings-icon" />Account
         </button>
-        <button onClick={() => setTab("Security")} className={`settings-tab ${tab === "Security" ? "active" : ""}`}>
+        <button onClick={() => setTab("Security")} className={`settings-tab ${tab === "Security" ? "settings-tab-active" : ""}`}>
           <HiOutlineLockClosed className="settings-icon" />Security
         </button>
       </div>

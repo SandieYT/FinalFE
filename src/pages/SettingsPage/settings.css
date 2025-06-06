@@ -37,6 +37,11 @@
     background-color: transparent;
     border: none;
 }
+
+.settings-tab-active {
+    background-color: #e6e6e6;
+}
+
 .settings-icon {
     color: #1b1b1b;
     width: 50%;

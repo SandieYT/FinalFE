@@ -172,7 +172,7 @@ export default function Market() {
               <h2 className="currency-percentage">24h Change</h2>
             </div>
             {
-cryptoData.map((coin) => (
+              loading?<p>Loading...</p>:cryptoData.map((coin) => (
             
               <Link
                 key={coin.id}

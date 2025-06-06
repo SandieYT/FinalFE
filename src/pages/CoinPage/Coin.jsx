@@ -14,7 +14,9 @@ export default function Coin() {
     maximumFractionDigits: 3,
   });
 
-  useEffect(() => {
+    useEffect(() => {
+    if (!id) return;
+
     const fetchCoinData = async () => {
       try {
         const coinDetailsUrl = `https://api.coingecko.com/api/v3/coins/${id.toLowerCase()}`;
@@ -38,34 +40,6 @@ export default function Coin() {
     };
 
     fetchCoinData();
-  }, [id]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [coinDetailsResponse, ohlcResponse] = await Promise.all([
-          axios.get(
-            `https://api.coingecko.com/api/v3/coins/${id.toLowerCase()}`
-          ),
-          axios.get(
-            `https://api.coingecko.com/api/v3/coins/${id.toLowerCase()}/ohlc`,
-            {
-              params: {
-                vs_currency: "usd",
-                days: 1,
-              },
-            }
-          ),
-        ]);
-
-        setCoinDetails(coinDetailsResponse.data);
-        setCryptoData(ohlcResponse.data);
-      } catch (error) {
-        console.error("Error fetching data from CoinGecko API:", error);
-      }
-    };
-
-    fetchData();
   }, [id]);
 
   return (

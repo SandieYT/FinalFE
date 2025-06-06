@@ -25,8 +25,8 @@ const processQueue = (error, token = null) => {
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config;
     console.log(error)
+    const originalRequest = error.config;
     const isAuthRequest =
       originalRequest.url.includes("/user/login") ||
       originalRequest.url.includes("/user/register");
@@ -41,7 +41,7 @@ instance.interceptors.response.use(
           failedQueue.push({ resolve, reject });
         })
           .then((token) => {
-            originalRequest.headers["Authorization"] = `Bearer ${token}`;
+            originalRequest.headers.authorization = `Bearer ${token}`;
             return axios(originalRequest);
           })
           .catch((err) => Promise.reject(err));
@@ -53,8 +53,8 @@ instance.interceptors.response.use(
       try {
         const data = await userService.refreshToken();
         const newAccessToken = data.accessToken;
-
-        originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+        originalRequest.headers.authorization = `Bearer ${newAccessToken}`;
+        console.log("new " + newAccessToken)
         processQueue(null, newAccessToken);
         return instance(originalRequest);
       } catch (err) {

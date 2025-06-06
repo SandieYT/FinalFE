@@ -27,6 +27,10 @@
     padding: 2vw;
 }
 
+.settings-form {
+    flex: 1;
+}
+
 .settings-tab {
     align-items: center;
     display: flex;
@@ -36,10 +40,12 @@
     outline: none;
     background-color: transparent;
     border: none;
+    transition-duration: 0.25s;
 }
 
 .settings-tab-active {
-    background-color: #e6e6e6;
+    background-color: #f3f3f3;
+    border-radius: 1vw;
 }
 
 .settings-icon {
@@ -47,6 +53,11 @@
     width: 50%;
     height: 50%;
     aspect-ratio: 1;
+}
+
+.settings-error {
+    color: #ff4281;
+    font-weight: bold;
 }
 
 .settings-input {
@@ -57,11 +68,121 @@
     border-radius: 0.5vw;
     padding: 0.1vw;
     font-size: 1.5vw;
-    width: 30%;
+    width: 100%;
 }
 
 .settings-field {
     display: flex;
     flex-direction: column;
     gap: 0.2vw;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vw;
+}
+
+.settings-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vw;
+    width: 40vw;
+}
+
+.settings-field.appearance-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settings-form-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    width: 12vw;
+}
+
+.settings-pfp-preview {
+    border-radius: 100%;
+    height: 10vw;
+    width: 10vw;
+    border: solid 0.3vw #f8d33a;
+    background-color: #000000;
+    box-shadow: 0 0 1vw #00000065;
+    object-fit: cover;
+    display: block;
+}
+
+.settings-change-button {
+    width: 10vw;
+    border-radius: 100vw;
+    border: none;
+    outline: none;
+    padding: .5vw;
+    font-size: 1.5vw;
+    font-weight: bold;
+    background-color: #ffcc00;
+    transition: 0.5s;
+}
+
+.settings-change-button:hover {
+    transform: translate(2%,-2%);
+    box-shadow: -.5vw .5vw 1.5vw #00000054;
+    z-index: 1;
+}
+
+.settings-thumbnail-preview {
+    border-radius: 0.5vw;
+    height: 13.5vw;
+    width: 24vw;
+    border: solid 0.15vw #b3b3b3;
+    box-shadow: 0 0 0.5vw #000;
+    object-fit: cover;
+    display: block;
+}
+
+.settings-content-flex {
+    gap: 2vw;
+    display: flex;
+}
+
+.settings-actions-container {
+    display: flex;
+    gap: .5vw;
+}
+
+.settings-button {
+    outline: none;
+    padding: .75vw 2vw;
+    font-size: 1.75vw;
+    border-radius: 100vw;
+    border: none;
+    font-weight: bold;
+    background-color: #ffcc00;
+    transition: 0.5s;
+    z-index: 2;
+}
+
+.settings-button:hover {
+    transform: translate(2%,-2%);
+    box-shadow: -.5vw .5vw 1.5vw #00000054;
+    z-index: 1;
+}
+
+.settings-button-cancel {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #c0c0c0;
+}
+
+.settings-button-save {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: rgb(255, 211, 17);
+}
+
+#settings-description {
+    overflow-y: auto;
+    resize: none;
 }

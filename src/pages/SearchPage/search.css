@@ -314,3 +314,16 @@
     color: #4b4b4b;
     transform: scale(1.05);
 }
+
+.settings-profile-card {
+    padding: 4vmax;
+    box-shadow: 5px 5px 10px 0 #0000004b;
+    border-radius: 4vmax;
+    position: absolute;
+    background-color: #fff;
+    margin-top: calc(15% + 32px);
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 5vmax;
+}

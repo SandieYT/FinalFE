@@ -109,6 +109,9 @@ export default function Header() {
           </div>
           <div className="header-auth">
             {isAuthenticated ? (
+              <>
+              <p className="header-username">{profile.username}</p>
+
               <div className="user-dropdown" ref={dropdownRef}>
                 <img
                   src={profile.profile_picture}
@@ -160,6 +163,7 @@ export default function Header() {
                   </div>
                 )}
               </div>
+              </>
             ) : (
               <>
                 <div className="btn header-login-btn">

@@ -29,7 +29,7 @@
 
 .wave-text span {
     animation: wave 2s ease-in-out infinite;
-    color: #e8b10b;
+    color: #ffcf0f;
     display: inline-block;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .header-menu a:hover {
-    color: #f0b90b;
+    color: #ffcf0f;
 }
 
 .header-menu a::before {
@@ -102,7 +102,7 @@
 }
 
 .header-menu a:hover::before {
-    background-color: #f0b90b;
+    background-color: #ffcf0f;
     transform: scaleX(1);
     transform-origin: center;
 }
@@ -137,7 +137,7 @@
 
 .header-search:focus-within {
     background-color: #1f242b;
-    border-color: #f0b90b;
+    border-color: #ffcf0f;
     box-shadow: 0 0 0 2px rgba(240, 185, 11, 0.3);
     width: 30vmax;
 }
@@ -167,7 +167,7 @@
 
 .header-search:hover svg,
 .header-search:focus-within svg {
-    color: #f0b90b;
+    color: #ffcf0f;
     transform: scale(1.05);
 }
 
@@ -206,8 +206,8 @@
 /* Login */
 .header-login-btn button {
     background: transparent;
-    border: .05vmax solid #f0b90b;
-    color: #f0b90b;
+    border: .05vmax solid #ffcf0f;
+    color: #ffcf0f;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -215,13 +215,13 @@
 .header-login-btn button:hover {
     background: rgba(240, 185, 11, 0.1);
     box-shadow: 0 2px 8px rgba(240, 185, 11, 0.2);
-    color: #f8d33a;
+    color: #ffcf0f;
 }
 
 /* Register */
 .header-register-btn button {
-    background: #f0b90b;
-    border: .05vmax solid #f0b90b;
+    background: #ffcf0f;
+    border: .05vmax solid #ffcf0f;
     color: #000;
     font-weight: 600;
     border-top-left-radius: 0;
@@ -229,8 +229,8 @@
 }
 
 .header-register-btn button:hover {
-    background: #f8d33a;
-    border-color: #f8d33a;
+    background: #ffcf0f;
+    border-color: #ffcf0f;
     box-shadow: 0 2px 12px rgba(240, 185, 11, 0.4);
 }
 
@@ -272,7 +272,7 @@
 }
 
 .user-avatar {
-    border: .1vmax solid #f0b90b;
+    border: .1vmax solid #ffcf0f;
     border-radius: 50%;
     cursor: pointer;
     height: 3.5vmax;
@@ -314,7 +314,7 @@
 
 .dropdown-item:hover {
     background-color: #2d2d2d;
-    color: #f0b90b;
+    color: #ffcf0f;
 }
 
 /* Icon trong menu */
@@ -326,7 +326,7 @@
 
 /* ===== Logout ===== */
 .header-logout-btn {
-    color: #f0b90b;
+    color: #ffcf0f;
     font-weight: 500;
     overflow: hidden;
     position: relative;
@@ -351,5 +351,11 @@
 
 .header-logout-btn:hover {
     background-color: transparent;
-    color: #f8d33a;
+    color: #ffcf0f;
+}
+
+.header-username {
+    font-size: 1.5vmax;
+    color: #fff;
+    padding-right: 0.5vmax;
 }

@@ -34,39 +34,6 @@ export default function Profile() {
     const [editedUsername, setEditedUsername] = useState(username);
     const [error, setError] = useState("");
 
-      useEffect(() => {
-          setEditedUsername(profile.username);
-      }, [profile]);
-
-      
-      const handleImageChange = async (e) => {
-        const selectedImage = e.target.files[0];
-        if (!selectedImage) return;
-      
-        const formData = new FormData();
-        formData.append('image', selectedImage);
-      
-        try {
-          const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload/pfp`, formData);
-          const imageUrl = res.data.url;
-          await userService.updateUser(profile.userId, { profile_picture: imageUrl });
-          setProfile((prev) => ({ ...prev, profile_picture: imageUrl }));
-          window.location.reload();
-          toast.success("Profile picture updated successfully!");
-        } catch (err) {
-          console.error('Upload or update failed:', err);
-          toast.error(
-            err?.response?.data?.message || "Failed to update profile picture."
-          );
-        }
-      };
-
-    const fileInputRef = useRef(null);
-
-    const handleButtonClick = () => {
-      fileInputRef.current.click();
-    };
-
     const handleConfirm = async () => {
       try {
         await usernameSchema.validate(editedUsername);
@@ -116,7 +83,40 @@ export default function Profile() {
     }
   };
 
+      useEffect(() => {
+          setEditedUsername(profile.username);
+      }, [profile]);
 
+      
+      const handleImageChange = async (e) => {
+        const selectedImage = e.target.files[0];
+        if (!selectedImage) return;
+      
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+      
+        try {
+          toast.loading("Uploading profile picture...");
+          const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload/pfp`, formData);
+          const imageUrl = res.data.url;
+          await userService.updateUser(profile.userId, { profile_picture: imageUrl });
+          setProfile((prev) => ({ ...prev, profile_picture: imageUrl }));
+          window.location.reload();
+          toast.dismiss()
+          toast.success("Profile picture updated successfully!");
+        } catch (err) {
+          console.error('Upload or update failed:', err);
+          toast.error(
+            err?.response?.data?.message || "Failed to update profile picture."
+          );
+        }
+      };
+
+    const fileInputRef = useRef(null);
+
+    const handleButtonClick = () => {
+      fileInputRef.current.click();
+    };
 
     const fileThumbnailRef = useRef(null);
 
@@ -132,11 +132,13 @@ export default function Profile() {
         formData.append('image', selectedImage);
       
         try {
+          toast.loading("Uploading profile picture...");
           const res = await axios.post(`${import.meta.env.VITE_API_URL}/upload/thumbnail`, formData);
           const imageUrl = res.data.url;
           await userService.updateUser(profile.userId, { thumbnail: imageUrl });
           setProfile((prev) => ({ ...prev, thumbnail: imageUrl }));
           window.location.reload();
+          toast.dismiss()
           toast.success("Thumbnail updated successfully!");
         } catch (err) {
           console.error('Upload or update failed:', err);
